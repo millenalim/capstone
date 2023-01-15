@@ -1,7 +1,7 @@
 drop database if exists capstone_project;
 create database capstone_project;
 
-create table schedule (
+create table `schedule` (
 	schedule_id int primary key auto_increment,
     day_of_week varchar(10) not null,
     availability varchar(10) not null
@@ -22,9 +22,9 @@ create table app_role (
     `name` varchar(50) not null unique
 );
 
-create table language (
+create table `language` (
 	language_id int primary key auto_increment,
-	language varchar(20) not null
+	`language` varchar(20) not null
 );
 
 create table app_user_schedule (
@@ -65,5 +65,61 @@ create table app_user_language (
         references language(language_id)
 );
 
+-- data
+insert into app_role (`name`) values
+    ('USER'),
+    ('ADMIN');
 
+-- admins data, password: P@ssw0rd!
+insert into app_user (username, password_hash, enabled)
+    values
+    ('zach@yau.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1),
+    ('morgan@oliver.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1),
+    ('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1);
+
+insert into app_user_role
+    values
+    (1, 2),
+    (1, 2),
+    (1, 2);
+    
+insert into `schedule` (schedule_id, day_of_week, availability) 
+	values
+	(1, 'Monday', 'Morning'),
+    (2, 'Monday', 'Afternoon'),
+    (3, 'Monday', 'Evening'),
+    (4, 'Tuesday', 'Morning'),
+    (5, 'Tuesday', 'Afternoon'),
+    (6, 'Tuesday', 'Evening'),
+    (7, 'Wednesday', 'Morning'),
+    (8, 'Wednesday', 'Afternoon'),
+    (9, 'Wednesday', 'Evening'),
+    (10, 'Thursday', 'Morning'),
+    (11, 'Thursday', 'Afternoon'),
+    (12, 'Thursday', 'Evening'),
+    (13, 'Friday', 'Morning'),
+    (14, 'Friday', 'Afternoon'),
+    (15, 'Friday', 'Evening'),
+    (16, 'Saturday', 'Morning'),
+    (17, 'Saturday', 'Afternoon'),
+    (18, 'Saturday', 'Evening'),
+    (19, 'Sunday', 'Morning'),
+    (20, 'Sunday', 'Afternoon'),
+    (21, 'Sunday', 'Evening');
+    
+insert into `language` values
+    (1,'Java'),
+    (2, 'C'),
+    (3, 'C++'),
+    (4, 'C#'),
+    (5, 'JavaScript'),
+    (6, 'Python'),
+    (7, 'PHP'),
+    (8, 'SQL');
+
+
+    
+	
+    
+    
 
