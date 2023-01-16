@@ -1,4 +1,4 @@
-package learn.capstone.models;
+package learn.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

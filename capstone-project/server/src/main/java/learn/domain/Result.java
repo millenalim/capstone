@@ -1,4 +1,4 @@
-package learn.capstone.domain;
+package learn.domain;
 
 import java.util.ArrayList;
 import java.util.List;

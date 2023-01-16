@@ -1,4 +1,4 @@
-package learn.capstone.security;
+package learn.security;
 
 
 import learn.capstone.models.AppUser;

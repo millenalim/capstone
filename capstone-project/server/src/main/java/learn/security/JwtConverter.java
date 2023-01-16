@@ -1,8 +1,7 @@
-package learn.capstone.security;
+package learn.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-
 import learn.capstone.models.AppUser;
 import org.springframework.stereotype.Component;
 

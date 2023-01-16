@@ -1,10 +1,10 @@
-package learn.capstone.controllers;
+package learn.controllers;
 
 
-import learn.capstone.domain.Result;
-import learn.capstone.models.AppUser;
-import learn.capstone.security.AppUserService;
-import learn.capstone.security.JwtConverter;
+import learn.domain.Result;
+import learn.models.AppUser;
+import learn.security.AppUserService;
+import learn.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

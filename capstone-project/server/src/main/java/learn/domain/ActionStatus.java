@@ -1,4 +1,4 @@
-package learn.capstone.domain;
+package learn.domain;
 
 public enum ActionStatus {
     SUCCESS,
