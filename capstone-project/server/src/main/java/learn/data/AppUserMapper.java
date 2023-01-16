@@ -14,12 +14,16 @@ public class AppUserMapper implements RowMapper<AppUser> {
         this.roles = roles;
     }
 
+    public AppUserMapper(){}
+
+
     @Override
     public AppUser mapRow(ResultSet rs, int i) throws SQLException {
         return new AppUser(
                 rs.getInt("app_user_id"),
                 rs.getString("username"),
                 rs.getString("password_hash"),
+                rs.getString("bio"),
                 rs.getBoolean("enabled"),
                 roles);
     }

@@ -7,10 +7,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.OverridesAttribute;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository {
@@ -22,11 +25,37 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     @Override
+    public List<AppUser> findAll() {
+        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
+                + "from app_user;";
+        return jdbcTemplate.query(sql, new AppUserMapper());
+    }
+
+
+ /*
+ Whatever the user puts for their language,
+ proficiency level, and schedule,
+ the function needs to take that input, and return a list
+ of other existing AppUsers that are closest to the criteria
+ provided.
+  */
+    @Override
+    @Transactional
+    public List<AppUser> displayMatches() {
+       return findAll().stream()
+               .sorted(Comparator.comparing(AppUser::getLanguage))
+               .toList();
+
+    }
+
+
+
+    @Override
     @Transactional
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
 
-        final String sql = "select app_user_id, username, password_hash, enabled "
+        final String sql = "select app_user_id, username, password_hash, bio, enabled "
                 + "from app_user "
                 + "where username = ?;";
 
