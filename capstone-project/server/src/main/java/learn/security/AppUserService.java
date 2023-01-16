@@ -1,10 +1,9 @@
 package learn.security;
 
-
-import learn.capstone.data.AppUserRepository;
-import learn.capstone.domain.ActionStatus;
-import learn.capstone.domain.Result;
-import learn.capstone.models.AppUser;
+import learn.data.AppUserRepository;
+import learn.domain.ActionStatus;
+import learn.domain.Result;
+import learn.models.AppUser;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

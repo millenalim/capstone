@@ -1,6 +1,6 @@
 package learn.data;
 
-import learn.capstone.models.AppUser;
+import learn.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;

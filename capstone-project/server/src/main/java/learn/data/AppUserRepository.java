@@ -1,6 +1,6 @@
 package learn.data;
 
-import learn.capstone.models.AppUser;
+import learn.models.AppUser;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface AppUserRepository {

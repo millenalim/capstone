@@ -1,6 +1,5 @@
 package learn.controllers;
 
-
 import learn.domain.Result;
 import learn.models.AppUser;
 import learn.security.AppUserService;
