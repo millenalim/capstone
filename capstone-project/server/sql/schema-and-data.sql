@@ -1,6 +1,8 @@
 drop database if exists capstone_project;
 create database capstone_project;
 
+use capstone_project;
+
 create table `schedule` (
 	schedule_id int primary key auto_increment,
     day_of_week varchar(10) not null,
@@ -10,8 +12,8 @@ create table `schedule` (
 create table app_user (
 	app_user_id int primary key auto_increment,
     username varchar(50) not null unique,
-    first_name varchar(50) not null,
-    last_name varchar(50) not null,
+    first_name varchar(50) null,
+    last_name varchar(50) null,
     bio varchar(160) null,
     password_hash varchar(2048) not null,
     enabled bit not null default(1)
@@ -80,8 +82,8 @@ insert into app_user (username, password_hash, enabled)
 insert into app_user_role
     values
     (1, 2),
-    (1, 2),
-    (1, 2);
+    (2, 2),
+    (3, 2);
     
 insert into `schedule` (schedule_id, day_of_week, availability) 
 	values
