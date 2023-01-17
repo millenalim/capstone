@@ -6,7 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+    </list>
+    <list id="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" name="Changes by ZachYau" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
+>>>>>>> 76d32456f1230411b6312f9f835af096e0cad8de
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,12 +30,41 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java">
+      <ranges>
+        <range start1="2" end1="2" start2="2" end2="3" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="4" end1="4" start2="5" end2="7" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="8" end1="8" start2="11" end2="15" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="14" end1="14" start2="21" end2="23" changelist="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java">
+      <ranges>
+        <range start1="9" end1="9" start2="9" end2="10" changelist="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" />
+        <range start1="12" end1="12" start2="13" end2="14" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="13" end1="13" start2="15" end2="16" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="22" end1="22" start2="25" end2="51" changelist="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" />
+        <range start1="28" end1="29" start2="57" end2="58" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java">
+      <ranges>
+        <range start1="14" end1="16" start2="14" end2="17" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="17" end1="17" start2="18" end2="21" changelist="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" />
+        <range start1="26" end1="26" start2="30" end2="39" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="47" end1="47" start2="60" end2="68" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="79" end1="79" start2="100" end2="133" changelist="fd0f5f6a-d4d7-4121-95b4-dbc2036e8338" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -37,18 +79,32 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/MillenaLim/Desktop/repo/cohort-39-coursework/week-10/lms/exercises/solar-farm-web-app/server",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager"
+=======
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "C:/Users/MorganOliver/Documents/repositories/cohort-39-exercises/Study-Buddy/team-capstone/capstone-project/server",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+>>>>>>> 76d32456f1230411b6312f9f835af096e0cad8de
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+<<<<<<< HEAD
         <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="top-secret-password" />
+=======
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+>>>>>>> 76d32456f1230411b6312f9f835af096e0cad8de
       </envs>
       <option name="MAIN_CLASS_NAME" value="learn.App" />
       <module name="server" />
