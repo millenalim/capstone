@@ -6,7 +6,7 @@ function NavBar() {
   const auth = useContext(AuthContext);
 
   return (
-    <nav>
+    <nav class>
       <ul>
         <li>
           <Link to="/">Home</Link>
