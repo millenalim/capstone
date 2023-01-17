@@ -46,7 +46,7 @@ public class AppUserService implements UserDetailsService {
 
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, password, true, List.of("USER"));
+        AppUser appUser = new AppUser(0, username, password,"hello", true, List.of("USER"));
 
         try {
             appUser = repository.create(appUser);

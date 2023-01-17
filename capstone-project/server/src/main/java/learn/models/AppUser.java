@@ -17,7 +17,7 @@ public class AppUser implements UserDetails {
     private String bio;
     private boolean enabled;
     private Language language;
-    private Schedule schedule;
+    private List<Schedule> schedule;
     private Proficiency proficiency;
     private Collection<GrantedAuthority> authorities;
 
@@ -125,11 +125,11 @@ public class AppUser implements UserDetails {
         this.language = language;
     }
 
-    public Schedule getSchedule() {
+    public List<Schedule> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(List<Schedule> schedule) {
         this.schedule = schedule;
     }
 

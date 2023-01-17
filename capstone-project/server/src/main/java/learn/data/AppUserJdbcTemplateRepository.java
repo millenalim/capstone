@@ -1,7 +1,13 @@
 package learn.data;
 
 import learn.data.mappers.AppUserMapper;
+import learn.data.mappers.LanguageMapper;
+import learn.data.mappers.ProficiencyMapper;
+import learn.data.mappers.ScheduleMapper;
 import learn.models.AppUser;
+import learn.models.Language;
+import learn.models.Proficiency;
+import learn.models.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,57 +33,50 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public List<AppUser> findAll() {
-        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
-                + "from app_user;";
-        List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper());
-        for (AppUser user : appUserList) {
-            user.setAuthorities(getRolesByUsername(user.getUsername()));
-            user.setProficiency();
-        }
-        return appUserList;
+             final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
+                     + "from app_user;";
+             List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper());
+             for (AppUser user : appUserList) {
+                 user.setAuthorities(getRolesByUsername(user.getUsername()));
+                 getProficiency(user);
+                 addLanguage(user);
+                 addSchedule(user);
+             }
+             return appUserList;
+         }
+
+    @Override
+    public List<AppUser> displayMatches() {
+        return null;
     }
 
-    //getProficiency
-    //getLanguage
-    //getSchedule
-
-
-
- /*
- Whatever the user puts for their language,
- proficiency level, and schedule,
- the function needs to take that input, and return a list
- of other existing AppUsers that are closest to the criteria
- provided.
-  */
-//    @Override
-    @Transactional
-    public List<AppUser> displayMatches(int appUserId) {
-//        AppUser currentUser = findByUsername("morgeek523@yahoo.com");
-//        appUserId = currentUser.getAppUserId();
+//    @Transactional
+//    public List<AppUser> displayMatches(int appUserId) {
+////        AppUser currentUser = findByUsername("morgeek523@yahoo.com");
+////        appUserId = currentUser.getAppUserId();
+////
+////        findAll().stream().sorted(Comparator.comparing(appUser -> appUser.getAppUserId() == appUserId))
 //
-//        findAll().stream().sorted(Comparator.comparing(appUser -> appUser.getAppUserId() == appUserId))
-
-//        findAll().stream().sorted(Comparator.comparing(AppUser::getLanguage))
-
-        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
-                + "from app_user;";
-
-        final String sql1 ="select proficiency_level "
-                + "from app_user_language aul "
-                + "where aul.app_user_id = "
-                + appUserId
-                + ";";
-
-    ;
-       final String sql2 ="select `language` "
-               + "from `language`"
-               + "where language_id = ?;";
-
-       final String sql3 = "select schedule_id, day_of_week, availability "
-               + "from `schedule` "
-               + "where schedule_id = ?;";
-    }
+////        findAll().stream().sorted(Comparator.comparing(AppUser::getLanguage))
+//
+//        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
+//                + "from app_user;";
+//
+//        final String sql1 ="select proficiency_level "
+//                + "from app_user_language aul "
+//                + "where aul.app_user_id = "
+//                + appUserId
+//                + ";";
+//
+//    ;
+//       final String sql2 ="select `language` "
+//               + "from `language`"
+//               + "where language_id = ?;";
+//
+//       final String sql3 = "select schedule_id, day_of_week, availability "
+//               + "from `schedule` "
+//               + "where schedule_id = ?;";
+//    }
 
 
 
@@ -164,4 +163,36 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 + "where au.username = ?";
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
+
+    private void getProficiency(AppUser appUser) {
+        final String sql = "select proficiency_level "
+                + "from app_user au "
+                + "inner join app_user_language aul on aul.app_user_id = au.app_user_id; "
+                + "where au.username = ?";
+
+        var proficiency = jdbcTemplate.query(sql, new ProficiencyMapper(), appUser.getUsername());
+        appUser.setProficiency((Proficiency) proficiency);
+    }
+
+
+
+
+    private void addLanguage(AppUser appUser){
+        final String sql = "select l.language_id, l.language "
+                + "from language l "
+                + "inner join app_user_language aul on l.language_id = aul.language_Id "
+                + "where aul.app_user_id =?;";
+                var language = jdbcTemplate.query(sql, new LanguageMapper(),appUser.getAppUserId());
+                appUser.setLanguage((Language) language);
+    }
+
+    private void addSchedule(AppUser appUser){
+    final String sql= "select s.schedule_id, s.day_of_week, s.availability "
+            + "from schedule s "
+            + "inner join app_user_schedule aus on s.schedule_id = aus.schedule_id "
+            + "where aus.app_user_id = ?;";
+    var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId());
+    appUser.setSchedule(schedule);
+    }
+
 }
