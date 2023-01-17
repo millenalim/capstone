@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import Login from "./components/Login";
+import MyChatComponent from "./components/MyChatComponent";
 import NavBar from "./components/NavBar";
 import AuthContext from "./context/AuthContext";
+
 
 const LOCAL_STORAGE_TOKEN_KEY = "hookedToken";
 
@@ -59,6 +61,7 @@ function App() {
         <Route path="/login" element={
           currentUser ? <Navigate to={"/"} /> : <Login />
         }/>
+        <Route path="/messages" element={<MyChatComponent/>} />
         </Routes>
       </Router>
     </AuthContext.Provider>
