@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/components/MyChatComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/NavBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/mappers/AppUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/mappers/AppRoleMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/Proficiency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/Proficiency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" afterDir="false" />
+    </list>
+    <list id="b8e4e48c-6b8f-40b1-aaab-9e6bcf902fb4" name="Changes by MillenaLim" comment="" />
+    <list id="cfec877b-631f-4a5b-91f8-7c0265f94bc7" name="Changes by ZachYau" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +31,23 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/learn/models/Language.java">
+      <ranges>
+        <range start1="2" end1="11" start2="2" end2="3" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="15" end1="16" start2="7" end2="8" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
+        <range start1="27" end1="27" start2="19" end2="20" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="32" end1="39" start2="25" end2="26" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="40" end1="43" start2="27" end2="29" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,14 +63,24 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "C:/Users/MorganOliver/Documents/repositories/cohort-39-exercises/Study-Buddy/team-capstone/capstone-project/server",
+    "last_opened_file_path": "C:/Users/MorganOliver/Documents/repositories/team-capstone/.gitignore",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="learn.data" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>

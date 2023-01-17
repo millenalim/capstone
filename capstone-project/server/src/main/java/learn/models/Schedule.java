@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Schedule {
     private int scheduleId;
-    private final DayOfWeek dayOfWeek;
+    private DayOfWeek dayOfWeek;
     private String availability;
 
     public Schedule(int scheduleId, DayOfWeek dayOfWeek, String availability) {
@@ -13,6 +13,7 @@ public class Schedule {
         this.dayOfWeek = dayOfWeek;
         this.availability = availability;
     }
+    public Schedule(){}
 
     public int getScheduleId() {
         return scheduleId;
@@ -25,6 +26,8 @@ public class Schedule {
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek){ this.dayOfWeek = dayOfWeek;}
 
     public String getAvailability() {
         return availability;

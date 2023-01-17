@@ -1,13 +1,14 @@
 package learn.data;
 
+import learn.data.mappers.AppUserMapper;
 import learn.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.OverridesAttribute;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
@@ -28,8 +29,18 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     public List<AppUser> findAll() {
         final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
                 + "from app_user;";
-        return jdbcTemplate.query(sql, new AppUserMapper());
+        List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper());
+        for (AppUser user : appUserList) {
+            user.setAuthorities(getRolesByUsername(user.getUsername()));
+            user.setProficiency();
+        }
+        return appUserList;
     }
+
+    //getProficiency
+    //getLanguage
+    //getSchedule
+
 
 
  /*
@@ -39,14 +50,33 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
  of other existing AppUsers that are closest to the criteria
  provided.
   */
-    @Override
+//    @Override
     @Transactional
-    public List<AppUser> displayMatches() {
+    public List<AppUser> displayMatches(int appUserId) {
+//        AppUser currentUser = findByUsername("morgeek523@yahoo.com");
+//        appUserId = currentUser.getAppUserId();
+//
+//        findAll().stream().sorted(Comparator.comparing(appUser -> appUser.getAppUserId() == appUserId))
 
-       return findAll().stream()
-               .sorted(Comparator.comparing(AppUser::getLanguage))
-               .toList();
+//        findAll().stream().sorted(Comparator.comparing(AppUser::getLanguage))
 
+        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
+                + "from app_user;";
+
+        final String sql1 ="select proficiency_level "
+                + "from app_user_language aul "
+                + "where aul.app_user_id = "
+                + appUserId
+                + ";";
+
+    ;
+       final String sql2 ="select `language` "
+               + "from `language`"
+               + "where language_id = ?;";
+
+       final String sql3 = "select schedule_id, day_of_week, availability "
+               + "from `schedule` "
+               + "where schedule_id = ?;";
     }
 
 
