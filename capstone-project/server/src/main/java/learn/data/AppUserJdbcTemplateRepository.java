@@ -42,6 +42,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Override
     @Transactional
     public List<AppUser> displayMatches() {
+
        return findAll().stream()
                .sorted(Comparator.comparing(AppUser::getLanguage))
                .toList();

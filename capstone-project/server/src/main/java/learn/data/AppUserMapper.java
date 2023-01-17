@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AppUserMapper implements RowMapper<AppUser> {
-    private final List<String> roles;
+    private List<String> roles;
 
     public AppUserMapper(List<String> roles) {
         this.roles = roles;
