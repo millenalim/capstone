@@ -21,7 +21,7 @@ public class AppUser implements UserDetails {
     private Proficiency proficiency;
     private Collection<GrantedAuthority> authorities;
 
-
+    //Builder pattern
     public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
         this.appUserId = appUserId;
         this.username = username;
@@ -30,6 +30,7 @@ public class AppUser implements UserDetails {
         this.authorities = convertRolesToAuthorities(roles);
     }
 
+    //Or delete the one above and keep the two below.
     public AppUser() {
     }
 

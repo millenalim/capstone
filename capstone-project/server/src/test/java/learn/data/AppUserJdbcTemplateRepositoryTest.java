@@ -1,5 +1,6 @@
 package learn.data;
 
+import learn.App;
 import learn.models.AppUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,10 +33,31 @@ class AppUserJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindAll() {
-        List<AppUser> all = repository.findAll();
+    List<AppUser> all = repository.findAll();
         assertNotNull(all);
         assertEquals(3, all.size());
     }
+
+    @Test
+    void shouldFindOneUser() {
+        List<AppUser> actual = repository.findAllUsers();
+        assertEquals(1, actual.size());
+    }
+
+    @Test
+    void shouldFindByUsername() {
+        AppUser testDummy = repository.findByUsername("morgan@oliver.com");
+
+        assertTrue(testDummy.isEnabled());
+        assertNotNull(testDummy);
+    }
+
+    @Test
+    void shouldNotFindByUsername() {
+        AppUser testDummy = repository.findByUsername("youdontexist@null.com");
+        assertNull(testDummy);
+    }
+
 
 
 

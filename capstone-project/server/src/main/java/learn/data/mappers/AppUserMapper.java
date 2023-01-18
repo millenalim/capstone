@@ -5,16 +5,19 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AppUserMapper implements RowMapper<AppUser> {
-    private List<String> roles;
+    private List<String> roles = new ArrayList<>();
 
     public AppUserMapper(List<String> roles) {
         this.roles = roles;
     }
 
-    public AppUserMapper(){}
+    public AppUserMapper() {
+    }
 
 
     @Override

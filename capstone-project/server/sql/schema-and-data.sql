@@ -56,7 +56,7 @@ create table app_user_role (
 
 create table app_user_language (
 	proficiency_level_id int primary key auto_increment,
-    proficieny_level varchar(15) not null,
+    proficiency_level varchar(15) not null,
     app_user_id int not null,
     language_id int not null,
     constraint fk_app_user_language_app_user_id
@@ -87,27 +87,28 @@ insert into app_user_role
     
 insert into `schedule` (schedule_id, day_of_week, availability) 
 	values
-	(1, 'Monday', 'Morning'),
-    (2, 'Monday', 'Afternoon'),
-    (3, 'Monday', 'Evening'),
-    (4, 'Tuesday', 'Morning'),
-    (5, 'Tuesday', 'Afternoon'),
-    (6, 'Tuesday', 'Evening'),
-    (7, 'Wednesday', 'Morning'),
-    (8, 'Wednesday', 'Afternoon'),
-    (9, 'Wednesday', 'Evening'),
-    (10, 'Thursday', 'Morning'),
-    (11, 'Thursday', 'Afternoon'),
-    (12, 'Thursday', 'Evening'),
-    (13, 'Friday', 'Morning'),
-    (14, 'Friday', 'Afternoon'),
-    (15, 'Friday', 'Evening'),
-    (16, 'Saturday', 'Morning'),
-    (17, 'Saturday', 'Afternoon'),
-    (18, 'Saturday', 'Evening'),
-    (19, 'Sunday', 'Morning'),
-    (20, 'Sunday', 'Afternoon'),
-    (21, 'Sunday', 'Evening');
+	(1, 'MONDAY', 'Morning'),
+    (2, 'MONDAY', 'Afternoon'),
+    (3, 'MONDAY', 'Evening'),
+    (4, 'TUESDAY', 'Morning'),
+    (5, 'TUESDAY', 'Afternoon'),
+    (6, 'TUESDAY', 'Evening'),
+    (7, 'WEDNESDAY', 'Morning'),
+    (8, 'WEDNESDAY', 'Afternoon'),
+    (9, 'WEDNESDAY', 'Evening'),
+    (10, 'THURSDAY', 'Morning'),
+    (11, 'THURSDAY', 'Afternoon'),
+    (12, 'THURSDAY', 'Evening'),
+    (13, 'FRIDAY', 'Morning'),
+    (14, 'FRIDAY', 'Afternoon'),
+    (15, 'FRIDAY', 'Evening'),
+    (16, 'SATURDAY', 'Morning'),
+    (17, 'SATURDAY', 'Afternoon'),
+    (18, 'SATURDAY', 'Evening'),
+    (19, 'SUNDAY', 'Morning'),
+    (20, 'SUNDAY', 'Afternoon'),
+    (21, 'SUNDAY', 'Evening');
+    
     
 insert into `language` values
     (1,'Java'),
