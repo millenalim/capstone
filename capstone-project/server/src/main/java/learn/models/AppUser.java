@@ -17,16 +17,20 @@ public class AppUser implements UserDetails {
     private String bio;
     private boolean enabled;
     private Language language;
-    private Schedule schedule;
+    private List<Schedule> schedule;
     private Proficiency proficiency;
-    private final Collection<GrantedAuthority> authorities;
+    private Collection<GrantedAuthority> authorities;
 
-    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
-        this.appUserId = appUserId;
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.authorities = convertRolesToAuthorities(roles);
+
+//    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
+//        this.appUserId = appUserId;
+//        this.username = username;
+//        this.password = password;
+//        this.enabled = enabled;
+//        this.authorities = convertRolesToAuthorities(roles);
+//    }
+
+    public AppUser() {
     }
 
     public AppUser(int appUserId, String username, String password, String bio, boolean enabled, List<String> roles) {
@@ -38,6 +42,7 @@ public class AppUser implements UserDetails {
         this.authorities = convertRolesToAuthorities(roles);
     }
 
+
     private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
         return roles.stream()
                 .map(r -> new SimpleGrantedAuthority(r))
@@ -47,6 +52,10 @@ public class AppUser implements UserDetails {
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         return new ArrayList<>(authorities);
+    }
+
+    public void setAuthorities(List<String> roles) {
+        this.authorities = convertRolesToAuthorities(roles);
     }
 
     @Override
@@ -116,11 +125,11 @@ public class AppUser implements UserDetails {
         this.language = language;
     }
 
-    public Schedule getSchedule() {
+    public List<Schedule> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(List<Schedule> schedule) {
         this.schedule = schedule;
     }
 

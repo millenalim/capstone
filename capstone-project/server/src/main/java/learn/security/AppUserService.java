@@ -19,6 +19,8 @@ public class AppUserService implements UserDetailsService {
     private final AppUserRepository repository;
     private final PasswordEncoder encoder;
 
+    public List<AppUser> findAll() {return repository.findAll();}
+
     public AppUserService(AppUserRepository repository,
                           PasswordEncoder encoder) {
         this.repository = repository;
@@ -44,7 +46,7 @@ public class AppUserService implements UserDetailsService {
 
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, password, true, List.of("USER"));
+        AppUser appUser = new AppUser(0, username, password,"hello", true, List.of("USER"));
 
         try {
             appUser = repository.create(appUser);

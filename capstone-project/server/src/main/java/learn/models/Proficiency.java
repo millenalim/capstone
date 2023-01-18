@@ -6,6 +6,14 @@ public class Proficiency {
     private AppUser appUserId;
     private Language languageId;
 
+    public Proficiency() {
+    }
+
+    public Proficiency(int proficiencyLevelId, String proficiencyLevel) {
+        this.proficiencyLevelId = proficiencyLevelId;
+        this.proficiencyLevel = proficiencyLevel;
+    }
+
     public Proficiency(int proficiencyLevelId, String proficiencyLevel, AppUser appUserId, Language languageId) {
         this.proficiencyLevelId = proficiencyLevelId;
         this.proficiencyLevel = proficiencyLevel;

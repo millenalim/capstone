@@ -1,4 +1,4 @@
-package learn.data;
+package learn.data.mappers;
 
 import learn.models.AppUser;
 import org.springframework.jdbc.core.RowMapper;
