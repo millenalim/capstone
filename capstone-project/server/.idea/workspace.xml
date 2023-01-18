@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/NavBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" afterDir="false" />
-    </list>
-    <list id="cfec877b-631f-4a5b-91f8-7c0265f94bc7" name="Changes by ZachYau" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" afterDir="false" />
     </list>
+    <list id="cfec877b-631f-4a5b-91f8-7c0265f94bc7" name="Changes by ZachYau" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,19 +30,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java">
-      <ranges>
-        <range start1="3" end1="3" start2="3" end2="6" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="4" end1="4" start2="7" end2="10" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="29" end1="38" start2="35" end2="46" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
-        <range start1="39" end1="43" start2="47" end2="51" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="44" end1="57" start2="52" end2="58" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="58" end1="80" start2="59" end2="79" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="166" end1="166" start2="165" end2="197" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
-      </ranges>
-    </file>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -55,21 +39,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/MorganOliver/Documents/repositories/team-capstone/.gitignore&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "C:/Users/MillenaLim/Desktop/cohort-39/M10/exercise/solar-farm-web-app/server",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -78,11 +62,11 @@
       <recent name="learn.data" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
-        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="top-secret-password" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="learn.App" />
       <module name="server" />
@@ -118,8 +102,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
         <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
       </list>
     </recent_temporary>
   </component>
