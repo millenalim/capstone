@@ -6,15 +6,24 @@ body {
 nav {
   background-color: white;
 } 
+
 nav ul {
   margin: 0;
   padding: 1em;
 }
+
 nav ul li {
   display: inline-block;
   margin-right: 1em;
 }
+
 nav ul li a {
   color: black;
   text-decoration: none;
 }
+
+.active {
+  font-weight: bold !important;
+  color: black !important;
+}
+

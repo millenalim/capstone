@@ -14,32 +14,38 @@ function TableOfUsers() {
   return (
     <>
     <h2 className="mt-4 mb-4" style={{color: "white", textAlign: "center"}}>Users</h2>
-    <table className="table table-dark table-striped">
-        <thead>
-            <tr>
-            <th scope="col">Username</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            {/* <td>{user.userId}</td>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td> */}
-            <td>email</td>
-            <td>first name</td>
-            <td>last name</td>
-            <td>
-                <div className="float-right mr-2">
-                    <button type="button" className="btn btn-outline-light">Edit</button>
-                    <button type="button" className="btn btn-outline-danger">Delete</button>    
-                </div>
-            </td>
-            </tr>
-        </tbody>
-    </table>
+    <form className="d-flex mb-4" role="search">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    <div className="col mx-4">
+        <table className="table table-dark table-striped">
+            <thead>
+                <tr>
+                <th scope="col">Username</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {/* <td>{user.username}</td>
+                <td>{user.firstName}</td>
+                <td>{user.lastName}</td> */}
+                <td>email</td>
+                <td>first name</td>
+                <td>last name</td>
+                <td>
+                    <div className="float-right mr-2">
+                        <button type="button" className="btn btn-outline-light">Edit</button>
+                        <button type="button" className="btn btn-outline-danger">Delete</button>    
+                    </div>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     </>
   );
 }

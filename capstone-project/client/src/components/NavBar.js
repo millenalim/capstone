@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 function NavBar() {
@@ -7,50 +7,87 @@ function NavBar() {
 
   return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        {(() => {
-          if (auth.currentUser && auth.currentUser.hasRole("ADMIN")) {
-            return (
-              <li>
-              <Link to="/users">Users</Link>
-              </li>
-            )
-          } else if (auth.currentUser) {
-            return (
-             <>
-             <li>
-               <Link to="/discover">Discover</Link>
-             </li>
-             <li>
-               <Link to="/messages">Messages</Link>
-             </li>
-             <li>
-               <Link to="/user-profile">Profile</Link>
-             </li>
-           </>
-            )
-          } else {
-            return (
+      <div className="container-fluid">
+        <ul>
+          <li>
+            <NavLink 
+                to="/"
+                className={({ isActive }) => 
+                isActive ? "nav-link active" : "nav-link"
+                }
+            >Home</NavLink>
+          </li>
+          {(() => {
+            if (auth.currentUser && auth.currentUser.hasRole("ADMIN")) {
+              return (
+                <li>
+                <NavLink 
+                  to="/users"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Users</NavLink>
+                </li>
+              )
+            } else if (auth.currentUser) {
+              return (
               <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </>
-            )
-          }
-        })()}
-      </ul>
-      {auth.currentUser && (
-        <div>
-          <button onClick={() => auth.logout()}>Logout</button>
-        </div>
-      )}
+              <li>
+                <NavLink 
+                  to="/discover"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Discover</NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/messages"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Messages</NavLink>
+              </li>
+              <li>
+                <NavLink 
+                  to="/user-profile"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Profile</NavLink>
+              </li>
+            </>
+              )
+            } else {
+              return (
+                <>
+              <li>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Login</NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) => 
+                  isActive ? "nav-link active" : "nav-link"
+                  }
+                >Sign Up</NavLink>
+              </li>
+            </>
+              )
+            }
+          })()}
+        </ul>
+        {auth.currentUser && (
+          <div>
+            <button onClick={() => auth.logout()}>Logout</button>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
