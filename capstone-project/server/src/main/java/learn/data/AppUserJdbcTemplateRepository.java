@@ -47,8 +47,9 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public List<AppUser> displayMatches(AppUser user) {
-        List<AppUser> appUserList = findAll();
-        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
+//        List<AppUser> appUserList = findAll();
+//        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
+        return null;
 
     }
 
