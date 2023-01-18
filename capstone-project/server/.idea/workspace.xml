@@ -6,14 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/schema-and-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/schema-and-data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" afterDir="false" />
     </list>
     <list id="cfec877b-631f-4a5b-91f8-7c0265f94bc7" name="Changes by ZachYau" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +25,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -34,15 +35,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java">
+    <file path="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java">
       <ranges>
-        <range start1="3" end1="3" start2="3" end2="6" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="4" end1="4" start2="7" end2="10" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="29" end1="38" start2="35" end2="46" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
-        <range start1="39" end1="43" start2="47" end2="51" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="44" end1="57" start2="52" end2="58" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="58" end1="80" start2="59" end2="79" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
-        <range start1="166" end1="166" start2="165" end2="197" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
+        <range start1="3" end1="3" start2="3" end2="4" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="6" end1="6" start2="7" end2="8" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="7" end1="7" start2="9" end2="10" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="11" end1="11" start2="14" end2="16" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="13" end1="14" start2="18" end2="18" changelist="cfec877b-631f-4a5b-91f8-7c0265f94bc7" />
+        <range start1="20" end1="21" start2="24" end2="31" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
+        <range start1="28" end1="28" start2="38" end2="39" changelist="205c11e0-6d99-4b3a-bc87-55a3aa88e291" />
       </ranges>
     </file>
   </component>
@@ -96,6 +97,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AppUserJdbcTemplateRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="learn.data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="learn.data" />
+      <option name="MAIN_CLASS_NAME" value="learn.data.AppUserJdbcTemplateRepositoryTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AppUserJdbcTemplateRepositoryTest.shouldFindAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -114,11 +135,13 @@
     </configuration>
     <list>
       <item itemvalue="Application.App" />
+      <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest" />
       <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>

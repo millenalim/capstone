@@ -46,8 +46,10 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
          }
 
     @Override
-    public List<AppUser> displayMatches() {
-        return null;
+    public List<AppUser> displayMatches(AppUser user) {
+        List<AppUser> appUserList = findAll();
+        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
+
     }
 
 //    @Transactional
@@ -88,8 +90,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         final String sql = "select app_user_id, username, password_hash, bio, enabled "
                 + "from app_user "
                 + "where username = ?;";
+        List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper(roles), username);
+        addDetails(appUserList);
 
-        return jdbcTemplate.query(sql, new AppUserMapper(roles), username)
+
+        return appUserList
                 .stream()
                 .findFirst().orElse(null);
     }
@@ -193,6 +198,14 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
             + "where aus.app_user_id = ?;";
     var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId());
     appUser.setSchedule(schedule);
+    }
+    private void addDetails(List<AppUser> appUserList){
+        for (AppUser user : appUserList) {
+            user.setAuthorities(getRolesByUsername(user.getUsername()));
+            getProficiency(user);
+            addLanguage(user);
+            addSchedule(user);
+        }
     }
 
 }

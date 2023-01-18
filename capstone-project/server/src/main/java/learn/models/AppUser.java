@@ -22,13 +22,13 @@ public class AppUser implements UserDetails {
     private Collection<GrantedAuthority> authorities;
 
 
-//    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
-//        this.appUserId = appUserId;
-//        this.username = username;
-//        this.password = password;
-//        this.enabled = enabled;
-//        this.authorities = convertRolesToAuthorities(roles);
-//    }
+    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
+        this.appUserId = appUserId;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = convertRolesToAuthorities(roles);
+    }
 
     public AppUser() {
     }
