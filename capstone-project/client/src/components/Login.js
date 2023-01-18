@@ -38,10 +38,10 @@ function Login() {
 
   return (
     <div>
-        <h2 class="text-white">Login</h2>
+        <h2 className="text-white">Login</h2>
         <form onSubmit={handleSubmit}>
             <div>
-                <label class="text-white" htmlFor="user-email">Email:</label>
+                <label className="text-white" htmlFor="user-email">Email:</label>
                 <input 
                     type="text"
                     onChange={(event) => setEmail(event.target.value)}
@@ -49,7 +49,7 @@ function Login() {
                 />
             </div>
             <div>
-                <label class="text-white" htmlFor="user-password">Password:</label>
+                <label className="text-white" htmlFor="user-password">Password:</label>
                 <input 
                     type="password"
                     onChange={(event) => setPassword(event.target.value)}

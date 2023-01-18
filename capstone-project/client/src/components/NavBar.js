@@ -6,22 +6,35 @@ function NavBar() {
   const auth = useContext(AuthContext);
 
   return (
-    <nav class>
+    <nav>
       <ul>
         <li>
           <Link to="/">Home</Link>
         </li>
-        {auth.currentUser ? (
-        <>
-          <li>
-            <Link to="/discover">Discover</Link>
-          </li>
-          <li>
-            <Link to="/messages">Messages</Link>
-          </li>
-        </>
-        ) : (
-          <>
+        {(() => {
+          if (auth.currentUser && auth.currentUser.hasRole("ADMIN")) {
+            return (
+              <li>
+              <Link to="/users">Users</Link>
+              </li>
+            )
+          } else if (auth.currentUser) {
+            return (
+             <>
+             <li>
+               <Link to="/discover">Discover</Link>
+             </li>
+             <li>
+               <Link to="/messages">Messages</Link>
+             </li>
+             <li>
+               <Link to="/user-profile">Profile</Link>
+             </li>
+           </>
+            )
+          } else {
+            return (
+              <>
             <li>
               <Link to="/login">Login</Link>
             </li>
@@ -29,7 +42,9 @@ function NavBar() {
               <Link to="/signup">Sign Up</Link>
             </li>
           </>
-        )}
+            )
+          }
+        })()}
       </ul>
       {auth.currentUser && (
         <div>

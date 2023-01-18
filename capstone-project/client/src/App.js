@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import Login from "./components/Login";
-import MyChatComponent from "./components/MyChatComponent";
 import NavBar from "./components/NavBar";
+import Login from "./components/Login";
+import TableOfUsers from "./components/TableOfUsers";
+import MyChatComponent from "./components/MyChatComponent";
 import AuthContext from "./context/AuthContext";
 
 
@@ -58,10 +59,20 @@ function App() {
         <NavBar />
 
         <Routes>
+        {/* If logged in as user, go to home page, if not, go to login page */}
         <Route path="/login" element={
           currentUser ? <Navigate to={"/"} /> : <Login />
         }/>
-        <Route path="/messages" element={<MyChatComponent/>} />
+
+        {/* If user is logged in and clicks message in navbar, go to chatbox */}
+        <Route path="/messages" element={
+          currentUser ? <MyChatComponent/> : <Login />
+        } />
+        
+        {/* If logged in as admin, go to the table of users, if not, go to login page */}
+        <Route path="/users" element={
+          currentUser ? <TableOfUsers /> : <Login /> 
+        }/>
         </Routes>
       </Router>
     </AuthContext.Provider>

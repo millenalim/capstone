@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/components/MyChatComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/NavBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +42,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "C:/Users/MorganOliver/Documents/repositories/cohort-39-exercises/Study-Buddy/team-capstone/capstone-project/server",
+    "last_opened_file_path": "C:/Users/MillenaLim/Desktop/repo/cohort-39-coursework/week-10/lms/examples/bug-safari-jwt-server/solution",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -55,7 +53,7 @@
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <envs>
         <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
-        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="top-secret-password" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="learn.App" />
       <module name="server" />
