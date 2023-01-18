@@ -1,6 +1,7 @@
 package learn.models;
 
 public class AppRole {
+    //Fix naming conventions for appRoleId
     private int app_role_id;
     private String name;
 

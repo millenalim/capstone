@@ -2,6 +2,7 @@ package learn.data;
 
 import learn.App;
 import learn.models.AppUser;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface AppUserRepository {
 
     List<AppUser> findAll();
     @Transactional
-    List<AppUser> displayMatches();
+    List<AppUser> displayMatches(AppUser user);
 
     @Transactional
     AppUser create(AppUser user);

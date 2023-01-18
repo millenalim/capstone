@@ -32,8 +32,8 @@ public class SecurityConfig {
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/refresh_token").authenticated()
                 .antMatchers("/create_account").permitAll()
-//                .antMatchers(HttpMethod.GET,
-//                        "/order").permitAll()
+                .antMatchers(HttpMethod.GET,
+                        "/api/").permitAll()
 //                .antMatchers(HttpMethod.GET,
 //                        "/sighting", "/sighting/*").permitAll()
 //                .antMatchers(HttpMethod.POST,
@@ -56,4 +56,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
 }

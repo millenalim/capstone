@@ -15,7 +15,7 @@ public class ProficiencyMapper implements RowMapper<Proficiency> {
     @Override
     public Proficiency mapRow(ResultSet rs, int i) throws SQLException {
         return new Proficiency(
-                rs.getInt("proficiency_id"),
+                rs.getInt("proficiency_level_id"),
                 rs.getString("proficiency_level")
         );
     }

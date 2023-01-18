@@ -1,7 +1,6 @@
-drop database if exists capstone_project;
-create database capstone_project;
-
-use capstone_project;
+drop database if exists capstone_project_test;
+create database capstone_project_test;
+use capstone_project_test;
 
 create table `schedule` (
 	schedule_id int primary key auto_increment,
@@ -67,6 +66,27 @@ create table app_user_language (
         references language(language_id)
 );
 
+delimiter //
+create procedure set_known_good_state()
+begin
+    delete from app_user_role;
+
+	delete from app_role;
+    alter table app_role auto_increment = 1;
+    
+    delete from app_user_schedule;
+
+    delete from `schedule`;
+    alter table `schedule` auto_increment = 1;
+    
+    delete from `language`;
+    alter table `language` auto_increment = 1;
+    
+	delete from app_user;
+    alter table app_user auto_increment = 1;
+    
+	
+
 -- data
 insert into app_role (`name`) values
     ('USER'),
@@ -109,7 +129,6 @@ insert into `schedule` (schedule_id, day_of_week, availability)
     (20, 'SUNDAY', 'Afternoon'),
     (21, 'SUNDAY', 'Evening');
     
-    
 insert into `language` values
     (1,'Java'),
     (2, 'C'),
@@ -120,17 +139,11 @@ insert into `language` values
     (7, 'PHP'),
     (8, 'SQL');
     
-describe app_user_schedule;
-
 insert into app_user_schedule (app_user_id, schedule_id ) values 
     (1,1),
     (1,2),
     (2,1),
     (2,2);
-
-
     
-	
-    
-    
-
+end //
+delimiter ;
