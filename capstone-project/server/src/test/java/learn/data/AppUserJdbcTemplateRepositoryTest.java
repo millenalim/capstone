@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,6 +57,18 @@ class AppUserJdbcTemplateRepositoryTest {
     void shouldNotFindByUsername() {
         AppUser testDummy = repository.findByUsername("youdontexist@null.com");
         assertNull(testDummy);
+    }
+
+    @Test
+    void shouldCreateNewUser() {
+    AppUser newUser = new AppUser(4,"fake@user.com",
+            "test",
+            "dummy",
+            "P@ssw0rd!",
+            "hello, I am not real",false, List.of("USER"));
+
+    AppUser testDummy = repository.create(newUser);
+    assertNotNull(testDummy);
     }
 
 

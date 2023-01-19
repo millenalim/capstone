@@ -38,15 +38,15 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
-    public Result<AppUser> create(String username, String password) {
-        Result<AppUser> result = validate(username, password);
+    public Result<AppUser> create(String username, String firstName, String lastName, String password) {
+        Result<AppUser> result = validate(username, firstName, lastName, password);
         if (!result.isSuccess()) {
             return result;
         }
 
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, password,"hello", true, List.of("USER"));
+        AppUser appUser = new AppUser(0, username, firstName, lastName, password,"hello", true, List.of("USER"));
 
         try {
             appUser = repository.create(appUser);
@@ -58,10 +58,20 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    private Result<AppUser> validate(String username, String password) {
+    private Result<AppUser> validate(String username, String firstName, String lastName, String password) {
         Result<AppUser> result = new Result<>();
         if (username == null || username.isBlank()) {
             result.addMessage(ActionStatus.INVALID, "username is required");
+            return result;
+        }
+
+        if (firstName.isBlank() || firstName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "first name is required");
+            return result;
+        }
+
+        if(lastName.isBlank() || lastName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "last name is required");
             return result;
         }
 

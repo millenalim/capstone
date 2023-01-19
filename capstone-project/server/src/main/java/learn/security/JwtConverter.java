@@ -52,10 +52,14 @@ public class JwtConverter {
                     .parseClaimsJws(token.substring(7));
 
             String username = jws.getBody().getSubject();
+            String firstName = jws.getBody().getSubject();
+            String lastName = jws.getBody().getSubject();
+            String password = jws.getBody().getSubject();
+            String bio = jws.getBody().getSubject();
             int appUserId = (int)jws.getBody().get("app_user_id");
             String authStr = (String) jws.getBody().get("authorities");
 
-            return new AppUser(appUserId, username, null, true,
+            return new AppUser(appUserId, username, firstName, lastName, password, bio, true,
                     Arrays.asList(authStr.split(",")));
 
         } catch (JwtException e) {

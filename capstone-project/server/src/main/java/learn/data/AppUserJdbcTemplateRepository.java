@@ -58,9 +58,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public List<AppUser> displayMatches(AppUser user) {
-//        List<AppUser> appUserList = findAll();
-//        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
-        return null;
+        List<AppUser> appUserList = findAll();
+        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
 
     }
 
@@ -70,7 +69,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
 
-        final String sql = "select app_user_id, username, password_hash, bio, enabled "
+        final String sql = "select app_user_id, username, first_name, last_name, password_hash, bio, enabled "
                 + "from app_user "
                 + "where username = ?;";
         List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper(roles), username);
@@ -85,14 +84,18 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Override
     @Transactional
     public AppUser create(AppUser user) {
+        //bio, language, schedule, proficiency
 
-        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
+        final String sql = "insert into app_user (username, first_name, last_name, bio, password_hash) values (?, ?, ?, ?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
+            ps.setString(2,user.getFirstName());
+            ps.setString(3,user.getLastName());
+            ps.setString(4, user.getBio());
+            ps.setString(5, user.getPassword());
             return ps;
         }, keyHolder);
 
