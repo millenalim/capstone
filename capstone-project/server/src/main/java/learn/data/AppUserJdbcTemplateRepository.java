@@ -5,6 +5,9 @@ import learn.data.mappers.LanguageMapper;
 import learn.data.mappers.ProficiencyMapper;
 import learn.data.mappers.ScheduleMapper;
 import learn.models.AppUser;
+import learn.models.Language;
+import learn.models.Proficiency;
+import learn.models.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository {
@@ -77,19 +81,14 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     @Transactional
-    public AppUser create(AppUser user) {
-        //bio, language, schedule, proficiency
-
-        final String sql = "insert into app_user (username, first_name, last_name, bio, password_hash) values (?, ?, ?, ?, ?);";
+    public AppUser createAccount(AppUser user) {
+        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
-            ps.setString(2,user.getFirstName());
-            ps.setString(3,user.getLastName());
-            ps.setString(4, user.getBio());
-            ps.setString(5, user.getPassword());
+            ps.setString(2, user.getPassword());
             return ps;
         }, keyHolder);
 
@@ -103,6 +102,36 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
         return user;
     }
+
+    @Override
+    @Transactional
+    public AppUser createProfile(AppUser appUser) {
+        //bio, language, schedule, proficiency
+
+        final String sql = "insert into app_user (app_user_id, first_name, last_name, bio) values (?, ?, ?, ?);";
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1,appUser.getAppUserId());
+            ps.setString(2,appUser.getFirstName());
+            ps.setString(3,appUser.getLastName());
+            ps.setString(4, appUser.getBio());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+//        appUser.setAppUserId(keyHolder.getKey().intValue());
+
+        updateRoles(appUser);
+
+        return appUser;
+    }
+
+
 
     @Override
     @Transactional

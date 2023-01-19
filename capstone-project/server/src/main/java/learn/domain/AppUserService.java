@@ -1,10 +1,16 @@
-package learn.security;
+package learn.domain;
 
+import learn.App;
 import learn.data.AppUserRepository;
 import learn.domain.ActionStatus;
 import learn.domain.Result;
 import learn.models.AppUser;
+import learn.models.Language;
+import learn.models.Proficiency;
+import learn.models.Schedule;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,14 +24,15 @@ public class AppUserService implements UserDetailsService {
 
     private final AppUserRepository repository;
     private final PasswordEncoder encoder;
-
-    public List<AppUser> findAll() {return repository.findAll();}
-
     public AppUserService(AppUserRepository repository,
                           PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
     }
+
+    public List<AppUser> findAll() {return repository.findAll();}
+
+    public List<AppUser> findAllUsers() {return repository.findAllUsers();}
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,18 +45,18 @@ public class AppUserService implements UserDetailsService {
         return appUser;
     }
 
-    public Result<AppUser> create(String username, String firstName, String lastName, String password) {
-        Result<AppUser> result = validate(username, firstName, lastName, password);
+
+    public Result<AppUser> createAccount(String username, String password) {
+        Result<AppUser> result = validate(username, password);
         if (!result.isSuccess()) {
             return result;
         }
-
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, firstName, lastName, password,"hello", true, List.of("USER"));
+        AppUser appUser = new AppUser(0, username, password, true, List.of("USER"));
 
         try {
-            appUser = repository.create(appUser);
+            appUser = repository.createAccount(appUser);
             result.setPayload(appUser);
         } catch (DuplicateKeyException e) {
             result.addMessage(ActionStatus.INVALID, "The provided username already exists");
@@ -58,10 +65,56 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
+    public Result<AppUser> createProfile(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
+        Result<AppUser> result = validateFields(firstName, lastName, bio, language,proficiency,schedule);
+        if(!result.isSuccess()) {
+            return result;
+        }
+        AppUser appUser = new AppUser(firstName,lastName,bio,language,proficiency,schedule);
+
+        try {
+            appUser = repository.createProfile(appUser);
+            result.setPayload(appUser);
+        } catch(DataAccessException e) {
+            result.addMessage(ActionStatus.INVALID, "Unable to create profile");
+        }
+        return result;
+    }
+
     public boolean deleteById(int appUserId){return repository.deleteById(appUserId);}
 
+    private Result<AppUser> validateFields(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
+        Result<AppUser> result = new Result<>();
+         if (firstName.isBlank() || firstName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "First name is required");
+            return result;
+        }
 
-    private Result<AppUser> validate(String username, String firstName, String lastName, String password) {
+        if(lastName.isBlank() || lastName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "Last name is required");
+            return result;
+        }
+
+        if (language == null) {
+            result.addMessage(ActionStatus.INVALID, "Please select a language");
+            return result;
+        }
+
+        if(proficiency == null) {
+            result.addMessage(ActionStatus.INVALID, "Please select a proficiency level");
+            return result;
+        }
+
+        if(schedule == null) {
+            result.addMessage(ActionStatus.INVALID, "Please select a schedule");
+            return result;
+        }
+
+        return result;
+    }
+
+    private Result<AppUser> validate(String username, String password) {
+
 
         Result<AppUser> result = new Result<>();
         if (username == null || username.isBlank()) {
@@ -69,15 +122,6 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
 
-        if (firstName.isBlank() || firstName.isEmpty()) {
-            result.addMessage(ActionStatus.INVALID, "first name is required");
-            return result;
-        }
-
-        if(lastName.isBlank() || lastName.isEmpty()) {
-            result.addMessage(ActionStatus.INVALID, "last name is required");
-            return result;
-        }
 
         if (password == null) {
             result.addMessage(ActionStatus.INVALID, "password is required");

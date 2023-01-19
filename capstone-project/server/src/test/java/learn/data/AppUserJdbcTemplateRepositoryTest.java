@@ -62,13 +62,23 @@ class AppUserJdbcTemplateRepositoryTest {
     @Test
     void shouldCreateNewUser() {
     AppUser newUser = new AppUser(4,"fake@user.com",
-            "test",
-            "dummy",
             "P@ssw0rd!",
-            "hello, I am not real",false, List.of("USER"));
+           false,
+            List.of("USER"));
 
-    AppUser testDummy = repository.create(newUser);
+    AppUser testDummy = repository.createAccount(newUser);
     assertNotNull(testDummy);
+    }
+
+    @Test
+    void shouldAddProfileToUser() {
+
+    }
+
+    @Test
+    void shouldDelete(){
+        assertTrue(repository.deleteById(4));
+        assertFalse(repository.deleteById(4));
     }
 
 
