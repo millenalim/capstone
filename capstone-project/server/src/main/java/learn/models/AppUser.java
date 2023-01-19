@@ -30,18 +30,7 @@ public class AppUser implements UserDetails {
         this.authorities = convertRolesToAuthorities(roles);
     }
 
-<<<<<<< HEAD
-    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
-        this.appUserId = appUserId;
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.authorities = convertRolesToAuthorities(roles);
-    }
-
-=======
     //Or delete the one above and keep the two below.
->>>>>>> 2f814d5763ddcfdb8863088ced8451d1b3d7e836
     public AppUser() {
     }
 
