@@ -25,6 +25,10 @@ public class AppUser implements UserDetails {
 
     //Builder pattern
 
+<<<<<<< HEAD
+    //Or delete the one above and keep the two below.
+=======
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
     public AppUser() {
     }
 

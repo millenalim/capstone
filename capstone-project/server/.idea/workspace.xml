@@ -6,17 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="205c11e0-6d99-4b3a-bc87-55a3aa88e291" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/http/user.http" beforeDir="false" afterPath="$PROJECT_DIR$/http/user.http" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
+=======
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/controllers/AppUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/controllers/AppUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserJdbcTemplateRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/AppUserRepository.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/data/mappers/AppUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/data/mappers/AppUserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/models/AppUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/domain/AppUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/JwtConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/learn/data/AppUserJdbcTemplateRepositoryTest.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/security/AppUserService.java" afterDir="false" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
     </list>
     <list id="93a887d8-e61e-4b37-a9be-bb8a7235f756" name="Changes by MillenaLim" comment="" />
     <list id="cfec877b-631f-4a5b-91f8-7c0265f94bc7" name="Changes by ZachYau" comment="">
@@ -60,6 +71,10 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -68,11 +83,33 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/Users/MorganOliver/Documents/repositories/cohort-39/M10/example/field-agent-fullstack-security/src",
+=======
+    "last_opened_file_path": "C:/Users/MillenaLim/Desktop/cohort-39/M09/assessment/field-agent-fullstack",
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.lookFeel"
+<<<<<<< HEAD
+=======
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MillenaLim/Desktop/cohort-39/M09/assessment/field-agent-fullstack&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
   }
 }]]></component>
   <component name="RecentsManager">
@@ -87,7 +124,58 @@
       <recent name="learn.data" />
     </key>
   </component>
+<<<<<<< HEAD
   <component name="RunManager">
+=======
+<<<<<<< HEAD
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="top-secret-password" />
+=======
+  <component name="RunManager" selected="JUnit.AppUserJdbcTemplateRepositoryTest.shouldCreateNewUser">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="learn.App" />
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="learn.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppUserJdbcTemplateRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="learn.data.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="learn.data" />
+      <option name="MAIN_CLASS_NAME" value="learn.data.AppUserJdbcTemplateRepositoryTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+      </envs>
+<<<<<<< HEAD
+=======
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
     <configuration name="AppUserJdbcTemplateRepositoryTest.shouldCreateNewUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -100,6 +188,7 @@
       <option name="MAIN_CLASS_NAME" value="learn.data.AppUserJdbcTemplateRepositoryTest" />
       <option name="METHOD_NAME" value="shouldCreateNewUser" />
       <option name="TEST_OBJECT" value="method" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -116,6 +205,15 @@
       <option name="MAIN_CLASS_NAME" value="learn.data.AppUserJdbcTemplateRepositoryTest" />
       <option name="METHOD_NAME" value="shouldNotCreateNewUserIfPasswordIsInvalid" />
       <option name="TEST_OBJECT" value="method" />
+<<<<<<< HEAD
+=======
+      <envs>
+        <env name="CAPSTONE_PROJECT_DB_USERNAME" value="root" />
+        <env name="CAPSTONE_PROJECT_DB_PASSWORD" value="dockersqlpassword" />
+      </envs>
+<<<<<<< HEAD
+=======
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,11 +262,13 @@
       <option name="MAIN_CLASS_NAME" value="learn.domain.AppUserServiceTest" />
       <option name="METHOD_NAME" value="shouldNotCreateUserIfPasswordIsInvalid" />
       <option name="TEST_OBJECT" value="method" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldCreateNewUser" />
       <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldNotCreateNewUserIfPasswordIsInvalid" />
       <item itemvalue="JUnit.AppUserServiceTest.shouldCreateNewUser" />
@@ -182,6 +282,30 @@
         <item itemvalue="JUnit.AppUserServiceTest.shouldFindAll" />
         <item itemvalue="JUnit.AppUserServiceTest.shouldNotCreateUserIfPasswordIsInvalid" />
         <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldNotCreateNewUserIfPasswordIsInvalid" />
+=======
+      <item itemvalue="Application.App" />
+<<<<<<< HEAD
+=======
+      <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldCreateNewUser" />
+      <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindByUsername" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
+      <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest" />
+      <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
+    </list>
+    <recent_temporary>
+      <list>
+<<<<<<< HEAD
+        <item itemvalue="Application.App" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest" />
+=======
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldCreateNewUser" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindByUsername" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest.shouldFindAll" />
+        <item itemvalue="JUnit.AppUserJdbcTemplateRepositoryTest" />
+        <item itemvalue="Application.App" />
+>>>>>>> 330cd2bc5b94c48aba85f479ebdd4b8b00674841
+>>>>>>> c11080d1e5bfb740e8b0e7f81a1e3b17e620646c
       </list>
     </recent_temporary>
   </component>
