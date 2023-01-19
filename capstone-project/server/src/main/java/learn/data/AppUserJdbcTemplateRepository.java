@@ -5,22 +5,16 @@ import learn.data.mappers.LanguageMapper;
 import learn.data.mappers.ProficiencyMapper;
 import learn.data.mappers.ScheduleMapper;
 import learn.models.AppUser;
-import learn.models.Language;
-import learn.models.Proficiency;
-import learn.models.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository {
@@ -124,6 +118,16 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         }
 
         return updated;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteById(int appUserId){
+        jdbcTemplate.update("delete from app_user_role where app_user_id =?;", appUserId);
+        jdbcTemplate.update("delete from app_user_schedule where app_user_id=?;", appUserId);
+        jdbcTemplate.update("delete from app_user_language where app_user_id=?;", appUserId);
+        return jdbcTemplate.update("delete from app_user where app_user_id=?;", appUserId) >0;
+
     }
 
     private void updateRoles(AppUser user) {
