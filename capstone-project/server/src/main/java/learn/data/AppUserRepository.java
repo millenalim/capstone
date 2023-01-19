@@ -22,4 +22,6 @@ public interface AppUserRepository {
     boolean update(AppUser user);
 
 
+    @Transactional
+    boolean deleteById(int appUserId);
 }

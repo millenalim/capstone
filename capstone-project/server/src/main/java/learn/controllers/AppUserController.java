@@ -2,10 +2,9 @@ package learn.controllers;
 
 import learn.models.AppUser;
 import learn.security.AppUserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +18,13 @@ public class AppUserController {
 
     @GetMapping
     public List<AppUser> findAll() {return service.findAll();}
+
+    @DeleteMapping("/{appUserId}")
+    public ResponseEntity<Void> deleteById(@PathVariable int appUserId){
+        if(service.deleteById(appUserId)){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 }

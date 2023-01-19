@@ -58,7 +58,11 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
+    public boolean deleteById(int appUserId){return repository.deleteById(appUserId);}
+
+
     private Result<AppUser> validate(String username, String firstName, String lastName, String password) {
+
         Result<AppUser> result = new Result<>();
         if (username == null || username.isBlank()) {
             result.addMessage(ActionStatus.INVALID, "username is required");
