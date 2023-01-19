@@ -1,9 +1,23 @@
 @url = http://localhost:8080
 
-POST {{url}}/authenticate HTTP/1.1 
+
+POST {{url}}/authenticate
 Content-Type: application/json
 
 {
     "username": "morgan@oliver.com",
     "password": "P@ssw0rd!"
 }
+
+###
+POST {{url}}/create_account
+Content-Type: application/json
+
+{
+    "username": "testdummy@code.com",
+    "password": "P@ssw0rd!"
+}
+###
+GET {{url}}/users
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibW9yZ2FuQG9saXZlci5jb20iLCJhcHBfdXNlcl9pZCI6MiwiYXV0aG9yaXRpZXMiOiJBRE1JTiIsImV4cCI6MTY3NDI0MzU0N30.DG3tAYkIZ9rTZMtR8fVvIlltP-8HUQsiMmcajcDQ6Qs
+###

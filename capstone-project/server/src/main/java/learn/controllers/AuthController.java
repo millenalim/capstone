@@ -2,7 +2,7 @@ package learn.controllers;
 
 import learn.domain.Result;
 import learn.models.AppUser;
-import learn.security.AppUserService;
+import learn.domain.AppUserService;
 import learn.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,11 +72,10 @@ public class AuthController {
     public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
 
         String username = credentials.get("username");
-        String firstName = credentials.get("first_name");
-        String lastName = credentials.get("last_name");
+
         String password = credentials.get("password");
 
-        Result<AppUser> result = appUserService.create(username, firstName, lastName, password);
+        Result<AppUser> result = appUserService.createAccount(username, password);
 
         // unhappy path...
         if (!result.isSuccess()) {
@@ -89,4 +88,20 @@ public class AuthController {
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
+
+//    @PostMapping("/create_account")
+//    public ResponseEntity<?> createAccount(@RequestBody AppUser appUser) {
+//
+//        Result<AppUser> result = appUserService.create(appUser);
+//
+//        // unhappy path...
+//        if (!result.isSuccess()) {
+//            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+//        }
+//        // happy path...
+//        HashMap<String, Integer> map = new HashMap<>();
+//        map.put("appUserId", result.getPayload().getAppUserId());
+//
+//        return new ResponseEntity<>(map, HttpStatus.CREATED);
+//    }
 }

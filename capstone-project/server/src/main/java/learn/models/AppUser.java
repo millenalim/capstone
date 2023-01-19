@@ -24,27 +24,26 @@ public class AppUser implements UserDetails {
     private Collection<GrantedAuthority> authorities;
 
     //Builder pattern
-//    public AppUser(int appUserId, String username, String firstName, String lastName, String password, boolean enabled, List<String> roles) {
-//        this.appUserId = appUserId;
-//        this.username = username;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.password = password;
-//        this.enabled = enabled;
-//        this.authorities = convertRolesToAuthorities(roles);
-//    }
 
     public AppUser() {
     }
 
-//    public AppUser(int appUserId, String username, String password, String bio, boolean enabled, List<String> roles) {
-//        this.appUserId = appUserId;
-//        this.username = username;
-//        this.password = password;
-//        this.bio = bio;
-//        this.enabled = enabled;
-//        this.authorities = convertRolesToAuthorities(roles);
-//    }
+    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
+        this.appUserId = appUserId;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = convertRolesToAuthorities(roles);
+    }
+
+    public AppUser(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.bio = bio;
+        this.language = language;
+        this.proficiency = proficiency;
+        this.schedule = schedule;
+    }
 
     public AppUser(int appUserId, String username, String firstName, String lastName, String password, String bio, boolean enabled, List<String> roles) {
         this.appUserId = appUserId;

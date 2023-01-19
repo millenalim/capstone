@@ -1,7 +1,8 @@
 package learn.controllers;
 
+import learn.domain.Result;
 import learn.models.AppUser;
-import learn.security.AppUserService;
+import learn.domain.AppUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,14 +11,14 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost3000"})
-@RequestMapping("/api/")
 public class AppUserController {
     private final AppUserService service;
 
     public AppUserController(AppUserService service){this.service = service;}
 
-    @GetMapping
-    public List<AppUser> findAll() {return service.findAll();}
+    @GetMapping("/users")
+    public List<AppUser> findAllUsers() {return service.findAllUsers();}
+
 
     @DeleteMapping("/{appUserId}")
     public ResponseEntity<Void> deleteById(@PathVariable int appUserId){
