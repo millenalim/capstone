@@ -5,22 +5,16 @@ import learn.data.mappers.LanguageMapper;
 import learn.data.mappers.ProficiencyMapper;
 import learn.data.mappers.ScheduleMapper;
 import learn.models.AppUser;
-import learn.models.Language;
-import learn.models.Proficiency;
-import learn.models.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository {
@@ -58,9 +52,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     @Override
     public List<AppUser> displayMatches(AppUser user) {
-//        List<AppUser> appUserList = findAll();
-//        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
-        return null;
+        List<AppUser> appUserList = findAll();
+        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
 
     }
 
@@ -70,7 +63,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
 
-        final String sql = "select app_user_id, username, password_hash, bio, enabled "
+        final String sql = "select app_user_id, username, first_name, last_name, password_hash, bio, enabled "
                 + "from app_user "
                 + "where username = ?;";
         List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper(roles), username);
@@ -85,14 +78,18 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Override
     @Transactional
     public AppUser create(AppUser user) {
+        //bio, language, schedule, proficiency
 
-        final String sql = "insert into app_user (username, password_hash) values (?, ?);";
+        final String sql = "insert into app_user (username, first_name, last_name, bio, password_hash) values (?, ?, ?, ?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
+            ps.setString(2,user.getFirstName());
+            ps.setString(3,user.getLastName());
+            ps.setString(4, user.getBio());
+            ps.setString(5, user.getPassword());
             return ps;
         }, keyHolder);
 
@@ -124,6 +121,16 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         }
 
         return updated;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteById(int appUserId){
+        jdbcTemplate.update("delete from app_user_role where app_user_id =?;", appUserId);
+        jdbcTemplate.update("delete from app_user_schedule where app_user_id=?;", appUserId);
+        jdbcTemplate.update("delete from app_user_language where app_user_id=?;", appUserId);
+        return jdbcTemplate.update("delete from app_user where app_user_id=?;", appUserId) >0;
+
     }
 
     private void updateRoles(AppUser user) {
