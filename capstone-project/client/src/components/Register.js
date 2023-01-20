@@ -1,8 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 function Register({ messages, setMessages, makeId, isPasswordComplex}) {
+
+  const auth = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -28,7 +31,21 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
             },
             body: JSON.stringify(userData)
         })
-          navigate("/create_profile");
+        .then(response => {
+            if (response.status === 200) {
+                return response.json()
+            } else if (response.status === 403) {
+                setMessages([...messages, { id: makeId(), type: "failure", text: "Account could not be logged in at this time." }]);
+                navigate("/");
+            } else {
+                setMessages([...messages, { id: makeId(), type: "failure", text: "Unexpected error occurred." }]);
+                navigate("/");
+            };
+        })
+        .then(data => {
+            auth.login(data.jwt_token);
+            navigate("/create_profile");
+        })
         } else if (response.status === 400) {
           setMessages([
             ...messages,
@@ -113,5 +130,4 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
   );
 }
 
-// comment to test out fixing gitignore
 export default Register;
