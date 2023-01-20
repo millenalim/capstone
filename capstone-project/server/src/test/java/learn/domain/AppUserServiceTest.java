@@ -54,6 +54,8 @@ class AppUserServiceTest {
                 appUser.getProficiency(),
                 List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
 
+        assertNotNull(profileAdded);
+
     }
 
 

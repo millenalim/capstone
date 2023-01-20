@@ -107,15 +107,17 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Transactional
     public AppUser createProfile(AppUser appUser) {
 
-        final String sql = "insert into app_user (app_user_id, first_name, last_name, bio) values (?, ?, ?, ?);";
+        final String sql = "insert into app_user (app_user_id, username, first_name, last_name, bio, password_hash) values (?, ?, ?, ?, ?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,appUser.getAppUserId());
-            ps.setString(2,appUser.getFirstName());
-            ps.setString(3,appUser.getLastName());
-            ps.setString(4, appUser.getBio());
+            ps.setString(2, appUser.getUsername());
+            ps.setString(3,appUser.getFirstName());
+            ps.setString(4,appUser.getLastName());
+            ps.setString(5, appUser.getBio());
+            ps.setString(6, appUser.getPassword());
             return ps;
         }, keyHolder);
 

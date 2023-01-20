@@ -89,19 +89,5 @@ public class AuthController {
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
-//    @PostMapping("/create_account")
-//    public ResponseEntity<?> createAccount(@RequestBody AppUser appUser) {
-//
-//        Result<AppUser> result = appUserService.create(appUser);
-//
-//        // unhappy path...
-//        if (!result.isSuccess()) {
-//            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
-//        }
-//        // happy path...
-//        HashMap<String, Integer> map = new HashMap<>();
-//        map.put("appUserId", result.getPayload().getAppUserId());
-//
-//        return new ResponseEntity<>(map, HttpStatus.CREATED);
-//    }
+
 }

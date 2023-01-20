@@ -72,13 +72,20 @@ class AppUserJdbcTemplateRepositoryTest {
 
     @Test
     void shouldAddProfileToAppUser() {
-        AppUser newUser = new AppUser(4,"fake@user.com",
+        AppUser newUser = new AppUser(5,"fakeprofile@user.com",
                 "P@ssw0rd!",
                 false,
                 List.of("USER"));
 
-        AppUser testDummy = repository.createAccount(newUser);
-        AppUser profileAdded = repository.createProfile(testDummy);
+
+//        AppUser testDummy = repository.createAccount(newUser);
+        newUser.setFirstName("test");
+        newUser.setLastName("dummy");
+        newUser.setBio("Hello");
+        newUser.setLanguage(newUser.getLanguage());
+        newUser.setProficiency(newUser.getProficiency());
+        newUser.setSchedule(newUser.getSchedule());
+        AppUser profileAdded = repository.createProfile(newUser);
         assertNotNull(profileAdded);
 
     }
