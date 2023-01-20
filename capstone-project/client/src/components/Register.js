@@ -21,7 +21,14 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
     })
       .then((response) => {
         if (response.status === 201) {
-          navigate("/login");
+          fetch("http://localhost:8080/authenticate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
+          navigate("/create_profile");
         } else if (response.status === 400) {
           setMessages([
             ...messages,
@@ -106,4 +113,5 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
   );
 }
 
+// comment to test out fixing gitignore
 export default Register;
