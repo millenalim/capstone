@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
-import reactSelect from "react-select";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 
-function ProfileForm({ currentUser}) {
+function ProfileForm({ allUsers, setAllUsers, messages, setMessages, currentUser, setCurrentUser}) {
   const {
     register,
     handleSubmit,
@@ -51,11 +51,77 @@ function ProfileForm({ currentUser}) {
       lastName: newUserObj.lastName,
       language: newUserObj.language,
       proficiency: newUserObj.proficiency,
-      schedule: [newUserObj.schedule]
+      schedule: [newUserObj.schedule],
+      bio: newUserObj.bio,
     }
 
     newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
+  }
+
+  if (currentUser.userId > 0) {
+    fetch("http://localhost:8080/user" + currentUser.userId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(retypedUser)
+    })
+    .then(response => {
+      if (response.status === 204) {
+        let message = {
+          status: "success",
+          text: "User \"" + retypedUser.firstName + " " + retypedUser.lastName + "'s\" profile has been successfully edited"
+        }
+        
+        const editUserProfile = () => {
+          let filteredUser = allUsers.filter(user => user.userId !== currentUser.userId);
+          filteredUser.push(retypedUser);
+          return filteredUser;
+        }
+
+        setAllUsers(editUserProfile());
+        setMessages([...messages, message]);
+        setCurrentUser({});
+        navigate("/profile");
+      } else {
+        let message = {
+          status: "failure",
+          text: "Profile could not be edited."
+        }
+        setMessages([...messages, message]);
+      }
+    })
+    .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
+  } else {
+    fetch("http://localhost:8080/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(retypedUser)
+    })
+    .then(response => {
+      if (response.status === 201) {
+
+        let message = {
+          status: "success",
+          text: "User \"" + retypedUser.firstName + " " + retypedUser.lastName + "'s\" profile has been successfully created"
+        }
+
+        setAllUsers(editUserProfile());
+        setMessages([...messages, message]);
+        setCurrentUser({});
+        navigate("/profile");
+      } else {
+        let message = {
+          status: "failure",
+          text: "Profile could not be created."
+        }
+        setMessages([...messages, message]);
+      }
+    })
+    .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
   }
 
   const selectScheduleOptions = [

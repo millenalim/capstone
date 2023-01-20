@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-function Register() {
+function Register({ messages, setMessages, makeId, isPasswordComplex}) {
   const {
     register,
     handleSubmit,
@@ -53,7 +53,7 @@ function Register() {
 
   return (
     <div className="row">
-      <div className="col-lg-4 col-md-6">
+      <div className="col-lg-4 col-md-6 text-white">
         <h3>Sign Up</h3>
         <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
           <label className="form-label mt-3" htmlFor="user-email">
@@ -98,7 +98,7 @@ function Register() {
           />
           <p className="form-error-message">{errors.password?.message}</p>
 
-          <button className="btn btn-primary mt-3" type="submit">Create Account</button>
+          <button className="btn btn-primary mt-3" type="submit" onClick={() => navigate("/create_profile")}>Create Account</button>
           <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/")}>Cancel</button>
         </form>
       </div>

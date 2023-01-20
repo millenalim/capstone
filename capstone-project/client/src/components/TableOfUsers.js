@@ -6,7 +6,7 @@ function TableOfUsers() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:8080/users/')
+        fetch('http://localhost:8080/users')
             .then(response => {
                 if (response.status === 200) {
                     return response.json();
@@ -60,7 +60,7 @@ function TableOfUsers() {
                 <th scope="col">Username</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">&nbsp;</th>
+                <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -71,12 +71,8 @@ function TableOfUsers() {
                 <td>{user.lastName}</td>
                 <td>
                     <div className="float-right mr-2">
-                        <Link className="btn btn-outline-light" to={`/users/edit/${user.appUserId}`}>
-                            <i className="bi bi-pencil-square"></i> Edit
-                        </Link>
-                        <button className="btn btn-outline-danger" onClick={() => handleDeleteUser(user.appUserId) }>
-                            <i className="bi bi-trash"></i> Delete
-                        </button>    
+                        <Link className="btn btn-outline-light" to={`/users/edit/${user.appUserId}`}>Edit</Link>
+                        <button className="btn btn-outline-danger" onClick={() => handleDeleteUser(user.appUserId) }> Delete</button>    
                     </div>
                 </td>
                 </tr>
