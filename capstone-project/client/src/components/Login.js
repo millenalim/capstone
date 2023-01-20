@@ -1,67 +1,87 @@
-import React, { useState, useContext } from 'react';
-import AuthContext from '../context/AuthContext';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import AuthContext from '../context/AuthContext';
 
-function Login() {
+function Login({ messages, setMessages, makeId, isPasswordComplex}) {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const { 
+        register, 
+        handleSubmit,
+        formState: { errors } 
+    } = useForm();
+
     const auth = useContext(AuthContext);
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-    const response = await fetch("http://localhost:8080/authenticate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username: email,
-            password
+    const onSubmit = (userData) => {
+        fetch("http://localhost:8080/authenticate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userData)
         })
-    });
-        if (response.status === 200) {
-            const { jwt_token } = await response.json();
-            auth.login(jwt_token)
+        .then(response => {
+            if (response.status === 200) {
+                return response.json()
+            } else if (response.status === 403) {
+                setMessages([...messages, { id: makeId(), type: "failure", text: "Account could not be logged in at this time." }]);
+                navigate("/");
+            } else {
+                setMessages([...messages, { id: makeId(), type: "failure", text: "Unexpected error occurred." }]);
+                navigate("/");
+            };
+        })
+        .then(data => {
+            auth.login(data.jwt_token);
             navigate("/");
-
-        } else if (response.status === 403) {
-            console.log("error sending...")
-
-        } else {
-            console.log("weird error")
-        }
+        })
+        .catch(error => setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
     };
 
-  return (
-    <div>
-        <h2 className="text-white">Login</h2>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label className="text-white" htmlFor="user-email">Email:</label>
-                <input 
-                    type="text"
-                    onChange={(event) => setEmail(event.target.value)}
-                    id="user-email"
-                />
+    return (
+        <div className="row">
+            <div className="col-lg-4 col-md-6 text-white">
+                <h3>Login</h3>
+                <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
+                <label className="form-label mt-3" htmlFor="user-email">Email</label>
+                    <input
+                        className="form-control"
+                        type="email"
+                        id="user-email" 
+                        {...register("username", { 
+                            required: "Must have a valid email address.",
+                            maxLength: {value: 50, message: "Must be 50 characters or less."},
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Invalid characters, please input a valid email address."
+                            }
+                        })}
+                    />
+                    <p className="form-error-message">{errors.username?.message}</p>
+
+                    <label className="form-label mt-3" htmlFor="user-password">Password</label>
+                    <input 
+                        className="form-control" 
+                        type="password" 
+                        id="user-password" 
+                        {...register("password", { 
+                            required: "Must have a valid password.",
+                            minLength: {value: 8, message: "Must have at least 8 characters."},
+                            validate: v => isPasswordComplex(v)
+                            || "Must contain at least one of the following: an uppercase letter, a lowercase letter, a number, and a special character."
+                        })}
+                    />
+                    <p className="form-error-message">{errors.password?.message}</p>
+
+                    <button className="btn btn-primary mt-3" type="submit">Login</button>
+                    <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/")}>Cancel</button>
+                </form>
             </div>
-            <div>
-                <label className="text-white" htmlFor="user-password">Password:</label>
-                <input 
-                    type="password"
-                    onChange={(event) => setPassword(event.target.value)}
-                    id="password"
-                />
-            </div>
-            <div>
-                <button type="submit">Login</button>
-            </div>
-        </form>
-    </div>
-  );
-}
+        </div>
+    );
+};
 
 export default Login;
