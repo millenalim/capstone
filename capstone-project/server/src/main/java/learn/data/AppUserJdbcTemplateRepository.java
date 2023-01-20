@@ -53,7 +53,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         addDetails(appUserList);
         return appUserList.stream().toList();
     }
-
+// only matches by language
     @Override
     public List<AppUser> displayMatches(AppUser user) {
         List<AppUser> appUserList = findAll();
