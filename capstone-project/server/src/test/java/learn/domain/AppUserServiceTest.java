@@ -4,6 +4,7 @@ import learn.App;
 import learn.data.AppUserRepository;
 import learn.models.AppUser;
 import learn.models.Language;
+import learn.models.Proficiency;
 import learn.models.Schedule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +46,15 @@ class AppUserServiceTest {
                 false,
                 List.of("USER"));
 
-        Result<AppUser> profileAdded = service.createProfile(
-                appUser,
-                "test",
-                "dummy",
-                "hello, I don't really exist",
-                appUser.getLanguage(),
-                appUser.getProficiency(),
-                List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        service.createAccount(appUser.getUsername(), appUser.getPassword());
+        appUser.setFirstName("test");
+        appUser.setLastName("dummy");
+        appUser.setBio("hello, I don't really exist");
+        appUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java"))
+                );
+        appUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
 
+        Result<AppUser> profileAdded = service.createProfile(appUser);
         assertNotNull(profileAdded);
 
     }

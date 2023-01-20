@@ -65,17 +65,11 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    public Result<AppUser> createProfile(AppUser appUser, String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
-        Result<AppUser> result = validateFields(firstName, lastName, bio, language,proficiency,schedule);
+    public Result<AppUser> createProfile(AppUser appUser) {
+        Result<AppUser> result = validateFields(appUser.getFirstName(), appUser.getLastName(), appUser.getBio(), appUser.getProficiency(),appUser.getSchedule());
         if(!result.isSuccess()) {
             return result;
         }
-        appUser.setFirstName(firstName);
-        appUser.setLastName(lastName);
-        appUser.setBio(bio);
-        appUser.setLanguage(language);
-        appUser.setProficiency(proficiency);
-        appUser.setSchedule(schedule);
 
         try {
             appUser = repository.createProfile(appUser);
@@ -88,7 +82,7 @@ public class AppUserService implements UserDetailsService {
 
     public boolean deleteById(int appUserId){return repository.deleteById(appUserId);}
 
-    private Result<AppUser> validateFields(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
+    private Result<AppUser> validateFields(String firstName, String lastName, String bio, Proficiency proficiency, List<Schedule> schedule) {
         Result<AppUser> result = new Result<>();
          if (firstName.isBlank() || firstName.isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "First name is required");
@@ -100,10 +94,6 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
 
-        if (language == null) {
-            result.addMessage(ActionStatus.INVALID, "Please select a language");
-            return result;
-        }
 
         if(proficiency == null) {
             result.addMessage(ActionStatus.INVALID, "Please select a proficiency level");

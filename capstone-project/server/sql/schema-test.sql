@@ -63,29 +63,36 @@ create table app_user_language (
         references app_user(app_user_id),
 	constraint fk_app_user_language_language_id
 		foreign key (language_id)
-        references language(language_id)
+        references `language`(language_id)
 );
 
 delimiter //
 create procedure set_known_good_state()
 begin
-    delete from app_user_role;
+set sql_safe_updates = 0;
+   delete from  app_user_language;
+   alter table app_user_language auto_increment = 1;
+   
+   delete from `language`;
+	alter table `language` auto_increment = 1;
 
-	delete from app_role;
-    alter table app_role auto_increment = 1;
-    
-    delete from app_user_schedule;
+   
+   	delete from app_user_schedule;
+	alter table app_user_schedule auto_increment = 1;
 
     delete from `schedule`;
-    alter table `schedule` auto_increment = 1;
-    
-    delete from `language`;
-    alter table `language` auto_increment = 1;
-    
+       alter table `schedule` auto_increment = 1;
+
+
+   delete from app_user_role;
+
+	delete from app_role;
+       alter table app_role auto_increment = 1;
+
 	delete from app_user;
-    alter table app_user auto_increment = 1;
-    
-	
+       alter table app_user auto_increment = 1;
+
+    	
 
 -- data
 insert into app_role (`name`) values
@@ -139,11 +146,19 @@ insert into `language` values
     (7, 'PHP'),
     (8, 'SQL');
     
+insert into app_user_language (proficiency_level, app_user_id, language_id)  values
+    ("Beginner", 1, 1),
+    ("Intermediate",2,2),
+    ("Expert",3,3); 
+    
 insert into app_user_schedule (app_user_id, schedule_id ) values 
     (1,1),
     (1,2),
     (2,1),
     (2,2);
-    
+set sql_safe_updates = 1;
 end //
 delimiter ;
+call set_known_good_state();
+call set_known_good_state();
+

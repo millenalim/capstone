@@ -5,9 +5,7 @@ import learn.data.mappers.LanguageMapper;
 import learn.data.mappers.ProficiencyMapper;
 import learn.data.mappers.ScheduleMapper;
 import learn.models.AppUser;
-import learn.models.Language;
 import learn.models.Proficiency;
-import learn.models.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,8 +34,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper());
         for (AppUser user : appUserList) {
             user.setAuthorities(getRolesByUsername(user.getUsername()));
-            getProficiency(user);
-            addLanguage(user);
+            addProficiency(user);
+//            addLanguage(user);
             addSchedule(user);
         }
         return appUserList;
@@ -53,13 +51,18 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         addDetails(appUserList);
         return appUserList.stream().toList();
     }
-// only matches by language
+
     @Override
     public List<AppUser> displayMatches(AppUser user) {
-        List<AppUser> appUserList = findAll();
-        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
-
+        return null;
     }
+// only matches by language
+//    @Override
+//    public List<AppUser> displayMatches(AppUser user) {
+//        List<AppUser> appUserList = findAll();
+//        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
+//
+//    }
 
 
     @Override
@@ -107,17 +110,15 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Transactional
     public AppUser createProfile(AppUser appUser) {
 
-        final String sql = "insert into app_user (app_user_id, username, first_name, last_name, bio, password_hash) values (?, ?, ?, ?, ?, ?);";
+        final String sql = "update app_user set first_name = ?, last_name = ?, bio = ? where app_user_id = ?;";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1,appUser.getAppUserId());
-            ps.setString(2, appUser.getUsername());
-            ps.setString(3,appUser.getFirstName());
-            ps.setString(4,appUser.getLastName());
-            ps.setString(5, appUser.getBio());
-            ps.setString(6, appUser.getPassword());
+            ps.setString(1,appUser.getFirstName());
+            ps.setString(2,appUser.getLastName());
+            ps.setString(3, appUser.getBio());
+            ps.setInt(4,appUser.getAppUserId());
             return ps;
         }, keyHolder);
 
@@ -125,13 +126,36 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
             return null;
         }
 
-//        appUser.setAppUserId(keyHolder.getKey().intValue());
-
-        updateRoles(appUser);
+        updateProficiency(appUser);
 
         return appUser;
     }
 
+    private void updateProficiency(AppUser appUser) {
+        jdbcTemplate.update("delete from app_user_language where app_user_id = ?;", appUser.getAppUserId());
+
+        Proficiency proficiency = appUser.getProficiency();
+        if(proficiency != null) {
+            String sql = "insert into app_user_language (proficiency_level, app_user_id, language_id) values (?, ?, ?);";
+            GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+            int rowsAffected = jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, appUser.getProficiency().getProficiencyLevel());
+                ps.setInt(2, appUser.getAppUserId());
+                ps.setInt(3,appUser.getProficiency().getLanguage().getLanguageId());
+                return ps;
+            }, keyHolder);
+
+            if (rowsAffected <= 0) {
+                return;
+            }
+
+            appUser.getProficiency().setProficiencyLevelId(keyHolder.getKey().intValue());
+
+        }
+
+
+    }
 
 
     @Override
@@ -189,10 +213,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
 
-    private void getProficiency(AppUser appUser) {
-        final String sql = "select aul.proficiency_level_id, aul.proficiency_level "
+    private void addProficiency(AppUser appUser) {
+        final String sql = "select aul.proficiency_level_id, aul.proficiency_level, l.`language` "
                 + "from app_user_language aul "
-                + "where aul.app_user_id = ?";
+                + "inner join `language` l on l.language_id = aul.language_id "
+                + "where aul.app_user_id = ?;";
 
         var proficiencyList = jdbcTemplate.query(sql, new ProficiencyMapper(), appUser.getAppUserId());
         var proficiency = proficiencyList.stream().findFirst().orElse(null);
@@ -201,15 +226,15 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
 
-    private void addLanguage(AppUser appUser) {
-        final String sql = "select l.language_id, l.language "
-                + "from language l "
-                + "inner join app_user_language aul on l.language_id = aul.language_Id "
-                + "where aul.app_user_id =?;";
-        var languageList = jdbcTemplate.query(sql, new LanguageMapper(), appUser.getAppUserId());
-        var language = languageList.stream().findFirst().orElse(null);
-        appUser.setLanguage(language);
-    }
+//    private void addLanguage(AppUser appUser) {
+//        final String sql = "select l.language_id, l.language "
+//                + "from language l "
+//                + "inner join app_user_language aul on l.language_id = aul.language_Id "
+//                + "where aul.app_user_id =?;";
+//        var languageList = jdbcTemplate.query(sql, new LanguageMapper(), appUser.getAppUserId());
+//        var language = languageList.stream().findFirst().orElse(null);
+//        appUser.setLanguage(language);
+//    }
 
     private void addSchedule(AppUser appUser) {
         final String sql = "select s.schedule_id, s.day_of_week, s.availability "
@@ -223,8 +248,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     private void addDetails(List<AppUser> appUserList) {
         for (AppUser user : appUserList) {
             user.setAuthorities(getRolesByUsername(user.getUsername()));
-            getProficiency(user);
-            addLanguage(user);
+            addProficiency(user);
+//            addLanguage(user);
             addSchedule(user);
         }
     }

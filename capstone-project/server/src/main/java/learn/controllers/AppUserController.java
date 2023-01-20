@@ -5,6 +5,8 @@ import learn.domain.Result;
 import learn.models.AppUser;
 import learn.domain.AppUserService;
 import learn.models.Language;
+import learn.models.Proficiency;
+import learn.models.Schedule;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,22 +26,16 @@ public class AppUserController {
     public List<AppUser> findAllUsers() {return service.findAllUsers();}
 
     @PutMapping("/create_profile")
-    public ResponseEntity<?> createProfile(@RequestBody AppUser appUser, Map<String, String> credentials) {
-        String firstName = credentials.get("first_name");
-        String lastName = credentials.get("last_name");
-        String bio = credentials.get("bio");
+    public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {
 
-        Result<AppUser> result = service.createProfile(appUser,firstName,lastName, bio,);
+        Result<AppUser> result = service.createProfile(appUser);
 
         // unhappy path...
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
         }
-        // happy path...
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("appUserId", result.getPayload().getAppUserId());
 
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

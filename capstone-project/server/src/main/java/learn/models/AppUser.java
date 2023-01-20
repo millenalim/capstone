@@ -18,10 +18,9 @@ public class AppUser implements UserDetails {
     private String password;
     private String bio;
     private boolean enabled;
-    private Language language;
     private List<Schedule> schedule;
     private Proficiency proficiency;
-    private Collection<GrantedAuthority> authorities;
+    private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     //Builder pattern
 
@@ -38,14 +37,6 @@ public class AppUser implements UserDetails {
         this.authorities = convertRolesToAuthorities(roles);
     }
 
-    public AppUser(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.bio = bio;
-        this.language = language;
-        this.proficiency = proficiency;
-        this.schedule = schedule;
-    }
 
     public AppUser(int appUserId, String username, String firstName, String lastName, String password, String bio, boolean enabled, List<String> roles) {
         this.appUserId = appUserId;
@@ -148,13 +139,7 @@ public class AppUser implements UserDetails {
     }
 
     //Outside classes - getters and setters
-    public Language getLanguage() {
-        return language;
-    }
 
-    public void setLanguage(Language language) {
-        this.language = language;
-    }
 
     public List<Schedule> getSchedule() {
         return schedule;

@@ -3,22 +3,18 @@ package learn.models;
 public class Proficiency {
     private int proficiencyLevelId;
     private String proficiencyLevel;
-    private AppUser appUserId;
-    private Language languageId;
+    private int appUserId;
+    private Language language;
 
     public Proficiency() {
     }
 
-    public Proficiency(int proficiencyLevelId, String proficiencyLevel) {
-        this.proficiencyLevelId = proficiencyLevelId;
-        this.proficiencyLevel = proficiencyLevel;
-    }
 
-    public Proficiency(int proficiencyLevelId, String proficiencyLevel, AppUser appUserId, Language languageId) {
+    public Proficiency(int proficiencyLevelId, String proficiencyLevel, int appUserId, Language language) {
         this.proficiencyLevelId = proficiencyLevelId;
         this.proficiencyLevel = proficiencyLevel;
         this.appUserId = appUserId;
-        this.languageId = languageId;
+        this.language = language;
     }
 
     public int getProficiencyLevelId() {
@@ -37,7 +33,7 @@ public class Proficiency {
         this.proficiencyLevel = proficiencyLevel;
     }
 
-    public AppUser getAppUserId() {
+    public int getAppUserId() {
         return appUserId;
     }
 
@@ -45,11 +41,11 @@ public class Proficiency {
 //        this.appUserId = appUserId;
 //    }
 
-    public Language getLanguageId() {
-        return languageId;
+    public Language getLanguage() {
+        return language;
     }
 
-//    public void setLanguageId(Language languageId) {
-//        this.languageId = languageId;
-//    }
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
 }

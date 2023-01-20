@@ -110,15 +110,23 @@ insert into `schedule` (schedule_id, day_of_week, availability)
     (21, 'SUNDAY', 'Evening');
     
     
-insert into `language` values
-    (1,'Java'),
-    (2, 'C'),
-    (3, 'C++'),
-    (4, 'C#'),
-    (5, 'JavaScript'),
-    (6, 'Python'),
-    (7, 'PHP'),
-    (8, 'SQL');
+insert into `language` (`language`) values
+    ('Java'),
+    ('C'),
+    ('C++'),
+    ('C#'),
+    ('JavaScript'),
+    ('Python'),
+    ('PHP'),
+    ('SQL');
+    
+    describe app_user_language;
+    insert into app_user_language (proficiency_level, app_user_id, language_id)  values
+    ("Beginner", 1, 1),
+-- 	("Expert", 1, 3),
+    ("Intermediate",2,2),
+    ("Expert",3,3); 
+    
     
 describe app_user_schedule;
 

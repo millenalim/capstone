@@ -3,7 +3,7 @@ package learn.models;
 public class Language {
 
     private int languageId;
-    private final String language;
+    private String language;
 
     public Language(int languageId, String language) {
         this.languageId = languageId;
@@ -23,8 +23,7 @@ public class Language {
         return language;
     }
 
-
-
-
-
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }
