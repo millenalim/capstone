@@ -4,11 +4,13 @@ import jwtDecode from "jwt-decode";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import MessageFactory from "./components/MessageFactory";
+import NotFound from "./components/NotFound";
 import TableOfUsers from "./components/TableOfUsers";
 import MyChatComponent from "./components/MyChatComponent";
 import ProfileForm from "./components/ProfileForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import UsersCard from "./components/user/UsersCard";
 import AuthContext from "./context/AuthContext";
 
 
@@ -147,18 +149,30 @@ function App() {
 
             <Route path="/create_profile" element={
               <ProfileForm 
+              messages={messages}
+              setMessages={setMessages}
+              makeId={makeId}
+              parseResponseMessage={parseResponseMessage}
               />
             }/>
 
+            <Route path="/discover"/>
+
             {/* If user is logged in and clicks message in navbar, go to chatbox */}
             <Route path="/messages" element={
-              currentUser ? <MyChatComponent/> : <Login />
+              currentUser ? <MyChatComponent/> : <NotFound />
             } />
+
+            <Route path="/profile" element={
+              currentUser ? <UsersCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
+            }/>
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}
             <Route path="/users" element={
               currentUser ? <TableOfUsers users={users} setAllUsers={setAllUsers} /> : <Login /> 
             }/>
+
+            <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
       </Router>

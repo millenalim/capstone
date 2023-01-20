@@ -48,7 +48,7 @@ function NavBar() {
                       </NavLink>
                     </li>
                     <li className="nav-item me-5">
-                      <NavLink to="/user-profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                      <NavLink to="/profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Profile
                       </NavLink>
                     </li>
@@ -75,7 +75,7 @@ function NavBar() {
         {/* </div> */}
         {auth.currentUser && (
           <div className="me-5">
-            <button onClick={() => auth.logout()}>Logout</button>
+            <button  type="button" className="btn btn-outline-dark" onClick={() => auth.logout()}>Logout</button>
           </div>
         )}
       </div>

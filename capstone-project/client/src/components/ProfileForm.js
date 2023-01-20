@@ -255,7 +255,7 @@ return (
     <p className="form-error-message">{errors.bio?.message}</p>
 
     <button className="btn btn-primary mt-3" type="submit">
-      {currentUser.userId > 0 ? "Edit" : "Add"}
+      {currentUser.userId > 0 ? "Edit" : "Create Profile"}
     </button>
   </form>
 );
