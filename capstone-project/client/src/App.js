@@ -10,7 +10,7 @@ import MyChatComponent from "./components/MyChatComponent";
 import ProfileForm from "./components/ProfileForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import UsersCard from "./components/user/UsersCard";
+import UsersSingleCard from "./components/user/UsersSingleCard";
 import AuthContext from "./context/AuthContext";
 
 
@@ -164,7 +164,7 @@ function App() {
             } />
 
             <Route path="/profile" element={
-              currentUser ? <UsersCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
+              currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
             }/>
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}

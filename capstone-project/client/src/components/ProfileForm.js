@@ -168,14 +168,14 @@ return (
       <option value="" selected disabled>
         Programming Language
       </option>
-      <option value="Java">Java</option>
-      <option value="C">C</option>
-      <option value="C#">C#</option>
-      <option value="C++">C++</option>
-      <option value="JavaScript">Javascript</option>
-      <option value="Python">Python</option>
-      <option value="PHP">PHP</option>
-      <option value="SQL">SQL</option>
+      <option value="1">Java</option>
+      <option value="2">C</option>
+      <option value="3">C#</option>
+      <option value="4">C++</option>
+      <option value="5">Javascript</option>
+      <option value="6">Python</option>
+      <option value="7">PHP</option>
+      <option value="8">SQL</option>
     </select>
     <p className="form-error-message">{errors.language?.message}</p>
 
