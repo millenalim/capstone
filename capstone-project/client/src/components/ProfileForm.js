@@ -1,128 +1,14 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
-function ProfileForm({ allUsers, setAllUsers, messages, setMessages, currentUser, setCurrentUser}) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    control,
-    formState,
-    formState: { errors, submittedData }
-  } = useForm();
-  
-  const navigate = useNavigate();
+function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponseMessage}) {
 
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-        userId: '',
-        username: '',
-        firstName: '',
-        lastName: '',
-        language: '',
-        proficiency: '',
-        schedule: '',
-        bio: ''
-      });
-    }
-  }, [formState, submittedData, reset]);
- 
-  useEffect(() => {
-    if (currentUser.userId > 0) {
-        setValue("userId", currentUser.userId);
-        setValue("username", currentUser.username);
-        setValue("firstName", currentUser.firstName);
-        setValue("lastName", currentUser.lastName);
-        setValue("language", currentUser.language);
-        setValue("proficiency", currentUser.proficiencyLevel);
-        setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
-        setValue("bio", currentUser.bio);
-    }
-  }, []);
+  const { userId } = useParams();
 
-  const onSubmit = (newUserObj) => {
-    let retypedUser = {
-      userId: newUserObj.userId,
-      firstName: newUserObj.firstName,
-      lastName: newUserObj.lastName,
-      language: newUserObj.language,
-      proficiency: newUserObj.proficiency,
-      schedule: [newUserObj.schedule],
-      bio: newUserObj.bio,
-    }
-
-    newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
-
-  }
-
-  if (currentUser.userId > 0) {
-    fetch("http://localhost:8080/user" + currentUser.userId, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(retypedUser)
-    })
-    .then(response => {
-      if (response.status === 204) {
-        let message = {
-          status: "success",
-          text: "User \"" + retypedUser.firstName + " " + retypedUser.lastName + "'s\" profile has been successfully edited"
-        }
-        
-        const editUserProfile = () => {
-          let filteredUser = allUsers.filter(user => user.userId !== currentUser.userId);
-          filteredUser.push(retypedUser);
-          return filteredUser;
-        }
-
-        setAllUsers(editUserProfile());
-        setMessages([...messages, message]);
-        setCurrentUser({});
-        navigate("/profile");
-      } else {
-        let message = {
-          status: "failure",
-          text: "Profile could not be edited."
-        }
-        setMessages([...messages, message]);
-      }
-    })
-    .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
-  } else {
-    fetch("http://localhost:8080/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(retypedUser)
-    })
-    .then(response => {
-      if (response.status === 201) {
-
-        let message = {
-          status: "success",
-          text: "User \"" + retypedUser.firstName + " " + retypedUser.lastName + "'s\" profile has been successfully created"
-        }
-
-        setAllUsers(editUserProfile());
-        setMessages([...messages, message]);
-        setCurrentUser({});
-        navigate("/profile");
-      } else {
-        let message = {
-          status: "failure",
-          text: "Profile could not be created."
-        }
-        setMessages([...messages, message]);
-      }
-    })
-    .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
-  }
+  const auth = useContext(AuthContext);
 
   const selectScheduleOptions = [
     { value: "1", label: "Monday - Morning" },
@@ -145,83 +31,195 @@ function ProfileForm({ allUsers, setAllUsers, messages, setMessages, currentUser
     { value: "18", label: "Saturday - Evening" },
     { value: "19", label: "Sunday - Morning" },
     { value: "20", label: "Sunday - Afternoon" },
-    { value: "21", label: "Sunday - Evening" }
+    { value: "21", label: "Sunday - Evening" },
   ];
 
   const registerOptions = {
-    schedule: { required: "Availability times required."}
+    schedule: { required: "Availability times required." },
   };
-    
-  return (
-    <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
-      <label className="form-label mt-3" htmlFor="profile-firstName">First Name</label>
-      <input 
-        className="form-control"
-        type="text"
-        id="profile-firstName"
-        {...register("firstName", {required: "First Name is required."})}
-      />
-      <p className="form-error-message">{errors.firstName?.message}</p>
 
-      <label className="form-label mt-3" htmlFor="profile-lastName">Last Name</label>
-      <input 
-        className="form-control"
-        type="text"
-        id="profile-lastName"
-        {...register("lastName", {required: "Last Name is required."})}
-      />
-      <p className="form-error-message">{errors.lastName?.message}</p>
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm();
 
-      <label className="form-label mt-3" htmlFor="profile-language">Language</label>
-      <select
-        className="form-select"
-        type="text"
-        id="profile-language"
-        {...register("language", {required: "Language is required."})}
-      >
-        <option value="" selected disabled>Programming Language</option>
-        <option value="Java">Java</option>
-        <option value="C">C</option>
-        <option value="C#">C#</option>
-        <option value="C++">C++</option>
-        <option value="JavaScript">Javascript</option>
-        <option value="Python">Python</option>
-        <option value="PHP">PHP</option>
-        <option value="SQL">SQL</option>
-      </select>
-      <p className="form-error-message">{errors.language?.message}</p>
+  const navigate = useNavigate();
 
-      <label className="form-label mt-3" htmlFor="profile-proficiency">Proficiency Level</label>
-      <select
-        className="form-select"
-        type="text"
-        id="profile-proficiency"
-        {...register("proficiency", {required: "Proficiency level is required."})}
-      >
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Advanced">Advanced</option>
-        <option value="Expert">Expert</option>
-      </select>
-      <p className="form-error-message">{errors.proficiency?.message}</p>
+  useEffect(() => {
+      reset({
+        userId: '',
+        username: '',
+        firstName: '',
+        lastName: '',
+        language: '',
+        proficiency: '',
+        schedule: '',
+        bio: '',
+      });
+    }, [window.location.pathname]);
 
-      <label className="form-label mt-3" htmlFor="profile-schedule">Availability</label>
-      <Controller 
-        className="schedule"
-        control={control}
-        defaultValue=""
-        rules={registerOptions.schedule}
-        render={() => (
-          <Select options={selectScheduleOptions} {...register("schedule")} label="Text field" />
-        )}
-      />
-      {/* <select
+  useEffect(() => {
+    if (userId) {
+      fetch("http://localhost:8080/user/" + userId, {
+        headers: {
+          Authorization: "Bearer " + auth.currentUser.token,
+        },
+      })
+        .then((response) => parseResponseMessage(response))
+        .then((user) => {
+          setValue("userId", user.userId);
+          setValue("username", user.username);
+          setValue("firstName", user.firstName);
+          setValue("lastName", user.lastName);
+          setValue("language", user.language);
+          setValue("proficiency", user.proficiencyLevel);
+          setValue("schedule", user.schedule.length > 1 ? user[1] : "");
+          setValue("bio", user.bio);
+        })
+        .catch((error) => {
+          if (error.message === "Unexpected end of JSON input") {
+            navigate("/404");
+          } else {
+          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
+          }
+    });
+    }
+  }, []);
+
+  const onSubmit = (userData) => {
+    let revisedUserData = { ...userData, schedule: [] };
+
+    if (userId) {
+      revisedUserData["userId"] = userId;
+
+      fetch("http://localhost:8080/user" + currentUser.userId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.currentUser.token,
+        },
+        body: JSON.stringify(revisedUserData),
+      })
+        .then((response) =>
+          parseResponseMessage(response, revisedUserData, "edited")
+        )
+        .then(() => navigate("/profile"))
+        .catch((error) =>
+          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
+        );
+    } else {
+      console.log("Token: ", auth.currentUser);
+      console.log("User Data: ", revisedUserData);
+      fetch("http://localhost:8080/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.currentUser.token,
+        },
+        body: JSON.stringify(revisedUserData),
+      })
+        .then((response) => parseResponseMessage(response))
+        .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
+        .then(() => navigate("/profile"))
+        .catch((error) =>
+          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
+    };
+  };
+
+  // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
+
+return (
+  <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
+    <label className="form-label mt-3" htmlFor="profile-firstName">
+      First Name
+    </label>
+    <input
+      className="form-control"
+      type="text"
+      id="profile-firstName"
+      {...register("firstName", { required: "First Name is required." })}
+    />
+    <p className="form-error-message">{errors.firstName?.message}</p>
+
+    <label className="form-label mt-3" htmlFor="profile-lastName">
+      Last Name
+    </label>
+    <input
+      className="form-control"
+      type="text"
+      id="profile-lastName"
+      {...register("lastName", { required: "Last Name is required." })}
+    />
+    <p className="form-error-message">{errors.lastName?.message}</p>
+
+    <label className="form-label mt-3" htmlFor="profile-language">
+      Language
+    </label>
+    <select
+      className="form-select"
+      type="text"
+      id="profile-language"
+      {...register("language", { required: "Language is required." })}
+    >
+      <option value="" selected disabled>
+        Programming Language
+      </option>
+      <option value="1">Java</option>
+      <option value="2">C</option>
+      <option value="3">C#</option>
+      <option value="4">C++</option>
+      <option value="5">Javascript</option>
+      <option value="6">Python</option>
+      <option value="7">PHP</option>
+      <option value="8">SQL</option>
+    </select>
+    <p className="form-error-message">{errors.language?.message}</p>
+
+    <label className="form-label mt-3" htmlFor="profile-proficiency">
+      Proficiency Level
+    </label>
+    <select
+      className="form-select"
+      type="text"
+      id="profile-proficiency"
+      {...register("proficiency", {
+        required: "Proficiency level is required.",
+      })}
+    >
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
+      <option value="Expert">Expert</option>
+    </select>
+    <p className="form-error-message">{errors.proficiency?.message}</p>
+
+    <label className="form-label mt-3" htmlFor="profile-schedule">
+      Availability
+    </label>
+    <Controller
+      className="schedule"
+      control={control}
+      defaultValue=""
+      rules={registerOptions.schedule}
+      render={() => (
+        <Select
+          options={selectScheduleOptions}
+          {...register("schedule")}
+          label="Text field"
+        />
+      )}
+    />
+    {/* <select
         className="form-select"
         type="text"
         id="profile-schedule"
         {...register("schedule", {required: "Schedule is required."})}
       > */}
-        {/* <option value="1">Monday - Morning</option>
+    {/* <option value="1">Monday - Morning</option>
         <option value="2">Monday - Afternoon</option>
         <option value="3">Monday - Evening</option>
         <option value="4">Tuesday - Morning</option>
@@ -242,20 +240,25 @@ function ProfileForm({ allUsers, setAllUsers, messages, setMessages, currentUser
         <option value="19">Sunday - Morning</option>
         <option value="20">Sunday - Afternoon</option>
         <option value="21">Sunday - Evening</option> */}
-      {/* </select> */}
-      <p className="form-error-message">{errors.schedule?.message}</p>
+    {/* </select> */}
+    <p className="form-error-message">{errors.schedule?.message}</p>
 
-      <label className="form-label mt-3" htmlFor="profile-bio">Bio</label>
-      <input 
-        className="form-control"
-        type="text"
-        id="profile-bio"
-        {...register("bio")}
-      />
-      <p className="form-error-message">{errors.bio?.message}</p>
+    <label className="form-label mt-3" htmlFor="profile-bio">
+      Bio
+    </label>
+    <input
+      className="form-control"
+      type="text"
+      id="profile-bio"
+      {...register("bio")}
+    />
+    <p className="form-error-message">{errors.bio?.message}</p>
 
-    </form>
-  )
+    <button className="btn btn-primary mt-3" type="submit">
+      {currentUser.userId > 0 ? "Edit" : "Create Profile"}
+    </button>
+  </form>
+);
 }
 
 export default ProfileForm;
