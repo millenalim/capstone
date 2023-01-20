@@ -1,89 +1,80 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 function NavBar() {
   const auth = useContext(AuthContext);
 
+  const logoString = "<Hooked />";
+
   return (
-    <nav>
+    <nav className="navbar navbar-expand-md bg-body-tertiary fixed-top">
       <div className="container-fluid">
-        <ul>
-          <li>
-            <NavLink 
-                to="/"
-                className={({ isActive }) => 
-                isActive ? "nav-link active" : "nav-link"
-                }
-            >Home</NavLink>
-          </li>
-          {(() => {
-            if (auth.currentUser && auth.currentUser.hasRole("ADMIN")) {
-              return (
-                <li>
-                <NavLink 
-                  to="/users"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Users</NavLink>
-                </li>
-              )
-            } else if (auth.currentUser) {
-              return (
-              <>
-              <li>
-                <NavLink 
-                  to="/discover"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Discover</NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/messages"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Messages</NavLink>
-              </li>
-              <li>
-                <NavLink 
-                  to="/user-profile"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Profile</NavLink>
-              </li>
-            </>
-              )
-            } else {
-              return (
-                <>
-              <li>
-                <NavLink
-                  to="/login"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Login</NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/signup"
-                  className={({ isActive }) => 
-                  isActive ? "nav-link active" : "nav-link"
-                  }
-                >Sign Up</NavLink>
-              </li>
-            </>
-              )
-            }
-          })()}
-        </ul>
+        {/* <div className="collapse navbar-collapse justify-content-center"> */}
+          <Link className="navbar-brand h1 fw-bold ms-5" to="/">{logoString}</Link>
+          <ul className="navbar-nav mb-2 mb-md-1">
+            {(() => {
+              if (auth.currentUser && auth.currentUser.hasRole("ADMIN")) {
+                return (
+                  <>
+                    <li className="nav-item">
+                      <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Home
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink to="/users" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Users
+                      </NavLink>
+                    </li>
+                  </>
+                );
+              } else if (auth.currentUser) {
+                return (
+                  <>
+                    <li className="nav-item me-5">
+                      <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Home
+                      </NavLink>
+                    </li>
+                    <li className="nav-item me-5">
+                      <NavLink to="/discover" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Discover
+                      </NavLink>
+                    </li>
+                    <li className="nav-item me-5">
+                      <NavLink to="/messages" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Messages
+                      </NavLink>
+                    </li>
+                    <li className="nav-item me-5">
+                      <NavLink to="/user-profile" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Profile
+                      </NavLink>
+                    </li>
+                  </>
+                );
+              } else {
+                return (
+                  <>
+                      {/* <NavLink to="/login" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> */}
+                    <Link to="/login" type="button" className="nav-item me-4 btn btn-outline-dark">
+                      Login
+                    </Link>
+                      {/* </NavLink> */}
+                    <Link to="/signup" type="button" className="nav-item me-5 btn btn-dark">
+                      {/* <NavLink to="/signup" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> */}
+                        Sign Up
+                      {/* </NavLink> */}
+                    </Link>
+                  </>
+                );
+              }
+            })()}
+          </ul>
+        {/* </div> */}
         {auth.currentUser && (
-          <div>
+          <div className="me-5">
             <button onClick={() => auth.logout()}>Logout</button>
           </div>
         )}
