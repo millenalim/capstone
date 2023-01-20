@@ -25,7 +25,6 @@ public class AppUserController {
     @GetMapping("/users")
     public List<AppUser> findAllUsers() {return service.findAllUsers();}
 
-<<<<<<< HEAD
     @PutMapping("/create_profile")
     public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {
 
@@ -38,27 +37,6 @@ public class AppUserController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-=======
-//    @PutMapping("/create_profile")
-//    public ResponseEntity<?> createProfile(@RequestBody AppUser appUser, Map<String, String> credentials) {
-//        String firstName = credentials.get("first_name");
-//        String lastName = credentials.get("last_name");
-//        String bio = credentials.get("bio");
-//
-//        Result<AppUser> result = service.createProfile(appUser,firstName,lastName, bio);
-//
-//        // unhappy path...
-//        if (!result.isSuccess()) {
-//            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
-//        }
-//        // happy path...
-//        HashMap<String, Integer> map = new HashMap<>();
-//        map.put("appUserId", result.getPayload().getAppUserId());
-//
-//        return new ResponseEntity<>(map, HttpStatus.CREATED);
-//    }
->>>>>>> 91b684157ec8035f64ec7f8bf26f286bdb5b88a2
-
 
     @DeleteMapping("/{appUserId}")
     public ResponseEntity<Void> deleteById(@PathVariable int appUserId){
