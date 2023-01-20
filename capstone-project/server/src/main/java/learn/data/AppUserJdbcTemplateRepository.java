@@ -106,7 +106,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Override
     @Transactional
     public AppUser createProfile(AppUser appUser) {
-        //bio, language, schedule, proficiency
 
         final String sql = "insert into app_user (app_user_id, first_name, last_name, bio) values (?, ?, ?, ?);";
 

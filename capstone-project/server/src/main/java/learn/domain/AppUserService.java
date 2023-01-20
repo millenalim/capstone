@@ -65,12 +65,17 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    public Result<AppUser> createProfile(String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
+    public Result<AppUser> createProfile(AppUser appUser, String firstName, String lastName, String bio, Language language, Proficiency proficiency, List<Schedule> schedule) {
         Result<AppUser> result = validateFields(firstName, lastName, bio, language,proficiency,schedule);
         if(!result.isSuccess()) {
             return result;
         }
-        AppUser appUser = new AppUser(firstName,lastName,bio,language,proficiency,schedule);
+        appUser.setFirstName(firstName);
+        appUser.setLastName(lastName);
+        appUser.setBio(bio);
+        appUser.setLanguage(language);
+        appUser.setProficiency(proficiency);
+        appUser.setSchedule(schedule);
 
         try {
             appUser = repository.createProfile(appUser);
@@ -105,7 +110,7 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
 
-        if(schedule == null) {
+        if(schedule == null || schedule.isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "Please select a schedule");
             return result;
         }
