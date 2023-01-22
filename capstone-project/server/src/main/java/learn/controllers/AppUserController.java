@@ -26,6 +26,10 @@ public class AppUserController {
     @GetMapping("/users")
     public List<AppUser> findAllUsers() {return service.findAllUsers();}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> cfec279ac360a9d6d62dc6fcc180c8b48df43f1c
     @GetMapping("/user/{appUserId}")
     public AppUser findById(@PathVariable int appUserId) {
         return service.findById(appUserId);
@@ -45,6 +49,10 @@ public class AppUserController {
 
     @GetMapping("/discover")
     public List<AppUser> displayMatches(@RequestBody AppUser appUser) {return service.displayMatches(appUser);}
+<<<<<<< HEAD
+=======
+
+>>>>>>> cfec279ac360a9d6d62dc6fcc180c8b48df43f1c
 
     @PutMapping("/create_profile")
     public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {
