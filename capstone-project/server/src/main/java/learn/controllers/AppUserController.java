@@ -25,6 +25,9 @@ public class AppUserController {
     @GetMapping("/users")
     public List<AppUser> findAllUsers() {return service.findAllUsers();}
 
+    @GetMapping("/discover")
+    public List<AppUser> displayMatches(@RequestBody AppUser appUser) {return service.displayMatches(appUser);}
+
     @PutMapping("/create_profile")
     public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {
 
