@@ -1,7 +1,9 @@
 package learn.data;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ScheduleJdbcTemplateRepository implements ScheduleRepository {
     private final JdbcTemplate jdbcTemplate;
 
