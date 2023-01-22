@@ -122,7 +122,7 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
           />
           <p className="form-error-message">{errors.password?.message}</p>
 
-          <button className="btn btn-primary mt-3" type="submit" onClick={() => navigate("/create_profile")}>Create Account</button>
+          <button className="btn btn-primary mt-3" type="submit">Create Account</button>
           <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/")}>Cancel</button>
         </form>
       </div>

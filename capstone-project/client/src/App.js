@@ -151,6 +151,7 @@ function App() {
               <ProfileForm 
               messages={messages}
               setMessages={setMessages}
+              currentUser={currentUser}
               makeId={makeId}
               parseResponseMessage={parseResponseMessage}
               />
@@ -165,6 +166,10 @@ function App() {
 
             <Route path="/profile" element={
               currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
+            }/>
+
+            <Route path="test_form" element={
+              currentUser ? <ProfileForm  messages={messages} setMessages={setMessages} currentUser={currentUser} makeId={makeId} parseResponseMessage={parseResponseMessage}/> : <NotFound />
             }/>
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}

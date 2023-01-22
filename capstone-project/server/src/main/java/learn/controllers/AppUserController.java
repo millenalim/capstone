@@ -7,6 +7,7 @@ import learn.domain.AppUserService;
 import learn.models.Language;
 import learn.models.Proficiency;
 import learn.models.Schedule;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,23 @@ public class AppUserController {
 
     @GetMapping("/users")
     public List<AppUser> findAllUsers() {return service.findAllUsers();}
+
+    @GetMapping("/user/{appUserId}")
+    public AppUser findById(@PathVariable int appUserId) {
+        return service.findById(appUserId);
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<Object> add(@RequestBody AppUser appUser) {
+        Result<AppUser> result = service.createProfile(appUser);
+
+        // unhappy path...
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @PutMapping("/create_profile")
     public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {

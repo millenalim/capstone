@@ -52,6 +52,11 @@ function NavBar() {
                         Profile
                       </NavLink>
                     </li>
+                    <li className="nav-item me-5">
+                      <NavLink to="/test_form" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        Test Form
+                      </NavLink>
+                    </li>
                   </>
                 );
               } else {

@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .antMatchers("/refresh_token").authenticated()
                 .antMatchers("/create_account").permitAll()
                 //TODO: Secure create_profile and have create_account return a JWT
-                .antMatchers("/create_profile").permitAll()
+                .antMatchers(HttpMethod.POST,"/user").hasAnyAuthority("USER")
                 .antMatchers(HttpMethod.GET,
                         "/").permitAll()
                 .antMatchers(HttpMethod.GET,"/users").permitAll()
