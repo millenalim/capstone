@@ -53,6 +53,17 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     @Override
+    public AppUser findById(int id) {
+        final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
+                + "from app_user "
+                + "where app_user_id = ?;";
+
+        List<AppUser> appUser = jdbcTemplate.query(sql, new AppUserMapper(), id);
+
+        return appUser.stream().findFirst().orElse(null);
+    }
+
+    @Override
     public List<AppUser> displayMatches(AppUser user) {
         return null;
     }

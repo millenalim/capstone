@@ -18,6 +18,8 @@ public interface AppUserRepository {
 
     List<AppUser> findAllUsers();
 
+    AppUser findById(int id);
+
     @Transactional
     List<AppUser> displayMatches(AppUser user);
 
@@ -26,6 +28,7 @@ public interface AppUserRepository {
 
     @Transactional
     AppUser createProfile(AppUser appUser);
+
 
     @Transactional
     boolean update(AppUser user);

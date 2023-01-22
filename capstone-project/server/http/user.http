@@ -14,10 +14,57 @@ POST {{url}}/create_account
 Content-Type: application/json
 
 {
-    "username": "testdummy@code.com",
+    "username": "testdummy2@code.com",
     "password": "P@ssw0rd!"
 }
 ###
 GET {{url}}/users
 Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibW9yZ2FuQG9saXZlci5jb20iLCJhcHBfdXNlcl9pZCI6MiwiYXV0aG9yaXRpZXMiOiJBRE1JTiIsImV4cCI6MTY3NDI0MzU0N30.DG3tAYkIZ9rTZMtR8fVvIlltP-8HUQsiMmcajcDQ6Qs
 ###
+
+PUT {{url}}/create_profile
+Content-Type: application/json
+
+{
+    "appUserId": 4,
+    "firstName": "test",
+    "lastName": "dummy",
+    "bio": "I'm not real",
+    "proficiency": {
+        "proficiencyLevelId": 1,
+        "proficiencyLevel": "Beginner", 
+        "appUserId": 4, 
+         "language": {
+            "languageId": 1,
+            "language": "Java"
+         }
+    },
+    "schedule": [
+        {
+           "scheduleId": 1, 
+            "dayOfWeek": "MONDAY",
+            "availability": "Morning"
+        }
+    ]  
+}
+###
+PUT {{url}}/create_profile
+Content-Type: application/json
+
+{
+    "appUserId": 5,
+    "firstName": "test",
+    "lastName": "dummy",
+    "bio": "I'm not real",
+    "proficiency": {
+        "proficiencyLevel": "Expert", 
+         "language": {
+            "languageId": 1
+         }
+    },
+    "schedule": [
+        {
+           "scheduleId": 1
+        }
+    ]  
+}

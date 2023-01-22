@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -27,6 +28,14 @@ class AppUserServiceTest {
     AppUserRepository repository;
 
 
+    @Test
+    void shouldFindUserById() {
+        AppUser testDummy = new AppUser(1, "test@dummy.com", "P@ssw0rd!", true, List.of("USER"));
+        when(repository.findById(1)).thenReturn(testDummy);
+        assertNotNull(testDummy);
+        assertEquals("test@dummy.com", testDummy.getUsername());
+
+    }
     @Test
     void shouldCreateNewUser() {
         Result<AppUser> testDummy = service.createAccount("fake@user.com", "P@ssw0rd!");

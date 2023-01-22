@@ -60,6 +60,21 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindById() {
+        AppUser shouldFind = repository.findById(2);
+
+        assertNotNull(shouldFind);
+        assertEquals("morgan@oliver.com", shouldFind.getUsername());
+
+    }
+
+    @Test
+    void shouldNotFindById() {
+        AppUser shouldNotFind = repository.findById(10);
+        assertNull(shouldNotFind);
+    }
+
+    @Test
     void shouldNotFindByUsername() {
         AppUser testDummy = repository.findByUsername("youdontexist@null.com");
         assertNull(testDummy);
@@ -75,13 +90,6 @@ class AppUserJdbcTemplateRepositoryTest {
     AppUser testDummy = repository.createAccount(newUser);
     assertNotNull(testDummy);
     }
-
-
-    /*
-    It should create a new User, with it's login information.
-    From there, the test should add profile details to the use that was newed up.
-    And then it should persist those.
-     */
 
     @Test
     void shouldAddProfileToAppUser() {
