@@ -120,7 +120,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
       })
         .then((response) => parseResponseMessage(response))
         .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
-        .then(() => navigate("/profile"))
+        .then(() => navigate("/discover"))
         .catch((error) =>
           setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
     };
