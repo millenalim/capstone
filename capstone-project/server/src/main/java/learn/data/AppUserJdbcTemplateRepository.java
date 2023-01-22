@@ -15,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository {
@@ -27,6 +30,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    //READ METHODS
+
     @Override
     public List<AppUser> findAll() {
         final String sql = "select app_user_id, first_name, last_name, username, password_hash, bio, enabled "
@@ -35,7 +40,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         for (AppUser user : appUserList) {
             user.setAuthorities(getRolesByUsername(user.getUsername()));
             addProficiency(user);
-//            addLanguage(user);
             addSchedule(user);
         }
         return appUserList;
@@ -63,17 +67,16 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         return appUser.stream().findFirst().orElse(null);
     }
 
+
+// only matches by language, can add schedule and proficiency level later
     @Override
     public List<AppUser> displayMatches(AppUser user) {
-        return null;
+        List<AppUser> appUserList = findAll();
+        return appUserList.stream().filter(u-> (u.getProficiency().getLanguage().getLanguage().equals(user.getProficiency().getLanguage().getLanguage()))
+                        && user.getAppUserId() != u.getAppUserId()).toList();
+
+
     }
-// only matches by language
-//    @Override
-//    public List<AppUser> displayMatches(AppUser user) {
-//        List<AppUser> appUserList = findAll();
-//        return appUserList.stream().filter(u-> u.getLanguage()==user.getLanguage()).collect(Collectors.toList());
-//
-//    }
 
 
     @Override
@@ -92,6 +95,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 .stream()
                 .findFirst().orElse(null);
     }
+
+    //CREATE METHODS
 
     @Override
     @Transactional
@@ -142,6 +147,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         return appUser;
     }
 
+    //UPDATE METHODS
+
     private void updateProficiency(AppUser appUser) {
         jdbcTemplate.update("delete from app_user_language where app_user_id = ?;", appUser.getAppUserId());
 
@@ -164,6 +171,22 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
             appUser.getProficiency().setProficiencyLevelId(keyHolder.getKey().intValue());
 
         }
+
+    }
+
+    private boolean updateSchedule(AppUser appUser) {
+//        final String sql = "update app_user_schedule set "
+//                + "schedule_id = ? "
+//                + "where app_user_id = ?;";
+//
+//    return  jdbcTemplate.update(sql, appUser., appUser.getAppUserId())
+    jdbcTemplate.update("delete from app_user_schedule where app_user_id = ?;", appUser.getAppUserId());
+    final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?) "
+                + "where app_user_schedule.app_user_id = ?;";
+    var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId(), appUser.getSchedule());
+    appUser.setSchedule(schedule);
+
+
 
 
     }
@@ -188,15 +211,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         return updated;
     }
 
-    @Override
-    @Transactional
-    public boolean deleteById(int appUserId){
-        jdbcTemplate.update("delete from app_user_role where app_user_id =?;", appUserId);
-        jdbcTemplate.update("delete from app_user_schedule where app_user_id=?;", appUserId);
-        jdbcTemplate.update("delete from app_user_language where app_user_id=?;", appUserId);
-        return jdbcTemplate.update("delete from app_user where app_user_id=?;", appUserId) >0;
-
-    }
 
     private void updateRoles(AppUser user) {
         // delete all roles, then re-add
@@ -215,6 +229,21 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         }
     }
 
+
+    //DELETE METHODS
+    @Override
+    @Transactional
+    public boolean deleteById(int appUserId){
+        jdbcTemplate.update("delete from app_user_role where app_user_id =?;", appUserId);
+        jdbcTemplate.update("delete from app_user_schedule where app_user_id=?;", appUserId);
+        jdbcTemplate.update("delete from app_user_language where app_user_id=?;", appUserId);
+        return jdbcTemplate.update("delete from app_user where app_user_id=?;", appUserId) >0;
+    }
+
+
+
+    //HELPER METHODS
+
     private List<String> getRolesByUsername(String username) {
         final String sql = "select r.name "
                 + "from app_user_role ur "
@@ -225,7 +254,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     }
 
     private void addProficiency(AppUser appUser) {
-        final String sql = "select aul.proficiency_level_id, aul.proficiency_level, l.`language` "
+        final String sql = "select aul.app_user_id, aul.proficiency_level_id, aul.proficiency_level, l.language, l.language_id "
                 + "from app_user_language aul "
                 + "inner join `language` l on l.language_id = aul.language_id "
                 + "where aul.app_user_id = ?;";
@@ -260,7 +289,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         for (AppUser user : appUserList) {
             user.setAuthorities(getRolesByUsername(user.getUsername()));
             addProficiency(user);
-//            addLanguage(user);
             addSchedule(user);
         }
     }

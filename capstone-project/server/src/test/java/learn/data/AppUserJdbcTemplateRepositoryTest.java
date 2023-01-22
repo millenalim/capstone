@@ -60,6 +60,57 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldNotFindByUsername() {
+        AppUser testDummy = repository.findByUsername("youdontexist@null.com");
+        assertNull(testDummy);
+    }
+
+    @Test
+    void shouldFindTwoMatchesBasedOnJavaLanguage() {
+        AppUser firstUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
+                "P@ssw0rd!",
+                false,
+                List.of("USER"));
+        firstUser = repository.createAccount(firstUser);
+
+        firstUser.setFirstName("test");
+        firstUser.setLastName("dummy");
+        firstUser.setBio("Hello");
+        firstUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        firstUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        AppUser firstProfileAdded = repository.createProfile(firstUser);
+
+        AppUser secondUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
+                "P@ssw0rd!",
+                false,
+                List.of("USER"));
+        secondUser = repository.createAccount(secondUser);
+
+        secondUser.setFirstName("secondtest");
+        secondUser.setLastName("dummy");
+        secondUser.setBio("Hello");
+        secondUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        secondUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        AppUser secondProfileAdded = repository.createProfile(secondUser);
+
+        AppUser thirdUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
+                "P@ssw0rd!",
+                false,
+                List.of("USER"));
+        thirdUser = repository.createAccount(thirdUser);
+
+        thirdUser.setFirstName("thirdtest");
+        thirdUser.setLastName("dummy");
+        thirdUser.setBio("Hello");
+        thirdUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(2,"C")));
+        thirdUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        AppUser thirdProfileAdded = repository.createProfile(thirdUser);
+
+        List<AppUser> shouldFindMatch = repository.displayMatches(firstProfileAdded);
+        assertEquals(2, shouldFindMatch.size());
+    }
+
+    @Test
     void shouldFindById() {
         AppUser shouldFind = repository.findById(2);
 
@@ -74,11 +125,8 @@ class AppUserJdbcTemplateRepositoryTest {
         assertNull(shouldNotFind);
     }
 
-    @Test
-    void shouldNotFindByUsername() {
-        AppUser testDummy = repository.findByUsername("youdontexist@null.com");
-        assertNull(testDummy);
-    }
+
+
 
     @Test
     void shouldCreateNewUser() {
@@ -118,6 +166,7 @@ class AppUserJdbcTemplateRepositoryTest {
         assertTrue(repository.deleteById(4));
         assertFalse(repository.deleteById(4));
     }
+
 
 
 
