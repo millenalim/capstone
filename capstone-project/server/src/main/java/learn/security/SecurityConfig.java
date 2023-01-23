@@ -42,8 +42,8 @@ public class SecurityConfig {
 //                        "/sighting").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.PUT,
 //                        "/sighting/*").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers(HttpMethod.DELETE,
-//                        "/sighting/*").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE,
+                        "/user/*").hasAnyAuthority("ADMIN", "USER")
 
                 .antMatchers("/**").denyAll()
                 .and()
