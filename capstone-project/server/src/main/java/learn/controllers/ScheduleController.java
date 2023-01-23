@@ -1,12 +1,12 @@
 package learn.controllers;
 
 import learn.domain.ScheduleService;
+import learn.models.Schedule;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost3000"})
@@ -16,7 +16,10 @@ public class ScheduleController {
     public ScheduleController(ScheduleService service) {
         this.service = service;
     }
-
+    @GetMapping("/schedule")
+    public List<Schedule> findAllSchedules(){
+        return service.findAll();
+    }
     @DeleteMapping("/{appUserId}/{scheduleId}")
     public ResponseEntity<Void> deleteByKey(@PathVariable int appUserId, @PathVariable int scheduleId) {
         if (service.deleteByKey(appUserId, scheduleId)) {
@@ -24,5 +27,6 @@ public class ScheduleController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
 
 }
