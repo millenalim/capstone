@@ -51,8 +51,6 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
 
   useEffect(() => {
       reset({
-        userId: '',
-        username: '',
         firstName: '',
         lastName: '',
         language: '',
@@ -71,8 +69,6 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
       })
         .then((response) => parseResponseMessage(response))
         .then((user) => {
-          setValue("userId", user.userId);
-          setValue("username", user.username);
           setValue("firstName", user.firstName);
           setValue("lastName", user.lastName);
           setValue("language", user.language);
@@ -96,7 +92,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
     if (userId) {
       revisedUserData["userId"] = userId;
 
-      fetch("http://localhost:8080/user" + currentUser.userId, {
+      fetch("http://localhost:8080/create_profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +120,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
       })
         .then((response) => parseResponseMessage(response))
         .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
-        .then(() => navigate("/profile"))
+        .then(() => navigate("/discover"))
         .catch((error) =>
           setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
     };
@@ -134,7 +130,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
 
 return (
   <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
-    <label className="form-label mt-3" htmlFor="profile-firstName">
+    <label className="form-label mt-3 text-white" htmlFor="profile-firstName">
       First Name
     </label>
     <input
@@ -143,9 +139,9 @@ return (
       id="profile-firstName"
       {...register("firstName", { required: "First Name is required." })}
     />
-    <p className="form-error-message">{errors.firstName?.message}</p>
+    <p className="form-error-message text-white">{errors.firstName?.message}</p>
 
-    <label className="form-label mt-3" htmlFor="profile-lastName">
+    <label className="form-label mt-3 text-white" htmlFor="profile-lastName">
       Last Name
     </label>
     <input
@@ -154,9 +150,9 @@ return (
       id="profile-lastName"
       {...register("lastName", { required: "Last Name is required." })}
     />
-    <p className="form-error-message">{errors.lastName?.message}</p>
+    <p className="form-error-message text-white">{errors.lastName?.message}</p>
 
-    <label className="form-label mt-3" htmlFor="profile-language">
+    <label className="form-label mt-3 text-white" htmlFor="profile-language">
       Language
     </label>
     <select
@@ -177,9 +173,9 @@ return (
       <option value="7">PHP</option>
       <option value="8">SQL</option>
     </select>
-    <p className="form-error-message">{errors.language?.message}</p>
+    <p className="form-error-message text-white">{errors.language?.message}</p>
 
-    <label className="form-label mt-3" htmlFor="profile-proficiency">
+    <label className="form-label mt-3 text-white" htmlFor="profile-proficiency">
       Proficiency Level
     </label>
     <select
@@ -195,55 +191,21 @@ return (
       <option value="Advanced">Advanced</option>
       <option value="Expert">Expert</option>
     </select>
-    <p className="form-error-message">{errors.proficiency?.message}</p>
+    <p className="form-error-message text-white">{errors.proficiency?.message}</p>
 
-    <label className="form-label mt-3" htmlFor="profile-schedule">
+    <label className="form-label mt-3 text-white" htmlFor="profile-schedule">
       Availability
     </label>
-    <Controller
-      className="schedule"
-      control={control}
-      defaultValue=""
-      rules={registerOptions.schedule}
-      render={() => (
-        <Select
-          options={selectScheduleOptions}
-          {...register("schedule")}
-          label="Text field"
-        />
-      )}
+    
+    <Select 
+      options={selectScheduleOptions} 
+      isMulti
+      required={registerOptions}
     />
-    {/* <select
-        className="form-select"
-        type="text"
-        id="profile-schedule"
-        {...register("schedule", {required: "Schedule is required."})}
-      > */}
-    {/* <option value="1">Monday - Morning</option>
-        <option value="2">Monday - Afternoon</option>
-        <option value="3">Monday - Evening</option>
-        <option value="4">Tuesday - Morning</option>
-        <option value="5">Tuesday - Afternoon</option>
-        <option value="6">Tuesday - Evening</option>
-        <option value="7">Wednesday - Morning</option>
-        <option value="8">Wednesday - Afternoon</option>
-        <option value="9">Wednesday - Evening</option>
-        <option value="10">Thursday - Morning</option>
-        <option value="11">Thursday - Afternoon</option>
-        <option value="12">Thursday - Evening</option>
-        <option value="13">Friday - Morning</option>
-        <option value="14">Friday - Afternoon</option>
-        <option value="15">Friday - Evening</option>
-        <option value="16">Saturday - Morning</option>
-        <option value="17">Saturday - Afternoon</option>
-        <option value="18">Saturday - Evening</option>
-        <option value="19">Sunday - Morning</option>
-        <option value="20">Sunday - Afternoon</option>
-        <option value="21">Sunday - Evening</option> */}
-    {/* </select> */}
-    <p className="form-error-message">{errors.schedule?.message}</p>
 
-    <label className="form-label mt-3" htmlFor="profile-bio">
+    <p className="form-error-message text-white">{errors.schedule?.message}</p>
+
+    <label className="form-label mt-3 text-white" htmlFor="profile-bio">
       Bio
     </label>
     <input
@@ -252,7 +214,6 @@ return (
       id="profile-bio"
       {...register("bio")}
     />
-    <p className="form-error-message">{errors.bio?.message}</p>
 
     <button className="btn btn-primary mt-3" type="submit">
       {currentUser.userId > 0 ? "Edit" : "Create Profile"}

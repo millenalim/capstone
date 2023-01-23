@@ -27,7 +27,7 @@ function TableOfUsers() {
                 method: 'DELETE'
             };
 
-            fetch(`http://localhost:8080/api/user/${appUserId}`, init)
+            fetch(`http://localhost:8080/user/${appUserId}`, init)
                 .then(response => {
                     if (response.status === 204) {
                         const newUsers = users.filter(user => user.appUserId !== appUserId);
