@@ -32,7 +32,8 @@ public class AppUserController {
         return service.findById(appUserId);
     }
 
-
+    @GetMapping("/user{username}")
+    public AppUser findByUsername(@PathVariable String username){return service.findByUsername(username);}
 
     @GetMapping("/discover")
     public List<AppUser> displayMatches(@RequestBody AppUser appUser) {return service.displayMatches(appUser);}

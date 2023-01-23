@@ -38,6 +38,8 @@ public class AppUserService implements UserDetailsService {
 
     public List<AppUser> displayMatches(AppUser user) {return repository.displayMatches(user);}
 
+    public AppUser findByUsername(String username){return repository.findByUsername(username); }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = repository.findByUsername(username);

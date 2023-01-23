@@ -37,15 +37,15 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,
                         "/").permitAll()
                 .antMatchers(HttpMethod.GET,"/users").permitAll()
-<<<<<<< HEAD
+
                 .antMatchers(HttpMethod.PUT, "/create_profile/*").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.POST,
 //                        "/sighting").hasAnyAuthority("USER", "ADMIN")
-=======
+
                 .antMatchers(HttpMethod.GET,
                         "/discover").hasAnyAuthority("USER")
                 .antMatchers(HttpMethod.PUT, "/create_profile").hasAnyAuthority("USER", "ADMIN")
->>>>>>
+
 //                .antMatchers(HttpMethod.PUT,
 //                        "/sighting/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE,
