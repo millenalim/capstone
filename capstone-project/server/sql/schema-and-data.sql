@@ -81,13 +81,22 @@ insert into app_user (username, password_hash, enabled)
 
 insert into app_user (username, password_hash, first_name, last_name, enabled)
 	values 
-	('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Millena', 'Lim', 1);
+	('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Millena', 'Lim', 1),
+    ('john@williams.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'John', 'Williams',1),
+    ('sarah@ryder.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Sarah', 'Ryder', 1),
+    ('gia@tanner.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Gia','Tanner',1),
+    ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson',1);
+    
     
 insert into app_user_role
     values
     (1, 2),
     (2, 2),
-    (3, 1);
+    (3, 1),
+    (4,1),
+    (5,1),
+    (6,1),
+    (7,1);
     
 insert into `schedule` (schedule_id, day_of_week, availability) 
 	values
@@ -128,7 +137,12 @@ insert into `language` (`language`) values
     insert into app_user_language (proficiency_level, app_user_id, language_id)  values
     ("Beginner", 1, 1),
 	("Intermediate",2,2),
-    ("Expert",3,3); 
+    ("Expert",3,3),
+    ("Beginner",4,2),
+    ("Intemediate",5,2),
+    ("Intermediate",6,7),
+    ("Expert",7,5);
+    
     
     
 describe app_user_schedule;
@@ -137,7 +151,13 @@ insert into app_user_schedule (app_user_id, schedule_id ) values
     (1,1),
     (1,2),
     (2,1),
-    (2,2);
+    (2,2),
+    (3,10),
+    (4,5),
+    (5,18),
+    (6,18),
+    (7,12);
+    
 
 
     

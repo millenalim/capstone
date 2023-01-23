@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { useParams, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
@@ -88,26 +88,27 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
 
   const onSubmit = (userData) => {
     let revisedUserData = { ...userData};
+    console.log(revisedUserData);
 
-    if (userId) {
-      revisedUserData["userId"] = userId;
+    // if (userId) {
+    //   revisedUserData["userId"] = userId;
 
-      fetch("http://localhost:8080/create_profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.currentUser.token,
-        },
-        body: JSON.stringify(revisedUserData),
-      })
-        .then((response) =>
-          parseResponseMessage(response, revisedUserData, "edited")
-        )
-        .then(() => navigate("/profile"))
-        .catch((error) =>
-          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
-        );
-    } 
+    //   fetch("http://localhost:8080/create_profile", {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: "Bearer " + auth.currentUser.token,
+    //     },
+    //     body: JSON.stringify(revisedUserData),
+    //   })
+    //     .then((response) =>
+    //       parseResponseMessage(response, revisedUserData, "edited")
+    //     )
+    //     .then(() => navigate("/profile"))
+    //     .catch((error) =>
+    //       setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
+    //     );
+    // } 
     // else {
     //   console.log("Token: ", auth.currentUser);
     //   console.log("User Data: ", revisedUserData);
@@ -201,6 +202,7 @@ return (
       options={selectScheduleOptions} 
       isMulti
       required={registerOptions}
+      {...register("schedule")}
     />
 
     <p className="form-error-message text-white">{errors.schedule?.message}</p>
