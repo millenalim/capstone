@@ -62,7 +62,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
 
   useEffect(() => {
     if (userId) {
-      fetch("http://localhost:8080/user/" + userId, {
+      fetch("http://localhost:8080/create_profile", {
         headers: {
           Authorization: "Bearer " + auth.currentUser.token,
         },
@@ -87,7 +87,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
   }, []);
 
   const onSubmit = (userData) => {
-    let revisedUserData = { ...userData, schedule: [] };
+    let revisedUserData = { ...userData};
 
     if (userId) {
       revisedUserData["userId"] = userId;
@@ -107,23 +107,24 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
         .catch((error) =>
           setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
         );
-    } else {
-      console.log("Token: ", auth.currentUser);
-      console.log("User Data: ", revisedUserData);
-      fetch("http://localhost:8080/user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.currentUser.token,
-        },
-        body: JSON.stringify(revisedUserData),
-      })
-        .then((response) => parseResponseMessage(response))
-        .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
-        .then(() => navigate("/discover"))
-        .catch((error) =>
-          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
-    };
+    } 
+    // else {
+    //   console.log("Token: ", auth.currentUser);
+    //   console.log("User Data: ", revisedUserData);
+    //   fetch("http://localhost:8080/user", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: "Bearer " + auth.currentUser.token,
+    //     },
+    //     body: JSON.stringify(revisedUserData),
+    //   })
+    //     .then((response) => parseResponseMessage(response))
+    //     .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
+    //     .then(() => navigate("/discover"))
+    //     .catch((error) =>
+    //       setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
+    // };
   };
 
   // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
@@ -188,7 +189,6 @@ return (
     >
       <option value="Beginner">Beginner</option>
       <option value="Intermediate">Intermediate</option>
-      <option value="Advanced">Advanced</option>
       <option value="Expert">Expert</option>
     </select>
     <p className="form-error-message text-white">{errors.proficiency?.message}</p>

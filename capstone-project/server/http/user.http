@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-POST {{url}}/create_account
+POST {{url}}/authenticate
 Content-Type: application/json
 
 {
@@ -24,6 +24,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibW9yZ2Fu
 
 PUT {{url}}/create_profile
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoidGVzdGR1bW15MkBjb2RlLmNvbSIsImFwcF91c2VyX2lkIjo0LCJhdXRob3JpdGllcyI6IlVTRVIiLCJleHAiOjE2NzQ1ODAzNjF9.yf2YOS1KySxVKCvvkWn_bYGWulR4Tmynk2f3zklwsnk
 
 {
     "appUserId": 4,
