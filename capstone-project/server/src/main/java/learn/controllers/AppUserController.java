@@ -32,7 +32,7 @@ public class AppUserController {
         return service.findById(appUserId);
     }
 
-    @GetMapping("/user{username}")
+    @GetMapping("/user/{username}")
     public AppUser findByUsername(@PathVariable String username){return service.findByUsername(username);}
 
     @GetMapping("/discover")
