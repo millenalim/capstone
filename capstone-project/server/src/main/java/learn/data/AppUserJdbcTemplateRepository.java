@@ -186,10 +186,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 //    var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId(), appUser.getSchedule());
 //    appUser.setSchedule(schedule);
 //
-//
-//
-//
-//    }
 
 
     @Override
