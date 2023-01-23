@@ -32,24 +32,17 @@ public class AppUserController {
         return service.findById(appUserId);
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<Object> add(@RequestBody AppUser appUser) {
-        Result<AppUser> result = service.createProfile(appUser);
 
-        // unhappy path...
-        if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 
     @GetMapping("/discover")
     public List<AppUser> displayMatches(@RequestBody AppUser appUser) {return service.displayMatches(appUser);}
 
 
-    @PutMapping("/create_profile")
-    public ResponseEntity<?> createProfile(@RequestBody AppUser appUser) {
+    @PutMapping("/create_profile/{appUserId}")
+    public ResponseEntity<?> createProfile(@PathVariable int appUserId, @RequestBody AppUser appUser) {
+        if (appUserId != appUser.getAppUserId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
 
         Result<AppUser> result = service.createProfile(appUser);
 
