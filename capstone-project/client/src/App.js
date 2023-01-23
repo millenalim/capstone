@@ -12,7 +12,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UsersSingleCard from "./components/user/UsersSingleCard";
 import AuthContext from "./context/AuthContext";
-import TestNav from "./components/TestNav";
 
 
 const LOCAL_STORAGE_TOKEN_KEY = "hookedToken";
