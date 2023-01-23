@@ -123,8 +123,7 @@ insert into `language` (`language`) values
     describe app_user_language;
     insert into app_user_language (proficiency_level, app_user_id, language_id)  values
     ("Beginner", 1, 1),
--- 	("Expert", 1, 3),
-    ("Intermediate",2,2),
+	("Intermediate",2,2),
     ("Expert",3,3); 
     
     

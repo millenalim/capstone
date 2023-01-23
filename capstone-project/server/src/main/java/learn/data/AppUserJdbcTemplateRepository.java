@@ -179,7 +179,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 ////                + "schedule_id = ? "
 ////                + "where app_user_id = ?;";
 ////
-////    return  jdbcTemplate.update(sql, appUser., appUser.getAppUserId())
+////   return  jdbcTemplate.update(sql, appUser., appUser.getAppUserId())
+
 //    jdbcTemplate.update("delete from app_user_schedule where app_user_id = ?;", appUser.getAppUserId());
 //    final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?) "
 //                + "where app_user_schedule.app_user_id = ?;";
