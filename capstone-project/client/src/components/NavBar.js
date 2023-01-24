@@ -72,7 +72,7 @@ function NavBar() {
         </ul>
         {auth.currentUser ? (
           <div className="me-5">
-            <button  type="button" className="btn btn-outline-dark" onClick={() => auth.logout()}>Logout</button>
+            <Link to="/login" type="button" className="btn btn-outline-dark" onClick={() => auth.logout()}>Logout</Link>
           </div>
         ) : null}
       </div>
