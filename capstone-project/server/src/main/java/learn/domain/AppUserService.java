@@ -36,7 +36,7 @@ public class AppUserService implements UserDetailsService {
 
     public AppUser findById(int id) {return repository.findById(id);}
 
-    public List<AppUser> displayMatches(AppUser user) {return repository.displayMatches(user);}
+    public List<AppUser> displayMatches(int appUserId) {return repository.displayMatches(appUserId);}
 
     public AppUser findByUsername(String username){return repository.findByUsername(username); }
 

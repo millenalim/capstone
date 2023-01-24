@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import AuthContext from '../../context/AuthContext';
 import MatchCard from './MatchCard';
 
-function MatchCardFactory({matches, setMatches, setCurrentMatch, currentMatch, messages, setMessages, makeId, parseResponseMessage}) {
+function MatchCardFactory({currentUser, matches, setMatches, setCurrentMatch, currentMatch, messages, setMessages, makeId, parseResponseMessage}) {
 
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ function MatchCardFactory({matches, setMatches, setCurrentMatch, currentMatch, m
 
 
     const getMatches = () => {
-        fetch("http://localhost:8080/discover", {
+        fetch("http://localhost:8080/discover/" + currentUser.appUserId, {
             headers: {
                 Authorization: "Bearer " + auth.currentUser.token
             }
@@ -33,7 +33,7 @@ function MatchCardFactory({matches, setMatches, setCurrentMatch, currentMatch, m
     const createCardFactory = () => {
         if (matches.length > 0) {
             let matchCardArray = matches.map(matchObj => {
-                return (<MatchCard key={matchObj.userId + "-" + matchObj.username}
+                return (<MatchCard key={matchObj.appUserId + "-" + matchObj.username}
                                     match={matchObj}
                                     messageMatch={messageMatch}
                                     currentMatch={currentMatch}

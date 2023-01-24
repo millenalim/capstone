@@ -89,7 +89,7 @@ class AppUserJdbcTemplateRepositoryTest {
         secondUser.setFirstName("secondtest");
         secondUser.setLastName("dummy");
         secondUser.setBio("Hello");
-        secondUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        secondUser.setProficiency(new Proficiency(1,"Expert", 5,new Language(1,"Java")));
         secondUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser secondProfileAdded = repository.createProfile(secondUser);
 
@@ -106,8 +106,8 @@ class AppUserJdbcTemplateRepositoryTest {
         thirdUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser thirdProfileAdded = repository.createProfile(thirdUser);
 
-        List<AppUser> shouldFindMatch = repository.displayMatches(firstProfileAdded);
-        assertEquals(2, shouldFindMatch.size());
+        List<AppUser> shouldFindMatch = repository.displayMatches(firstProfileAdded.getAppUserId());
+        assertEquals(1, shouldFindMatch.size());
     }
 
     @Test

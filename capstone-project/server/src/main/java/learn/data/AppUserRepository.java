@@ -21,7 +21,7 @@ public interface AppUserRepository {
     AppUser findById(int id);
 
     @Transactional
-    List<AppUser> displayMatches(AppUser user);
+    List<AppUser> displayMatches(int appUserId);
 
     @Transactional
     AppUser createAccount(AppUser appUser);
