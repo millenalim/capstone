@@ -35,8 +35,8 @@ public class AppUserController {
     @GetMapping("/user")
     public AppUser findByUsername(@PathVariable String username){return service.findByUsername(username);}
 
-    @GetMapping("/discover")
-    public List<AppUser> displayMatches(@RequestBody AppUser appUser) {return service.displayMatches(appUser);}
+    @GetMapping("/discover/{appUserId}")
+    public List<AppUser> displayMatches(@PathVariable int appUserId) {return service.displayMatches(appUserId);}
 
 
     @PutMapping("/create_profile/{appUserId}")

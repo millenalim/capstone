@@ -71,10 +71,11 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
 // only matches by language, can add schedule and proficiency level later
     @Override
-    public List<AppUser> displayMatches(AppUser user) {
-        List<AppUser> appUserList = findAll();
-        return appUserList.stream().filter(u-> (u.getProficiency().getLanguage().getLanguage().equals(user.getProficiency().getLanguage().getLanguage()))
-                        && user.getAppUserId() != u.getAppUserId()).toList();
+    public List<AppUser> displayMatches(int appUserId) {
+        //use sql statement to find matches
+//        List<AppUser> appUserList = findAll();
+//        return appUserList.stream().filter(u-> (u.getProficiency().getLanguage().getLanguage().equals(user.getProficiency().getLanguage().getLanguage()))
+//                        && user.getAppUserId() != u.getAppUserId()).toList();
 
 
     }
