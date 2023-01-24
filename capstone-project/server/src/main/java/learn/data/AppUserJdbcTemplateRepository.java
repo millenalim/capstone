@@ -179,8 +179,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     @Transactional
     public boolean updateSchedule(AppUser appUser) {
         jdbcTemplate.update("delete from app_user_schedule where app_user_id = ?;", appUser.getAppUserId());
-//        final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?) "
-//                + "where app_user_schedule.app_user_id = ?;";
+
         boolean updated = false;
 
         List<Schedule> scheduleList = appUser.getSchedule();

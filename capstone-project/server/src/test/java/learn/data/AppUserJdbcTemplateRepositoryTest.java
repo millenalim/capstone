@@ -149,7 +149,6 @@ class AppUserJdbcTemplateRepositoryTest {
         newUser.setFirstName("test");
         newUser.setLastName("dummy");
         newUser.setBio("Hello");
-//        newUser.setLanguage(new Language(1, "Java"));
         newUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
         newUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser profileAdded = repository.createProfile(newUser);
