@@ -10,8 +10,10 @@ import MyChatComponent from "./components/MyChatComponent";
 import ProfileForm from "./components/ProfileForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import UsersSingleCard from "./components/user/UsersSingleCard";
+import CardFactory from "./components/user/CardFactory";
 import AuthContext from "./context/AuthContext";
+import MatchCardFactory from "./components/matches/MatchCardFactory";
+
 
 
 const LOCAL_STORAGE_TOKEN_KEY = "hookedToken";
@@ -20,6 +22,8 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [users, setAllUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [matches, setMatches] = useState([]);
+  const [currentMatch, setCurrentMatch] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
@@ -130,6 +134,7 @@ function App() {
             <Route path="/login" element={
               currentUser ? <Navigate to={"/"} /> : 
               <Login 
+                setCurrentUser={setCurrentUser}
                 messages={messages}
                 setMessages={setMessages}
                 makeId={makeId}
@@ -157,7 +162,18 @@ function App() {
               />
             }/>
 
-            <Route path="/discover"/>
+            <Route path="/discover" element={
+              <MatchCardFactory
+              matches={matches} 
+              setMatches={setMatches} 
+              setCurrentMatch={setCurrentMatch}
+              currentMatch={currentMatch} 
+              messages={messages} 
+              setMessages={setMessages}
+              makeId={makeId}
+              parseResponseMessage={parseResponseMessage}
+              />
+            }/>
 
             {/* If user is logged in and clicks message in navbar, go to chatbox */}
             <Route path="/messages" element={
@@ -165,7 +181,7 @@ function App() {
             } />
 
             <Route path="/profile" element={
-              currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
+              currentUser ? <CardFactory users={users} setAllUsers={setAllUsers} currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
             }/>
 
             <Route path="test_form" element={

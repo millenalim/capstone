@@ -1,9 +1,12 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useContext} from 'react';
 import { Link,useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+
 
 function TableOfUsers() {
     const [users, setAllUsers] = useState([]);
     const navigate = useNavigate();
+    const auth = useContext(AuthContext);
 
     useEffect(() => {
         fetch('http://localhost:8080/users')
@@ -24,7 +27,11 @@ function TableOfUsers() {
         const user = users.find(user => user.appUserId === appUserId);
         if (window.confirm(`Delete user ${user.firstName}-${user.lastName}?`)) {
             const init = {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    Authorization: "Bearer " + auth.currentUser.token
+                }
+
             };
 
             fetch(`http://localhost:8080/user/${appUserId}`, init)

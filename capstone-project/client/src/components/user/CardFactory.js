@@ -1,8 +1,9 @@
 
 import { useEffect } from "react";
 import UsersSingleCard from "./UsersSingleCard";
+import { useNavigate } from "react-router";
 
-function CardFactory({ allUsers, setAllUsers, currentUser, setCurrentUser, messages, setMessages }) {
+function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages, setMessages }) {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -10,7 +11,7 @@ function CardFactory({ allUsers, setAllUsers, currentUser, setCurrentUser, messa
     }, []);
 
     const getUser = () => {
-        fetch("http://localhost:8080/users")
+        fetch("http://localhost:8080/user")
         .then(response => response.json())
         .then(data => setAllUsers(data))
         .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
@@ -27,8 +28,8 @@ function CardFactory({ allUsers, setAllUsers, currentUser, setCurrentUser, messa
     }
 
     const createCardFactory = () => {
-        if (allUsers.length > 0) {
-            let userCardArray = allUsers.map(userObj => {
+        if (users.length > 0) {
+            let userCardArray = users.map(userObj => {
                 return (<UsersSingleCard key={userObj.username + "-" + userObj.firstName + "-" + userObj.lastName}
                                 user={userObj}
                                 editUser={editUser}
