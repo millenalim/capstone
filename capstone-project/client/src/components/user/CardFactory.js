@@ -11,7 +11,7 @@ function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages
     }, []);
 
     const getUser = () => {
-        fetch("http://localhost:8080/users")
+        fetch("http://localhost:8080/user")
         .then(response => response.json())
         .then(data => setAllUsers(data))
         .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));

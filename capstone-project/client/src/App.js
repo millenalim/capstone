@@ -134,6 +134,7 @@ function App() {
             <Route path="/login" element={
               currentUser ? <Navigate to={"/"} /> : 
               <Login 
+                setCurrentUser={setCurrentUser}
                 messages={messages}
                 setMessages={setMessages}
                 makeId={makeId}

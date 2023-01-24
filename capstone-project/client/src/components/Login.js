@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import AuthContext from '../context/AuthContext';
@@ -11,6 +11,7 @@ function Login({ messages, setMessages, makeId, isPasswordComplex}) {
         formState: { errors } 
     } = useForm();
 
+    const [setCurrentUser] = useState([]);
     const auth = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -26,6 +27,16 @@ function Login({ messages, setMessages, makeId, isPasswordComplex}) {
         .then(response => {
             if (response.status === 200) {
                 return response.json()
+            //     fetch("http://localhost:8080/user")
+            //     .then(response => {
+            //         if (response.status === 204) {
+            //             return response.json();
+            //         } else {
+            //             return Promise.reject(`Unexpected status code: ${response.status}`);
+            //         }
+            //     })
+            //     .then(data => setCurrentUser(data))
+            //     .catch(console.log());
             } else if (response.status === 403) {
                 setMessages([...messages, { id: makeId(), type: "failure", text: "Account could not be logged in at this time." }]);
                 navigate("/");

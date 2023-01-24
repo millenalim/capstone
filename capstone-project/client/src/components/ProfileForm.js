@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useParams, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
@@ -10,34 +10,6 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
 
   const auth = useContext(AuthContext);
 
-  const selectScheduleOptions = [
-    { value: "1", label: "Monday - Morning" },
-    { value: "2", label: "Monday - Afternoon" },
-    { value: "3", label: "Monday - Evening" },
-    { value: "4", label: "Tuesday - Morning" },
-    { value: "5", label: "Tuesday - Afternoon" },
-    { value: "6", label: "Tuesday - Evening" },
-    { value: "7", label: "Wednesday - Morning" },
-    { value: "8", label: "Wednesday - Afternoon" },
-    { value: "9", label: "Wednesday - Evening" },
-    { value: "10", label: "Thursday - Morning" },
-    { value: "11", label: "Thursday - Afternoon" },
-    { value: "12", label: "Thursday - Evening" },
-    { value: "13", label: "Friday - Morning" },
-    { value: "14", label: "Friday - Afternoon" },
-    { value: "15", label: "Friday - Evening" },
-    { value: "16", label: "Saturday - Morning" },
-    { value: "17", label: "Saturday - Afternoon" },
-    { value: "18", label: "Saturday - Evening" },
-    { value: "19", label: "Sunday - Morning" },
-    { value: "20", label: "Sunday - Afternoon" },
-    { value: "21", label: "Sunday - Evening" },
-  ];
-
-  const registerOptions = {
-    schedule: { required: "Availability times required." },
-  };
-
   const {
     register,
     handleSubmit,
@@ -46,11 +18,11 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
     control,
     formState: { errors },
   } = useForm();
-
+  
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-      reset({
+    reset({
         firstName: '',
         lastName: '',
         language: '',
@@ -127,8 +99,31 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
     //       setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
     // };
   };
-
+  
   // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
+  const options = [
+    { value: 1, label: "Monday - Morning" },
+    { value: 2, label: "Monday - Afternoon" },
+    { value: 3, label: "Monday - Evening" },
+    { value: 4, label: "Tuesday - Morning" },
+    { value: 5, label: "Tuesday - Afternoon" },
+    { value: 6, label: "Tuesday - Evening" },
+    { value: 7, label: "Wednesday - Morning" },
+    { value: 8, label: "Wednesday - Afternoon" },
+    { value: 9, label: "Wednesday - Evening" },
+    { value: 10, label: "Thursday - Morning" },
+    { value: 11, label: "Thursday - Afternoon" },
+    { value: 12, label: "Thursday - Evening" },
+    { value: 13, label: "Friday - Morning" },
+    { value: 14, label: "Friday - Afternoon" },
+    { value: 15, label: "Friday - Evening" },
+    { value: 16, label: "Saturday - Morning" },
+    { value: 17, label: "Saturday - Afternoon" },
+    { value: 18, label: "Saturday - Evening" },
+    { value: 19, label: "Sunday - Morning" },
+    { value: 20, label: "Sunday - Afternoon" },
+    { value: 21, label: "Sunday - Evening" },
+  ];
 
 return (
   <form id="profile-form" onSubmit={handleSubmit(onSubmit)}>
@@ -163,9 +158,6 @@ return (
       id="profile-language"
       {...register("language", { required: "Language is required." })}
     >
-      <option value="" selected disabled>
-        Programming Language
-      </option>
       <option value="1">Java</option>
       <option value="2">C</option>
       <option value="3">C#</option>
@@ -198,10 +190,20 @@ return (
       Availability
     </label>
     
-    <Select 
-      options={selectScheduleOptions} 
-      isMulti
-      required={registerOptions}
+    <Controller
+      control={control}
+      defaultValue={options.map(c => c.value)}
+      name="schedule"
+      render={({ field: { onChange, value, ref, name},}) => (
+        <Select 
+          inputRef={ref}
+          classNamePrefix={"react-select"}
+          options={options} 
+          isMulti
+          value={options.filter(c => value.includes(c.value))}
+          onChange={val => onChange(val.map(c => c.value))}
+        />
+      )} 
       {...register("schedule")}
     />
 
