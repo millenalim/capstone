@@ -19,7 +19,9 @@ public class AppUser implements UserDetails {
     private String bio;
     private boolean enabled;
     private List<Schedule> schedule;
-    private Proficiency proficiency;
+    private int languageId;
+//    private Proficiency proficiency;
+    private String proficiencyLevel;
     private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     //Builder pattern
@@ -149,11 +151,29 @@ public class AppUser implements UserDetails {
         this.schedule = schedule;
     }
 
-    public Proficiency getProficiency() {
-        return proficiency;
+    //LANGUAGE
+    public int getLanguageId() {
+        return languageId;
     }
 
-    public void setProficiency(Proficiency proficiency) {
-        this.proficiency = proficiency;
+    public void setLanguageId(int languageId) {
+        this.languageId = languageId;
     }
+
+    //PROFICIENCY
+    public String getProficiencyLevel() {
+        return proficiencyLevel;
+    }
+
+    public void setProficiencyLevel(String proficiencyLevel) {
+        this.proficiencyLevel = proficiencyLevel;
+    }
+
+    //    public Proficiency getProficiency() {
+//        return proficiency;
+//    }
+//
+//    public void setProficiency(Proficiency proficiency) {
+//        this.proficiency = proficiency;
+//    }
 }

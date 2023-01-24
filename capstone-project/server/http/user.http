@@ -8,9 +8,18 @@ Content-Type: application/json
     "username": "morgan@oliver.com",
     "password": "P@ssw0rd!"
 }
-
 ###
 POST {{url}}/authenticate
+Content-Type: application/json
+
+{
+    "username": "millena@lim.com",
+    "password": "P@ssw0rd!"
+}
+
+
+###
+POST {{url}}/create_account
 Content-Type: application/json
 
 {
@@ -69,3 +78,6 @@ Content-Type: application/json
         }
     ]  
 }
+###
+GET {{url}}/discover
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibWlsbGVuYUBsaW0uY29tIiwiYXBwX3VzZXJfaWQiOjMsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3NDY2Njc1NH0.MgHIV3RA-TY74gl6bqtJHJfqkra8QjBjbswEY-S6YJA
