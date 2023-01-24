@@ -69,25 +69,15 @@ class AppUserServiceTest {
     }
 
     @Test
-    void shouldUpdateUserSchedule() {
-        AppUser appUser = new AppUser(4,"fake@user.com",
-                "P@ssw0rd!",
-                false,
-                List.of("USER"));
+    void shouldUpdateSchedule() {
+        AppUser testDummy = new AppUser(1, "test@dummy.com", "P@ssw0rd!", true, List.of("USER"));
+        testDummy.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        when(repository.updateSchedule(testDummy)).thenReturn(true);
 
-        service.createAccount(appUser.getUsername(), appUser.getPassword());
-        appUser.setFirstName("test");
-        appUser.setLastName("dummy");
-        appUser.setBio("hello, I don't really exist");
-        appUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java"))
-        );
-        appUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        Result<AppUser> actual = service.updateSchedule(testDummy);
+        assertEquals(ActionStatus.SUCCESS, actual.getStatus());
 
-        Result<AppUser> profileAdded = service.createProfile(appUser);
-        assertNotNull(profileAdded);
 
-        appUser.setSchedule(List.of(new Schedule(6, DayOfWeek.TUESDAY, "Evening")));
-        assertTrue(service.updateSchedule(appUser));
     }
 
 

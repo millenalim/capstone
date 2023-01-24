@@ -2,20 +2,20 @@ package learn.models;
 
 public class AppRole {
     //Fix naming conventions for appRoleId
-    private int app_role_id;
+    private int appRoleId;
     private String name;
 
-    public AppRole(int app_role_id, String name) {
-        this.app_role_id = app_role_id;
+    public AppRole(int appRoleId, String name) {
+        this.appRoleId = appRoleId;
         this.name = name;
     }
 
-    public int getApp_role_id() {
-        return app_role_id;
+    public int getappRoleId() {
+        return appRoleId;
     }
 
-    public void setApp_role_id(int app_role_id) {
-        this.app_role_id = app_role_id;
+    public void setappRoleId(int appRoleId) {
+        this.appRoleId = appRoleId;
     }
 
     public String getName() {

@@ -86,7 +86,25 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    public boolean updateSchedule(AppUser appUser) {return repository.updateSchedule(appUser);}
+
+    public Result<AppUser> updateSchedule(AppUser appUser) {
+        Result<AppUser> result = new Result<>();
+
+        if(!result.isSuccess()) {
+            return result;
+        }
+
+        if(appUser.getAppUserId() <= 0) {
+            result.addMessage(ActionStatus.INVALID, "AppUserId must be set for `updateSchedule` operation");
+            return result;
+        }
+
+        if(!repository.updateSchedule(appUser)) {
+            result.addMessage(ActionStatus.NOT_FOUND,"Not found.");
+        }
+
+        return result;
+    }
 
 
 
