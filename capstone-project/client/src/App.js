@@ -8,11 +8,12 @@ import NotFound from "./components/NotFound";
 import TableOfUsers from "./components/TableOfUsers";
 import MyChatComponent from "./components/MyChatComponent";
 import ProfileForm from "./components/ProfileForm";
+import CardFactory from "./components/user/CardFactory";
+import UsersSingleCard from "./components/user/UsersSingleCard";
+import MatchCardFactory from "./components/matches/MatchCardFactory";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import CardFactory from "./components/user/CardFactory";
 import AuthContext from "./context/AuthContext";
-import MatchCardFactory from "./components/matches/MatchCardFactory";
 
 
 
@@ -152,7 +153,7 @@ function App() {
               />
             }/>
 
-            <Route path="/create_profile" element={
+            <Route path="/profile_form" element={
               <ProfileForm 
               messages={messages}
               setMessages={setMessages}
@@ -181,11 +182,11 @@ function App() {
             } />
 
             <Route path="/profile" element={
-              currentUser ? <CardFactory users={users} setAllUsers={setAllUsers} currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
+              currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
             }/>
 
             <Route path="test_form" element={
-              currentUser ? <ProfileForm  messages={messages} setMessages={setMessages} makeId={makeId} parseResponseMessage={parseResponseMessage}/> : <NotFound />
+              currentUser ? <ProfileForm  currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
             }/>
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}

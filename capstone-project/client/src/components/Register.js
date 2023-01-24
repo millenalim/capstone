@@ -44,7 +44,7 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
         })
         .then(data => {
             auth.login(data.jwt_token);
-            navigate("/create_profile");
+            navigate("/profile_form");
         })
         } else if (response.status === 400) {
           setMessages([

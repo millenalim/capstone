@@ -51,7 +51,7 @@ function NavBar() {
                       </NavLink>
                     </li>
                     <li className="nav-item me-5">
-                      <NavLink to="/test_form" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                      <NavLink to="/profile_form" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Test Form
                       </NavLink>
                     </li>

@@ -1,12 +1,10 @@
 import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-function ProfileForm({ messages, setMessages, makeId, parseResponseMessage}) {
-
-  const { appUserId } = useParams();
+function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
 
   const auth = useContext(AuthContext);
 
@@ -16,90 +14,81 @@ function ProfileForm({ messages, setMessages, makeId, parseResponseMessage}) {
     reset,
     setValue,
     control,
-    formState: { errors },
+    formState,
+    formState: { errors, submittedData },
   } = useForm();
   
   const navigate = useNavigate();
   
   useEffect(() => {
-    reset({
-        firstName: '',
-        lastName: '',
-        language: '',
-        proficiency: '',
-        schedule: '',
-        bio: '',
-      });
-    }, [window.location.pathname]);
+    if (formState.isSubmitSuccessful) {
+      reset({
+          appUserId: '',
+          firstName: '',
+          lastName: '',
+          language: '',
+          proficiency: '',
+          schedule: '',
+          bio: '',
+        });    
+    }
+    }, [formState, submittedData, reset]);
 
   useEffect(() => {
-    if (appUserId) {
-      fetch("http://localhost:8080/user/" + appUserId, {
-        headers: {
-          Authorization: "Bearer " + auth.currentUser.token,
-        },
-      })
-        .then((response) => parseResponseMessage(response))
-        .then((user) => {
-          setValue("firstName", user.firstName);
-          setValue("lastName", user.lastName);
-          setValue("language", user.language);
-          setValue("proficiency", user.proficiencyLevel);
-          setValue("schedule", user.schedule.length > 1 ? user[1] : "");
-          setValue("bio", user.bio);
-        })
-        .catch((error) => {
-          if (error.message === "Unexpected end of JSON input") {
-            navigate("/404");
-          } else {
-          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
-          }
-    });
+    if (currentUser.appUserId > 0) {
+          setValue("appUserId", currentUser.appUserId);
+          setValue("firstName", currentUser.firstName);
+          setValue("lastName", currentUser.lastName);
+          setValue("language", currentUser.language);
+          setValue("proficiency", currentUser.proficiencyLevel);
+          setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
+          setValue("bio", currentUser.bio);
     }
   }, []);
 
-  const onSubmit = (userData) => {
-    let revisedUserData = { ...userData};
-    console.log(revisedUserData);
+  const onSubmit = (newUserObj) => {
 
-    if (appUserId) {
-      revisedUserData["appUserId"] = appUserId;
+    let retypedUser = {
+      appUserId: newUserObj.appUserId,
+      firstName: newUserObj.firstName,
+      lastName: newUserObj.lastName,
+      language: newUserObj.language,
+      proficiency: newUserObj.proficiency,
+      bio: newUserObj.bio,
+    }
 
-      fetch("http://localhost:8080/create_profile/" + appUserId, {
+    newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
+
+    if (currentUser.appUserId > 0) {
+      fetch("http://localhost:8080/create_profile/" + currentUser.appUserId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth.currentUser.token,
         },
-        body: JSON.stringify(revisedUserData),
+        body: JSON.stringify(retypedUser),
       })
-        .then((response) =>
-          parseResponseMessage(response, revisedUserData, "edited")
-        )
-        .catch((error) =>
-          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
-        );
+        .then((response) => {
+          if (response.status === 204) {
+            let message = {
+              status: "success",
+              text: "User profile has been successfully added"
+            }
+
+            setMessages([...messages, message]);
+            setCurrentUser({});
+            navigate("/");
+          } else {
+            let message = {
+              status: "failure",
+              text: "User profile could not be edited."
+            }
+            setMessages([...messages, message]);
+          }
+        })
+        .catch((error) => setMessages([...messages, { type: "failure", text: error.message }]));
     } 
-    // else {
-    //   console.log("Token: ", auth.currentUser);
-    //   console.log("User Data: ", revisedUserData);
-    //   fetch("http://localhost:8080/create_profile", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: "Bearer " + auth.currentUser.token,
-    //     },
-    //     body: JSON.stringify(revisedUserData),
-    //   })
-    //     .then((response) => parseResponseMessage(response))
-    //     .then((userData) => setMessages([...messages,{ id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} successfully created profile.`}]))
-    //     .then(() => navigate("/discover"))
-    //     .catch((error) =>
-    //       setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
-    // };
   };
-  
-  // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
   const options = [
     { value: 1, label: "Monday - Morning" },
@@ -149,7 +138,7 @@ return (
     />
     <p className="form-error-message text-white">{errors.lastName?.message}</p>
 
-    {/* <label className="form-label mt-3 text-white" htmlFor="profile-language">
+    <label className="form-label mt-3 text-white" htmlFor="profile-language">
       Language
     </label>
     <select
@@ -217,10 +206,10 @@ return (
       type="text"
       id="profile-bio"
       {...register("bio")}
-    /> */}
+    />
 
-    <button className="btn btn-primary mt-3" type="submit">{appUserId ? "Edit" : "Create Profile"}</button>
-    <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/home")}>Cancel</button>
+    <button className="btn btn-primary mt-3" type="submit">{currentUser ? "Edit" : "Create Profile"}</button>
+    <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/")}>Cancel</button>
   </form>
 );
 }
