@@ -84,33 +84,11 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
+    public boolean updateSchedule(AppUser appUser) {return repository.updateSchedule(appUser);}
+
+
+
     public boolean deleteById(int appUserId){return repository.deleteById(appUserId);}
-
-    private Result<AppUser> validateFields(String firstName, String lastName, String bio, Proficiency proficiency, List<Schedule> schedule) {
-        Result<AppUser> result = new Result<>();
-         if (firstName.isBlank() || firstName.isEmpty()) {
-            result.addMessage(ActionStatus.INVALID, "First name is required");
-            return result;
-        }
-
-        if(lastName.isBlank() || lastName.isEmpty()) {
-            result.addMessage(ActionStatus.INVALID, "Last name is required");
-            return result;
-        }
-
-
-        if(proficiency == null) {
-            result.addMessage(ActionStatus.INVALID, "Please select a proficiency level");
-            return result;
-        }
-
-        if(schedule == null || schedule.isEmpty()) {
-            result.addMessage(ActionStatus.INVALID, "Please select a schedule");
-            return result;
-        }
-
-        return result;
-    }
 
     private Result<AppUser> validate(String username, String password) {
 
@@ -135,6 +113,32 @@ public class AppUserService implements UserDetailsService {
             result.addMessage(ActionStatus.INVALID,
                     "password must be at least 8 character and contain a digit," +
                             " a letter, and a non-digit/non-letter");
+        }
+
+        return result;
+    }
+
+    private Result<AppUser> validateFields(String firstName, String lastName, String bio, Proficiency proficiency, List<Schedule> schedule) {
+        Result<AppUser> result = new Result<>();
+        if (firstName.isBlank() || firstName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "First name is required");
+            return result;
+        }
+
+        if(lastName.isBlank() || lastName.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "Last name is required");
+            return result;
+        }
+
+
+        if(proficiency == null) {
+            result.addMessage(ActionStatus.INVALID, "Please select a proficiency level");
+            return result;
+        }
+
+        if(schedule == null || schedule.isEmpty()) {
+            result.addMessage(ActionStatus.INVALID, "Please select a schedule");
+            return result;
         }
 
         return result;

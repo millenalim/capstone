@@ -9,7 +9,6 @@ public class Schedule {
     private int scheduleId;
     private DayOfWeek dayOfWeek;
     private String availability;
-    private List<Integer> appUserIds;
 
     public Schedule(int scheduleId, DayOfWeek dayOfWeek, String availability) {
         this.scheduleId = scheduleId;
@@ -40,13 +39,6 @@ public class Schedule {
         this.availability = availability;
     }
 
-    public List<Integer> getAppUserIds() {
-        return new ArrayList<>(appUserIds);
-    }
 
-    public void setAppUserIds(List<Integer> appUserIds) {
-        this.appUserIds.clear();
-        this.appUserIds.addAll(appUserIds);
-//        this.appUserIds = appUserIds;
-    }
+
 }

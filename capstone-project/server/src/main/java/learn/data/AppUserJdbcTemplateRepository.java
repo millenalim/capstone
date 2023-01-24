@@ -175,15 +175,20 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
     }
 
-    private void updateSchedule(AppUser appUser) {
+    @Override
+    @Transactional
+    public boolean updateSchedule(AppUser appUser) {
         jdbcTemplate.update("delete from app_user_schedule where app_user_id = ?;", appUser.getAppUserId());
-        final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?) "
-                + "where app_user_schedule.app_user_id = ?;";
+//        final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?) "
+//                + "where app_user_schedule.app_user_id = ?;";
+        boolean updated = false;
 
-
-
-        var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId(), appUser.getSchedule());
-        appUser.setSchedule(schedule);
+        List<Schedule> scheduleList = appUser.getSchedule();
+        for (Schedule schedule: scheduleList) {
+            final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?);";
+            updated = jdbcTemplate.update(sql, appUser.getAppUserId(), schedule.getScheduleId()) > 0;
+        }
+        return updated;
     }
 
 
@@ -260,16 +265,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
         appUser.setProficiency(proficiency);
     }
 
-
-//    private void addLanguage(AppUser appUser) {
-//        final String sql = "select l.language_id, l.language "
-//                + "from language l "
-//                + "inner join app_user_language aul on l.language_id = aul.language_Id "
-//                + "where aul.app_user_id =?;";
-//        var languageList = jdbcTemplate.query(sql, new LanguageMapper(), appUser.getAppUserId());
-//        var language = languageList.stream().findFirst().orElse(null);
-//        appUser.setLanguage(language);
-//    }
 
     private void addSchedule(AppUser appUser) {
         final String sql = "select s.schedule_id, s.day_of_week, s.availability "

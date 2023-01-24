@@ -126,8 +126,6 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
 
-
-
     @Test
     void shouldCreateNewUser() {
     AppUser newUser = new AppUser(4,"fake@user.com",
@@ -156,6 +154,15 @@ class AppUserJdbcTemplateRepositoryTest {
         newUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser profileAdded = repository.createProfile(newUser);
         assertNotNull(profileAdded);
+
+    }
+
+    @Test
+    void shouldUpdateSchedule() {
+
+        AppUser testUser = repository.findById(5);
+        testUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+        assertTrue(repository.updateSchedule(testUser));
 
     }
 

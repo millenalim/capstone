@@ -158,6 +158,7 @@ insert into app_user_schedule (app_user_id, schedule_id ) values
     (6,18),
     (7,12);
     
+    
 
 
     

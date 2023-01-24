@@ -29,6 +29,8 @@ public interface AppUserRepository {
     @Transactional
     AppUser createProfile(AppUser appUser);
 
+    @Transactional
+    boolean updateSchedule(AppUser appUser);
 
     @Transactional
     boolean update(AppUser user);
