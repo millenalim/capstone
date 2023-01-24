@@ -65,7 +65,6 @@ function NavBar() {
                     </Link>
                     <Link to="/signup" type="button" className="nav-item me-5 btn btn-dark">
                         Sign Up
-
                     </Link>
                   </>
                 ) : null}

@@ -4,9 +4,9 @@ import Select from "react-select";
 import { useParams, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponseMessage}) {
+function ProfileForm({ messages, setMessages, makeId, parseResponseMessage}) {
 
-  const { userId } = useParams();
+  const { appUserId } = useParams();
 
   const auth = useContext(AuthContext);
 
@@ -33,8 +33,8 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
     }, [window.location.pathname]);
 
   useEffect(() => {
-    if (userId) {
-      fetch("http://localhost:8080/create_profile", {
+    if (appUserId) {
+      fetch("http://localhost:8080/user/" + appUserId, {
         headers: {
           Authorization: "Bearer " + auth.currentUser.token,
         },
@@ -62,30 +62,29 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
     let revisedUserData = { ...userData};
     console.log(revisedUserData);
 
-    // if (userId) {
-    //   revisedUserData["userId"] = userId;
+    if (appUserId) {
+      revisedUserData["appUserId"] = appUserId;
 
-    //   fetch("http://localhost:8080/create_profile", {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: "Bearer " + auth.currentUser.token,
-    //     },
-    //     body: JSON.stringify(revisedUserData),
-    //   })
-    //     .then((response) =>
-    //       parseResponseMessage(response, revisedUserData, "edited")
-    //     )
-    //     .then(() => navigate("/profile"))
-    //     .catch((error) =>
-    //       setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
-    //     );
-    // } 
+      fetch("http://localhost:8080/create_profile/" + appUserId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.currentUser.token,
+        },
+        body: JSON.stringify(revisedUserData),
+      })
+        .then((response) =>
+          parseResponseMessage(response, revisedUserData, "edited")
+        )
+        .catch((error) =>
+          setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])
+        );
+    } 
     // else {
     //   console.log("Token: ", auth.currentUser);
     //   console.log("User Data: ", revisedUserData);
-    //   fetch("http://localhost:8080/user", {
-    //     method: "POST",
+    //   fetch("http://localhost:8080/create_profile", {
+    //     method: "PUT",
     //     headers: {
     //       "Content-Type": "application/json",
     //       Authorization: "Bearer " + auth.currentUser.token,
@@ -101,6 +100,7 @@ function ProfileForm({ messages, setMessages, currentUser, makeId, parseResponse
   };
   
   // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
+
   const options = [
     { value: 1, label: "Monday - Morning" },
     { value: 2, label: "Monday - Afternoon" },
@@ -149,7 +149,7 @@ return (
     />
     <p className="form-error-message text-white">{errors.lastName?.message}</p>
 
-    <label className="form-label mt-3 text-white" htmlFor="profile-language">
+    {/* <label className="form-label mt-3 text-white" htmlFor="profile-language">
       Language
     </label>
     <select
@@ -217,11 +217,10 @@ return (
       type="text"
       id="profile-bio"
       {...register("bio")}
-    />
+    /> */}
 
-    <button className="btn btn-primary mt-3" type="submit">
-      {currentUser.userId > 0 ? "Edit" : "Create Profile"}
-    </button>
+    <button className="btn btn-primary mt-3" type="submit">{appUserId ? "Edit" : "Create Profile"}</button>
+    <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/home")}>Cancel</button>
   </form>
 );
 }
