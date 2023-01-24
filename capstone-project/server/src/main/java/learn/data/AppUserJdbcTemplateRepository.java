@@ -162,15 +162,13 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
     private void updateProficiency(AppUser appUser) {
         jdbcTemplate.update("delete from app_user_language where app_user_id = ?;", appUser.getAppUserId());
 
-        Proficiency proficiency = appUser.getProficiency();
-        if (proficiency != null) {
             String sql = "insert into app_user_language (proficiency_level, app_user_id, language_id) values (?, ?, ?);";
             GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
             int rowsAffected = jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, appUser.getProficiency().getProficiencyLevel());
+                ps.setString(1, appUser.getProficiencyLevel());
                 ps.setInt(2, appUser.getAppUserId());
-                ps.setInt(3, appUser.getProficiency().getLanguage().getLanguageId());
+                ps.setInt(3, appUser.getLanguageId());
                 return ps;
             }, keyHolder);
 
@@ -178,9 +176,9 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 return;
             }
 
-            appUser.getProficiency().setProficiencyLevelId(keyHolder.getKey().intValue());
+//            appUser.getProficiency().setProficiencyLevelId(keyHolder.getKey().intValue());
 
-        }
+
 
     }
 
@@ -266,11 +264,15 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 + "inner join `language` l on l.language_id = aul.language_id "
                 + "where aul.app_user_id = ?;";
 
-        var proficiencyList = jdbcTemplate.query(sql, new ProficiencyMapper(), appUser.getAppUserId());
-        var proficiency = proficiencyList.stream().findFirst().orElse(null);
+        var proficiency = jdbcTemplate.queryForObject(sql, new ProficiencyMapper(), appUser.getAppUserId());
 
-        appUser.setProficiency(proficiency);
+        if(proficiency != null) {
+            appUser.setProficiencyLevel(proficiency.getProficiencyLevel());
+            appUser.setLanguageId(proficiency.getLanguage().getLanguageId());
+        }
     }
+
+
 
 
     private void addSchedule(AppUser appUser) {

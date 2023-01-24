@@ -59,8 +59,9 @@ class AppUserServiceTest {
         appUser.setFirstName("test");
         appUser.setLastName("dummy");
         appUser.setBio("hello, I don't really exist");
-        appUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java"))
-                );
+        appUser.setProficiencyLevel("Beginner");
+        appUser.setLanguageId(1);
+//        appUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java"))
         appUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
 
         Result<AppUser> profileAdded = service.createProfile(appUser);

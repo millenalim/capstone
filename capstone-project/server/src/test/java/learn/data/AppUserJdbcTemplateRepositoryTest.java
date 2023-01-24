@@ -66,7 +66,7 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void shouldFindTwoMatchesBasedOnJavaLanguage() {
+    void shouldFindOneMatch() {
         AppUser firstUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
                 "P@ssw0rd!",
                 false,
@@ -76,7 +76,9 @@ class AppUserJdbcTemplateRepositoryTest {
         firstUser.setFirstName("test");
         firstUser.setLastName("dummy");
         firstUser.setBio("Hello");
-        firstUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        firstUser.setProficiencyLevel("Beginner");
+//        firstUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        firstUser.setLanguageId(1);
         firstUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser firstProfileAdded = repository.createProfile(firstUser);
 
@@ -89,7 +91,9 @@ class AppUserJdbcTemplateRepositoryTest {
         secondUser.setFirstName("secondtest");
         secondUser.setLastName("dummy");
         secondUser.setBio("Hello");
-        secondUser.setProficiency(new Proficiency(1,"Expert", 5,new Language(1,"Java")));
+        secondUser.setProficiencyLevel("Expert");
+//        secondUser.setProficiency(new Proficiency(1,"Expert", 5,new Language(1,"Java")));
+        secondUser.setLanguageId(1);
         secondUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser secondProfileAdded = repository.createProfile(secondUser);
 
@@ -102,7 +106,9 @@ class AppUserJdbcTemplateRepositoryTest {
         thirdUser.setFirstName("thirdtest");
         thirdUser.setLastName("dummy");
         thirdUser.setBio("Hello");
-        thirdUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(2,"C")));
+        thirdUser.setProficiencyLevel("Beginner");
+        thirdUser.setLanguageId(2);
+//        thirdUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(2,"C")));
         thirdUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser thirdProfileAdded = repository.createProfile(thirdUser);
 
@@ -149,7 +155,9 @@ class AppUserJdbcTemplateRepositoryTest {
         newUser.setFirstName("test");
         newUser.setLastName("dummy");
         newUser.setBio("Hello");
-        newUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
+        newUser.setProficiencyLevel("Beginner");
+        newUser.setLanguageId(1);
+//        newUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
         newUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser profileAdded = repository.createProfile(newUser);
         assertNotNull(profileAdded);
