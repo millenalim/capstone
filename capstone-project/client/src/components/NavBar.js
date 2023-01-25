@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-function NavBar() {
+function NavBar({ currentUser }) {
+  const { appUserId } = useParams();
   const auth = useContext(AuthContext);
 
   const logoString = "<Hooked />";

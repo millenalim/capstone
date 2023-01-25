@@ -163,7 +163,7 @@ insert into `language` values
     ("Beginner", 1, 1),
 	("Intermediate",2,2),
     ("Expert",3,3),
-    ("Beginner",4,2),
+    ("Expert",4,3),
     ("Intemediate",5,2),
     ("Intermediate",6,7),
     ("Expert",7,5);
@@ -174,7 +174,7 @@ insert into app_user_schedule (app_user_id, schedule_id ) values
     (2,1),
     (2,2),
     (3,10),
-    (4,5),
+    (4,10),
     (5,18),
     (6,18),
     (7,12);
