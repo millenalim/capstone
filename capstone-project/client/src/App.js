@@ -22,9 +22,8 @@ const LOCAL_STORAGE_TOKEN_KEY = "hookedToken";
 function App() {
   const [messages, setMessages] = useState([]);
   const [users, setAllUsers] = useState([]);
+  const [appUser, setAppUser] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [matches, setMatches] = useState([]);
-  const [currentMatch, setCurrentMatch] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
@@ -102,7 +101,7 @@ function App() {
     return id;
   }
 
-  const parseResponseMessage = (response, agentData = "", method = "changed") => {
+  const parseResponseMessage = (response, userData = "", method = "changed") => {
     switch (response.status) {
       case 200: 
         return response.json();
@@ -111,15 +110,15 @@ function App() {
         return response.json();
 
       case 204:
-        setMessages([...messages, { id: makeId(), type: "success", text: `Agent ${agentData.firstName} ${agentData.lastName} was successfully ${method}.`}]);
+        setMessages([...messages, { id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} was successfully ${method}.`}]);
         return null;
       
       case 404:
-        setMessages([...messages, { id: makeId(), type: "failure", text: "Agents could not be found."}]);
+        setMessages([...messages, { id: makeId(), type: "failure", text: "Users could not be found."}]);
         return null;
       
       case 409:
-        setMessages([...messages, { id: makeId(), type: "failure", text: "Agent data does not match. Request could not be completed."}]);
+        setMessages([...messages, { id: makeId(), type: "failure", text: "User data does not match. Request could not be completed."}]);
         return null;
 
       default:
@@ -171,7 +170,7 @@ function App() {
             <Route path="/discover" element={
               <MatchCardFactory
               currentUser={currentUser}
-              setCurrentUser={setCurrentMatch}
+              setCurrentUser={setCurrentUser}
               users={users}
               setAllUsers={setAllUsers}
               messages={messages} 
@@ -187,10 +186,13 @@ function App() {
             } />
 
             <Route path="/profile" element={
-              currentUser ? 
               <CardFactory 
               currentUser={currentUser} 
-              setCurrentUser={setCurrentUser} /> : <NotFound />
+              setCurrentUser={setCurrentUser}
+              appUser={appUser}
+              setAppUser={setAppUser}
+              messages={messages}
+              setMessages={setMessages} />
             }/>
 
             <Route path="/profile_form" element={
@@ -199,7 +201,7 @@ function App() {
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}
             <Route path="/users" element={
-              currentUser ? <TableOfUsers users={users} setAllUsers={setAllUsers} /> : <Login /> 
+              currentUser ? <TableOfUsers users={users} setAppUser={setAllUsers} /> : <Login /> 
             }/>
 
             <Route path="*" element={<NotFound />} />
