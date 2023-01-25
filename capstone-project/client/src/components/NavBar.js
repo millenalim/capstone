@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-function NavBar() {
+function NavBar({ currentUser }) {
+  const { appUserId } = useParams();
   const auth = useContext(AuthContext);
 
   const logoString = "<Hooked />";
@@ -36,7 +37,7 @@ function NavBar() {
                       </NavLink>
                     </li>
                     <li className="nav-item me-5">
-                      <NavLink to="/discover" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                      <NavLink to= {`/discover/${currentUser.appUserId}`} className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Discover
                       </NavLink>
                     </li>

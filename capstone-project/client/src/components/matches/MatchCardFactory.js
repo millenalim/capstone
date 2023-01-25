@@ -1,11 +1,13 @@
 import { useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router'
+import { useParams, useNavigate } from 'react-router'
 import AuthContext from '../../context/AuthContext';
 import MatchCard from './MatchCard';
 
-function MatchCardFactory({currentUser, matches, setMatches, setCurrentMatch, currentMatch, messages, setMessages, makeId, parseResponseMessage}) {
+function MatchCardFactory({ currentUser, matches, setMatches, setCurrentMatch, currentMatch, messages, setMessages, makeId, parseResponseMessage}) {
 
     const navigate = useNavigate();
+
+    // const { appUserId } = useParams()
 
     const auth = useContext(AuthContext);
 
@@ -15,11 +17,9 @@ function MatchCardFactory({currentUser, matches, setMatches, setCurrentMatch, cu
 
 
     const getMatches = () => {
-        fetch("http://localhost:8080/discover/" + currentUser.appUserId, {
-            headers: {
-                Authorization: "Bearer " + auth.currentUser.token
-            }
-        })
+        fetch("http://localhost:8080/discover/")
+        .then(error => console.error(error))
+        // .then(response => console.log(response))
         .then(response => parseResponseMessage(response))
         .then(data => data ? setMatches(data) : null)
         .catch(error => setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])); 
@@ -40,6 +40,7 @@ function MatchCardFactory({currentUser, matches, setMatches, setCurrentMatch, cu
                                     setCurrentMatch={setCurrentMatch}
                 />)
             });
+            console.log(matchCardArray)
             return matchCardArray;
         }
     }
