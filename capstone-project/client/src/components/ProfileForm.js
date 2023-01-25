@@ -105,7 +105,7 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
         .then((response) => {
           if (response.status === 204) {
             let message = {
-              status: "success",
+              type: "success",
               text: "User profile has been successfully added"
             }
 
@@ -113,7 +113,7 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
             navigate("/");
           } else {
             let message = {
-              status: "failure",
+              type: "failure",
               text: "User profile could not be edited."
             }
             setMessages([...messages, message]);
@@ -241,7 +241,7 @@ return (
       {...register("bio")}
     />
 
-    <button className="btn btn-primary mt-3" type="submit">{currentUser ? "Edit" : "Create Profile"}</button>
+    <button className="btn btn-primary mt-3" type="submit">Submit</button>
     <button className="btn btn-secondary mt-3 ms-2" type="button" onClick={() => navigate("/")}>Cancel</button>
   </form>
 );

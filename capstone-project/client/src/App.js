@@ -180,9 +180,8 @@ function App() {
               />
             }/>
 
-            {/* If user is logged in and clicks message in navbar, go to chatbox */}
             <Route path="/messages" element={
-              currentUser ? <MyChatComponent/> : <NotFound />
+              <MyChatComponent/>
             } />
 
             <Route path="/profile" element={
@@ -195,9 +194,12 @@ function App() {
               setMessages={setMessages} />
             }/>
 
+<<<<<<< HEAD
             {/* <Route path="/profile_form" element={
               currentUser ? <ProfileForm  currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
             }/> */}
+=======
+>>>>>>> 2e5d9a50f11a9516ec41812491058963bdad9313
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}
             <Route path="/users" element={
