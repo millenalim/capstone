@@ -187,7 +187,10 @@ function App() {
             } />
 
             <Route path="/profile" element={
-              currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
+              currentUser ? 
+              <CardFactory 
+              currentUser={currentUser} 
+              setCurrentUser={setCurrentUser} /> : <NotFound />
             }/>
 
             <Route path="test_form" element={

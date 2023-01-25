@@ -1,9 +1,12 @@
 
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import UsersSingleCard from "./UsersSingleCard";
 import { useNavigate } from "react-router";
+import AuthContext from "../../context/AuthContext";
 
-function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages, setMessages }) {
+function CardFactory({ currentUser, setCurrentUser, messages, setMessages }) {
+
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -11,29 +14,33 @@ function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages
     }, []);
 
     const getUser = () => {
-        fetch("http://localhost:8080/users")
+        fetch("http://localhost:8080/user/" + currentUser.appUserId ,{
+            headers: {
+                Authorization: "Bearer " + auth.currentUser.token
+            }
+        })
         .then(response => response.json())
-        .then(data => setAllUsers(data))
+        .then(data => setCurrentUser(data))
         .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
     }
 
-    const editUser = (user) => {
-        setCurrentUser(user);
-        navigate("/profile_form");
-    }
+    // const editUser = (user) => {
+    //     setCurrentUser(user);
+    //     navigate("/profile_form");
+    // }
 
-    const deleteUser = (user) => {
-        setCurrentUser(user);
-        navigate("/confirm-delete");
-    }
+    // const deleteUser = (user) => {
+    //     setCurrentUser(user);
+    //     navigate("/confirm-delete");
+    // }
 
     const createCardFactory = () => {
-        if (users.length > 0) {
-            let userCardArray = users.map(userObj => {
+        if (currentUser.length > 0) {
+            let userCardArray = currentUser.map(userObj => {
                 return (<UsersSingleCard key={userObj.username + "-" + userObj.firstName + "-" + userObj.lastName}
-                                user={userObj}
-                                editUser={editUser}
-                                deleteUser={deleteUser}
+                                // user={userObj}
+                                // editUser={editUser}
+                                // deleteUser={deleteUser}
                                 currentUser={currentUser}
                                 setCurrentUser={setCurrentUser}
                         />)
@@ -48,5 +55,4 @@ function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages
     </>
   )
 }
-
 export default CardFactory;
