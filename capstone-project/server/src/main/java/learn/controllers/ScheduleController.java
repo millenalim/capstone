@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost3000"})
+@RequestMapping("/schedule")
 public class ScheduleController {
     private final ScheduleService service;
 
@@ -20,7 +21,7 @@ public class ScheduleController {
     @GetMapping("/{scheduleId}")
     public Schedule findById(@PathVariable int scheduleId) {return service.findById(scheduleId);}
 
-    @GetMapping("/schedule")
+    @GetMapping
     public List<Schedule> findAllSchedules(){
         return service.findAll();
     }

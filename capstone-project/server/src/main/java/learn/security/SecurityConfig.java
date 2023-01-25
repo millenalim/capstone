@@ -41,6 +41,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/users").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.GET,"/user/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/create_profile/*").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/language/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/schedule/**").permitAll()
 //                .antMatchers(HttpMethod.POST,
 //                        "/sighting").hasAnyAuthority("USER", "ADMIN")
 

@@ -2,7 +2,9 @@ package learn.domain;
 
 import learn.data.LanguageRepository;
 import learn.models.Language;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LanguageService {
 
     private final LanguageRepository languageRepository;

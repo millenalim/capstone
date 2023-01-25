@@ -157,7 +157,7 @@ function App() {
               />
             }/>
 
-            {/* <Route path="/profile_form" element={
+            <Route path="/profile_form" element={
               <ProfileForm 
               messages={messages}
               setMessages={setMessages}
@@ -165,7 +165,7 @@ function App() {
               makeId={makeId}
               parseResponseMessage={parseResponseMessage}
               />
-            }/> */}
+            }/>
 
             <Route path="/discover" element={
               <MatchCardFactory
@@ -195,9 +195,9 @@ function App() {
               setMessages={setMessages} />
             }/>
 
-            <Route path="/profile_form" element={
+            {/* <Route path="/profile_form" element={
               currentUser ? <ProfileForm  currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
-            }/>
+            }/> */}
             
             {/* If logged in as admin, go to the table of users, if not, go to login page */}
             <Route path="/users" element={

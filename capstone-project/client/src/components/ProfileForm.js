@@ -20,18 +20,18 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
   
   const navigate = useNavigate();
   
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-          firstName: '',
-          lastName: '',
-          languageId: '',
-          proficiencyLevel: '',
-          schedule: '',
-          bio: '',
-        });    
-    }
-    }, [formState, submittedData, reset]);
+  // useEffect(() => {
+  //   if (formState.isSubmitSuccessful) {
+  //     reset({
+  //         firstName: '',
+  //         lastName: '',
+  //         languageId: '',
+  //         proficiencyLevel: '',
+  //         schedule: '',
+  //         bio: '',
+  //       });    
+  //   }
+  //   }, [formState, submittedData, reset]);
   useEffect(() => {
     if (appUserId) {
         fetch("http://localhost:8080/user/" + appUserId, {
@@ -80,7 +80,16 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
     let retypedUser = {...newUserObj};
     
 
+      // firstName: newUserObj.firstName,
+      // lastName: newUserObj.lastName,
+      // language: newUserObj.languageId,
+      // proficiencyLevel: newUserObj.proficiencyLevel,
+      // bio: newUserObj.bio,
+      // schedule:newUserObj.schedule,
+    
+    
 
+    // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
     if (appUserId) {
       retypedUser["appUserId"] = appUserId;
