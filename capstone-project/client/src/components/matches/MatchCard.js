@@ -9,12 +9,10 @@ function MatchCard({ matchedUser, messageMatch }) {
             </p>
           </div>
           <div className="card-body">
-            <p className="mb-1">
-              {matchedUser.firstName} {matchedUser.lastName}
-            </p>
             <p>Language: {matchedUser.languageId}</p>
             <p>Proficiency: {matchedUser.proficiencyLevel}</p>
             <p>Availability: {matchedUser.schedule}</p>
+            <p>Bio: {matchedUser.bio}</p>
           </div>
           <div>
             <button
