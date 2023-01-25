@@ -16,6 +16,10 @@ public class ScheduleController {
     public ScheduleController(ScheduleService service) {
         this.service = service;
     }
+
+    @GetMapping("/{scheduleId}")
+    public Schedule findById(@PathVariable int scheduleId) {return service.findById(scheduleId);}
+
     @GetMapping("/schedule")
     public List<Schedule> findAllSchedules(){
         return service.findAll();

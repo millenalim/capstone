@@ -17,4 +17,6 @@ public class ScheduleService {
     public boolean deleteByKey(int appUserId,int scheduleId){return scheduleRepository.deleteByKey(appUserId,scheduleId);}
 
     public List<Schedule> findAll() {return scheduleRepository.findAll();}
+
+    public Schedule findById(int scheduleId) {return scheduleRepository.findById(scheduleId);}
 }
