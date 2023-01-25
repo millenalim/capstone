@@ -4,10 +4,10 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
+function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId,parseResponseMessage }) {
 
   const auth = useContext(AuthContext);
-
+  const appUserId = auth.currentUser.appUserId
   const {
     register,
     handleSubmit,
@@ -23,48 +23,69 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({
-          appUserId: '',
           firstName: '',
           lastName: '',
-          language: '',
-          proficiency: '',
+          languageId: '',
+          proficiencyLevel: '',
           schedule: '',
           bio: '',
         });    
     }
     }, [formState, submittedData, reset]);
-
   useEffect(() => {
-    console.log("asdf"+currentUser)
-    if (currentUser.appUserId > 0) {
-          setValue("appUserId", currentUser.appUserId);
-          setValue("firstName", currentUser.firstName);
-          setValue("lastName", currentUser.lastName);
-          setValue("language", currentUser.language);
-          setValue("proficiency", currentUser.proficiencyLevel);
-          setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
-          setValue("bio", currentUser.bio);
+    if (appUserId) {
+        fetch("http://localhost:8080/user/" + appUserId, {
+            headers: {
+                Authorization: "Bearer " + auth.currentUser.token
+            }
+        })
+        .then(response => parseResponseMessage(response))
+        .then(appUser => {
+
+            setValue("firstName", appUser.firstName);
+            setValue("lastName", appUser.lastName);
+            setValue("languageId", appUser.languageId);
+            setValue("bio", appUser.bio);
+            setValue("schedule",appUser.schedule);
+            setValue("proficiencyLevel", appUser.proficiencyLevel);
+           
+        })
+        .catch(error => {
+            // If a user tries to access an appUser by an ID that doesn't exist in the database...
+            if (error.message === "Unexpected end of JSON input") {
+                navigate("/404");
+            } else {
+                setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]);
+            }
+        });
     }
-  }, []);
+}, []);
+
+  // useEffect(() => {
+  //   console.log("asdf"+currentUser)
+  //   if (currentUser.appUserId > 0) {
+  //         setValue("appUserId", currentUser.appUserId);
+  //         setValue("firstName", currentUser.firstName);
+  //         setValue("lastName", currentUser.lastName);
+  //         setValue("language", currentUser.language);
+  //         setValue("proficiency", currentUser.proficiencyLevel);
+  //         setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
+  //         setValue("bio", currentUser.bio);
+  //   }
+  // }, []);
 
   const onSubmit = (newUserObj) => {
     
 
-    let retypedUser = {
-      appUserId: 3,
-      firstName: newUserObj.firstName,
-      lastName: newUserObj.lastName,
-      language: newUserObj.language,
-      proficiency: newUserObj.proficiency,
-      bio: newUserObj.bio,
-      schedule:newUserObj.schedule
-    }
-    console.log(retypedUser);
+    let retypedUser = {...newUserObj};
+    
 
-    // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
-    if (true) {
-      fetch("http://localhost:8080/create_profile/" + retypedUser.appUserId, {
+
+    if (appUserId) {
+      retypedUser["appUserId"] = appUserId;
+
+      fetch("http://localhost:8080/create_profile/" + appUserId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +101,6 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
             }
 
             setMessages([...messages, message]);
-            setCurrentUser({});
             navigate("/");
           } else {
             let message = {
@@ -149,7 +169,7 @@ return (
       className="form-select"
       type="text"
       id="profile-language"
-      {...register("language", { required: "Language is required." })}
+      {...register("languageId", { required: "Language is required." })}
     >
       <option value="1">Java</option>
       <option value="2">C</option>
@@ -169,7 +189,7 @@ return (
       className="form-select"
       type="text"
       id="profile-proficiency"
-      {...register("proficiency", {
+      {...register("proficiencyLevel", {
         required: "Proficiency level is required.",
       })}
     >
