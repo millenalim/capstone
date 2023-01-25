@@ -1,9 +1,11 @@
-
-import { useEffect } from "react";
-import UsersSingleCard from "./UsersSingleCard";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
+import UsersSingleCard from "./UsersSingleCard";
+import AuthContext from "../../context/AuthContext";
 
-function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages, setMessages }) {
+function CardFactory({ currentUser, setCurrentUser, appUser, setAppUser, messages, setMessages }) {
+
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -11,42 +13,44 @@ function CardFactory({ users, setAllUsers, currentUser, setCurrentUser, messages
     }, []);
 
     const getUser = () => {
-        fetch("http://localhost:8080/users")
+        fetch("http://localhost:8080/user/" + auth.currentUser.appUserId, {
+            headers: {
+                Authorization: "Bearer " + auth.currentUser.token
+            }
+        })
         .then(response => response.json())
-        .then(data => setAllUsers(data))
+        .then(data => data ? setAppUser(data) : null)
+        // .then(data => console.log(data))
         .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
     }
 
-    const editUser = (user) => {
-        setCurrentUser(user);
+    const editUser = (appUser) => {
+        setCurrentUser(appUser);
         navigate("/profile_form");
     }
 
-    const deleteUser = (user) => {
-        setCurrentUser(user);
-        navigate("/confirm-delete");
-    }
+    // const deleteUser = (user) => {
+    //     setCurrentUser(user);
+    //     navigate("/confirm-delete");
+    // }
 
     const createCardFactory = () => {
-        if (users.length > 0) {
-            let userCardArray = users.map(userObj => {
-                return (<UsersSingleCard key={userObj.username + "-" + userObj.firstName + "-" + userObj.lastName}
-                                user={userObj}
+        if (appUser) {
+                return (<UsersSingleCard key={appUser.appUserId + "-" + appUser.username}
                                 editUser={editUser}
-                                deleteUser={deleteUser}
+                                // deleteUser={deleteUser}
+                                user={appUser}
                                 currentUser={currentUser}
                                 setCurrentUser={setCurrentUser}
-                        />)
-            });
-            return userCardArray;
+                        />);
+            };
+            // console.log(userCardArray);
+            return null;
         }
-    }
-
   return (
     <>
-        <div className="row mt-4">{createCardFactory}</div>
+        <div className="row mt-4">{createCardFactory()}</div>
     </>
   )
 }
-
 export default CardFactory;

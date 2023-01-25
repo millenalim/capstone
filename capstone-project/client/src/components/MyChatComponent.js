@@ -20,10 +20,9 @@ function MyChatComponent() {
       });
 
       const otherUser = new Talk.User({
-        id: '2',
-        name: 'Jessica Wells',
-        email: 'jessicawells@example.com',
-        photoUrl: 'jessica.jpeg',
+        id: '4',
+        name: 'John Williams',
+        email: 'john@williams.com',
         welcomeMessage: 'Hello!',
         role: 'default',
       });
