@@ -34,8 +34,12 @@ function App() {
     }
   }, []);
 
+
     const login = (token) => {
-      const { sub: username, authorities: authoritiesString } = jwtDecode(token);
+
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY,token)
+
+      const { sub: username, authorities: authoritiesString,app_user_id: appUserId } = jwtDecode(token);
 
       const roles = authoritiesString.split(',');
 
@@ -43,6 +47,7 @@ function App() {
         username,
         roles,
         token,
+        appUserId,
         hasRole(role) {
           return this.roles.includes(role);
         }
