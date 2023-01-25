@@ -176,7 +176,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 return;
             }
 
-//            appUser.getProficiency().setProficiencyLevelId(keyHolder.getKey().intValue());
+//            appUser.getProficiencyLevel().setProficiencyLevelId(keyHolder.getKey().intValue());
 
 
 
@@ -189,10 +189,10 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
 
         boolean updated = false;
 
-        List<Schedule> scheduleList = appUser.getSchedule();
-        for (Schedule schedule : scheduleList) {
+        List<Integer> scheduleList = appUser.getSchedule();
+        for (Integer scheduleId : scheduleList) {
             final String sql = "insert into app_user_schedule (app_user_id, schedule_id ) values (?, ?);";
-            updated = jdbcTemplate.update(sql, appUser.getAppUserId(), schedule.getScheduleId()) > 0;
+            updated = jdbcTemplate.update(sql, appUser.getAppUserId(), scheduleId) > 0;
         }
         return updated;
     }
@@ -264,11 +264,12 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 + "inner join `language` l on l.language_id = aul.language_id "
                 + "where aul.app_user_id = ?;";
 
-        var proficiency = jdbcTemplate.queryForObject(sql, new ProficiencyMapper(), appUser.getAppUserId());
+         var proficiency= jdbcTemplate.query(sql, new ProficiencyMapper(), appUser.getAppUserId()).stream().findFirst();
 
-        if(proficiency != null) {
-            appUser.setProficiencyLevel(proficiency.getProficiencyLevel());
-            appUser.setLanguageId(proficiency.getLanguage().getLanguageId());
+
+        if(proficiency.isPresent()) {
+            appUser.setProficiencyLevel(proficiency.get().getProficiencyLevel());
+            appUser.setLanguageId(proficiency.get().getLanguage().getLanguageId());
         }
     }
 
@@ -281,7 +282,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 + "inner join app_user_schedule aus on s.schedule_id = aus.schedule_id "
                 + "where aus.app_user_id = ?;";
         var schedule = jdbcTemplate.query(sql, new ScheduleMapper(), appUser.getAppUserId());
-        appUser.setSchedule(schedule);
+        var scheduleIds = schedule.stream().map(s->s.getScheduleId()).collect(toList());
+        appUser.setSchedule(scheduleIds);
     }
 
     private void addDetails(AppUser appUser) {

@@ -18,10 +18,10 @@ public class AppUser implements UserDetails {
     private String password;
     private String bio;
     private boolean enabled;
-    private List<Schedule> schedule;
-    private int languageId;
+    private List<Integer> schedule;
+    private int languageId =0;
 //    private Proficiency proficiency;
-    private String proficiencyLevel;
+    private String proficiencyLevel ="";
     private Collection<GrantedAuthority> authorities = new ArrayList<>();
 
     //Builder pattern
@@ -143,11 +143,11 @@ public class AppUser implements UserDetails {
     //Outside classes - getters and setters
 
 
-    public List<Schedule> getSchedule() {
+    public List<Integer> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<Schedule> schedule) {
+    public void setSchedule(List<Integer> schedule) {
         this.schedule = schedule;
     }
 

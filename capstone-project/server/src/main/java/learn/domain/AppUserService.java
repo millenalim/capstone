@@ -138,7 +138,7 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    private Result<AppUser> validateFields(String firstName, String lastName, String bio, String proficiency, List<Schedule> schedule) {
+    private Result<AppUser> validateFields(String firstName, String lastName, String bio, String proficiency, List<Integer> schedule) {
         Result<AppUser> result = new Result<>();
         if (firstName.isBlank() || firstName.isEmpty()) {
             result.addMessage(ActionStatus.INVALID, "First name is required");
