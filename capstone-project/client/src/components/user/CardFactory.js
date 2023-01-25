@@ -35,22 +35,18 @@ function CardFactory({ currentUser, setCurrentUser, appUser, setAppUser, message
     // }
 
     const createCardFactory = () => {
-        if (true) {
-            let userCardArray = appUser.map(userObj => {
-                return (<UsersSingleCard key={userObj.appUserId + "-" + userObj.username}
-                                // user={userObj}
+        if (appUser) {
+                return (<UsersSingleCard key={appUser.appUserId + "-" + appUser.username}
                                 editUser={editUser}
                                 // deleteUser={deleteUser}
-                                user={userObj}
+                                user={appUser}
                                 currentUser={currentUser}
                                 setCurrentUser={setCurrentUser}
-                        />)
-            });
-            console.log(userCardArray);
-            return userCardArray;
+                        />);
+            };
+            // console.log(userCardArray);
+            return null;
         }
-    }
-
   return (
     <>
         <div className="row mt-4">{createCardFactory()}</div>
