@@ -1,12 +1,24 @@
 import { useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+const USER_DEFAULT = {
+    firstName: '',
+    lastName: '',
+    languageId:'',
+    schedule:'',
+    bio:'',
+    proficiencyLevel:''
 
-function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
+};
+
+function ProfileForm() {
+    const [currentUser, setCurrentUser] = useState(USER_DEFAULT);
+    const [messages, setMessages] = useState([]);
 
   const auth = useContext(AuthContext);
+  const {appUserId} = useParams();
 
   const {
     register,
@@ -19,52 +31,62 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
   } = useForm();
   
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset({
-          appUserId: '',
-          firstName: '',
-          lastName: '',
-          language: '',
-          proficiency: '',
-          schedule: '',
-          bio: '',
-        });    
+    useEffect(() => {
+        if(appUserId){
+            fetch(`http://localhost:8080/user/${appUserId}`)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    return Promise.reject(`Unexpected status code: ${response.status}`);
+                }
+            })
+            .then(data => setCurrentUser(data))
+            .catch(console.log);
     }
-    }, [formState, submittedData, reset]);
 
-  useEffect(() => {
-    console.log("asdf"+currentUser)
-    if (currentUser.appUserId > 0) {
-          setValue("appUserId", currentUser.appUserId);
-          setValue("firstName", currentUser.firstName);
-          setValue("lastName", currentUser.lastName);
-          setValue("language", currentUser.language);
-          setValue("proficiency", currentUser.proficiencyLevel);
-          setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
-          setValue("bio", currentUser.bio);
-    }
-  }, []);
+}, [appUserId]);
+//   useEffect(() => {
+//     if (formState.isSubmitSuccessful) {
+//       reset({
+//           appUserId: '',
+//           firstName: '',
+//           lastName: '',
+//           language: '',
+//           proficiency: '',
+//           schedule: '',
+//           bio: '',
+//         });    
+//     }
+//     }, [formState, submittedData, reset]);
+
+//   useEffect(() => {
+//     if (currentUser.appUserId > 0) {
+//           setValue("appUserId", currentUser.appUserId);
+//           setValue("firstName", currentUser.firstName);
+//           setValue("lastName", currentUser.lastName);
+//           setValue("language", currentUser.language);
+//           setValue("proficiency", currentUser.proficiencyLevel);
+//           setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
+//           setValue("bio", currentUser.bio);
+//     }
+//   }, []);
 
   const onSubmit = (newUserObj) => {
-    
 
     let retypedUser = {
-      appUserId: 3,
+      appUserId: newUserObj.appUserId,
       firstName: newUserObj.firstName,
       lastName: newUserObj.lastName,
       language: newUserObj.language,
       proficiency: newUserObj.proficiency,
       bio: newUserObj.bio,
-      schedule:newUserObj.schedule
     }
-    console.log(retypedUser);
 
-    // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
+    newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
-    if (true) {
-      fetch("http://localhost:8080/create_profile/" + retypedUser.appUserId, {
+    if (currentUser.appUserId > 0) {
+      fetch("http://localhost:8080/create_profile/" + currentUser.appUserId, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -218,4 +240,4 @@ return (
 );
 }
 
-export default ProfileForm;
+export default ProfileFormTest;
