@@ -1,13 +1,12 @@
 import { useEffect, useContext } from 'react'
-import { useParams, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import AuthContext from '../../context/AuthContext';
 import MatchCard from './MatchCard';
 
-function MatchCardFactory({ currentUser, matches, setMatches, setCurrentMatch, currentMatch, messages, setMessages, makeId, parseResponseMessage}) {
+function MatchCardFactory({ currentUser, setCurrentUser,  users, setAllUsers, messages, setMessages, makeId, parseResponseMessage}) {
 
     const navigate = useNavigate();
 
-    // const { appUserId } = useParams()
 
     const auth = useContext(AuthContext);
 
@@ -17,27 +16,34 @@ function MatchCardFactory({ currentUser, matches, setMatches, setCurrentMatch, c
 
 
     const getMatches = () => {
-        fetch("http://localhost:8080/discover/")
-        .then(error => console.error(error))
+        fetch("http://localhost:8080/discover/" + auth.currentUser.appUserId, {
+            headers: {
+                Authorization: "Bearer " + auth.currentUser.token
+            }
+        })
+        // .then(error => console.error(error))
         // .then(response => console.log(response))
-        .then(response => parseResponseMessage(response))
-        .then(data => data ? setMatches(data) : null)
+        // .then(response => parseResponseMessage(response))
+        .then(response => response.json())
+        .then(data => data ? setAllUsers(data) : null)
+        // .then(data => console.log(data))
         .catch(error => setMessages([...messages, { id: makeId(), type: "failure", text: error.message }])); 
     }
 
-    const messageMatch = (match) => {
-        setCurrentMatch(match);
+    const messageMatch = (users) => {
+        setCurrentUser(users);
         navigate("/messages");
     }
 
     const createCardFactory = () => {
-        if (matches.length > 0) {
-            let matchCardArray = matches.map(matchObj => {
+        if (users.length > 0) {
+            let matchCardArray = users.map(matchObj => {
                 return (<MatchCard key={matchObj.appUserId + "-" + matchObj.username}
-                                    match={matchObj}
+                                    currentUser={currentUser}
+                                    setCurrentUser={setCurrentUser}
                                     messageMatch={messageMatch}
-                                    currentMatch={currentMatch}
-                                    setCurrentMatch={setCurrentMatch}
+                                    matchedUser = {matchObj}
+                                    
                 />)
             });
             console.log(matchCardArray)

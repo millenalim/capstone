@@ -37,7 +37,7 @@ function NavBar({ currentUser }) {
                       </NavLink>
                     </li>
                     <li className="nav-item me-5">
-                      <NavLink to= {`/discover/${currentUser.appUserId}`} className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                      <NavLink to="/discover" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Discover
                       </NavLink>
                     </li>

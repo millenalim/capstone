@@ -171,10 +171,9 @@ function App() {
             <Route path="/discover" element={
               <MatchCardFactory
               currentUser={currentUser}
-              matches={matches} 
-              setMatches={setMatches} 
-              setCurrentMatch={setCurrentMatch}
-              currentMatch={currentMatch} 
+              setCurrentUser={setCurrentMatch}
+              users={users}
+              setAllUsers={setAllUsers}
               messages={messages} 
               setMessages={setMessages}
               makeId={makeId}

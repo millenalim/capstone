@@ -63,13 +63,8 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages }) {
 
     // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
-<<<<<<< HEAD
-    if (currentUser.appUserId > 0) {
-      fetch("http://localhost:8080/create_profile", {
-=======
     if (true) {
       fetch("http://localhost:8080/create_profile/" + retypedUser.appUserId, {
->>>>>>> 317300ebf496ebd11f21fc1de01910b96956e137
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

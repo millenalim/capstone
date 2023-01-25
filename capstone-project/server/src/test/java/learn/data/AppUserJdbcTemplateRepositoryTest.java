@@ -79,7 +79,7 @@ class AppUserJdbcTemplateRepositoryTest {
         firstUser.setProficiencyLevel("Beginner");
 //        firstUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
         firstUser.setLanguageId(1);
-        firstUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+//        firstUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser firstProfileAdded = repository.createProfile(firstUser);
 
         AppUser secondUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
@@ -94,7 +94,7 @@ class AppUserJdbcTemplateRepositoryTest {
         secondUser.setProficiencyLevel("Expert");
 //        secondUser.setProficiency(new Proficiency(1,"Expert", 5,new Language(1,"Java")));
         secondUser.setLanguageId(1);
-        secondUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+//        secondUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser secondProfileAdded = repository.createProfile(secondUser);
 
         AppUser thirdUser = new AppUser(0,"fakeprofile-" +new Random().nextInt(1000) +"@user.com",
@@ -109,7 +109,7 @@ class AppUserJdbcTemplateRepositoryTest {
         thirdUser.setProficiencyLevel("Beginner");
         thirdUser.setLanguageId(2);
 //        thirdUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(2,"C")));
-        thirdUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+//        thirdUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser thirdProfileAdded = repository.createProfile(thirdUser);
 
         List<AppUser> shouldFindMatch = repository.displayMatches(firstProfileAdded.getAppUserId());
@@ -158,7 +158,7 @@ class AppUserJdbcTemplateRepositoryTest {
         newUser.setProficiencyLevel("Beginner");
         newUser.setLanguageId(1);
 //        newUser.setProficiency(new Proficiency(1,"Beginner", 5,new Language(1,"Java")));
-        newUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+//        newUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         AppUser profileAdded = repository.createProfile(newUser);
         assertNotNull(profileAdded);
 
@@ -168,7 +168,7 @@ class AppUserJdbcTemplateRepositoryTest {
     void shouldUpdateSchedule() {
 
         AppUser testUser = repository.findById(5);
-        testUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
+//        testUser.setSchedule(List.of(new Schedule(1, DayOfWeek.MONDAY, "Morning")));
         assertTrue(repository.updateSchedule(testUser));
 
     }
