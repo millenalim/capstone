@@ -79,13 +79,13 @@ insert into app_user (username, password_hash, enabled)
     ('morgan@oliver.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1);
     -- ('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 1);
 
-insert into app_user (username, password_hash, first_name, last_name, enabled)
+insert into app_user (username, password_hash, first_name, last_name, bio, enabled)
 	values 
-	('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Millena', 'Lim', 1),
-    ('john@williams.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'John', 'Williams',1),
-    ('sarah@ryder.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Sarah', 'Ryder', 1),
-    ('gia@tanner.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Gia','Tanner',1),
-    ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson',1);
+	('millena@lim.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Millena', 'Lim', 'Here to meet someone who loves coding as much as me!', 1),
+    ('john@williams.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'John', 'Williams', 'Java is love. Java is life.', 1),
+    ('sarah@ryder.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Sarah', 'Ryder', 'I have no idea what I am doing.', 1),
+    ('gia@tanner.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Gia','Tanner','Solving code and taking names one day at a time.',1),
+    ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson','I thought this was ChristianMingle',1);
     
     
 insert into app_user_role
@@ -139,8 +139,8 @@ insert into `language` (`language`) values
 	("Intermediate",2,2),
     ("Expert",3,3),
     ("Expert",4,3),
-    ("Intemediate",5,2),
-    ("Intermediate",6,7),
+    ("Expert",5,3),
+    ("Expert",6,3),
     ("Expert",7,5);
     
     
@@ -154,9 +154,9 @@ insert into app_user_schedule (app_user_id, schedule_id ) values
     (2,2),
     (3,10),
     (4,10),
-    (5,18),
-    (6,18),
-    (7,12);
+    (5,10),
+    (6,10),
+    (7,10);
     
     
 

@@ -29,4 +29,12 @@ public class ScheduleJdbcTemplateRepository implements ScheduleRepository {
                 + "from schedule;";
         return jdbcTemplate.query(sql, new ScheduleMapper());
     }
+    @Override
+    public Schedule findById(int scheduleId){
+        final String sql = "select schedule_id, day_of_week, availability "
+                + "from schedule "
+                + "where schedule_id = ?;";
+        return jdbcTemplate.query(sql,new ScheduleMapper(),scheduleId).stream()
+                .findFirst().orElse(null);
+    }
 }

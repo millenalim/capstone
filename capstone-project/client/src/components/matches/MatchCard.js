@@ -12,6 +12,7 @@ function MatchCard({ matchedUser, messageMatch }) {
             <p>Language: {matchedUser.languageId}</p>
             <p>Proficiency: {matchedUser.proficiencyLevel}</p>
             <p>Availability: {matchedUser.schedule}</p>
+            <p>Bio: {matchedUser.bio}</p>
           </div>
           <div>
             <button
