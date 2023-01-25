@@ -158,7 +158,7 @@ function App() {
               />
             }/>
 
-            <Route path="/profile_form" element={
+            {/* <Route path="/profile_form" element={
               <ProfileForm 
               messages={messages}
               setMessages={setMessages}
@@ -166,14 +166,14 @@ function App() {
               makeId={makeId}
               parseResponseMessage={parseResponseMessage}
               />
-            }/>
+            }/> */}
 
             <Route path="/discover" element={
               <MatchCardFactory
-              matches={matches} 
-              setMatches={setMatches} 
-              setCurrentMatch={setCurrentMatch}
-              currentMatch={currentMatch} 
+              currentUser={currentUser}
+              setCurrentUser={setCurrentMatch}
+              users={users}
+              setAllUsers={setAllUsers}
               messages={messages} 
               setMessages={setMessages}
               makeId={makeId}
@@ -190,7 +190,7 @@ function App() {
               currentUser ? <UsersSingleCard currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <NotFound />
             }/>
 
-            <Route path="test_form" element={
+            <Route path="/profile_form" element={
               currentUser ? <ProfileForm  currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
             }/>
             

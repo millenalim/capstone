@@ -100,7 +100,13 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository {
                 "and app_user_language.proficiency_level in (select app_user_language.proficiency_level from app_user_language " +
                 "where app_user_language.app_user_id = ?) " +
                 "and app_user.app_user_id <> ?;";
-        return jdbcTemplate.query(sql, new AppUserMapper(), appUserId, appUserId, appUserId, appUserId);
+
+
+        List<AppUser> appUserList = jdbcTemplate.query(sql, new AppUserMapper(), appUserId, appUserId, appUserId, appUserId);
+        for(AppUser appUser : appUserList) {
+            addDetails(appUser);
+        }
+        return appUserList;
 
     }
 

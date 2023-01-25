@@ -20,7 +20,7 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(userData)
     })
       .then((response) => {
         if (response.status === 201) {
