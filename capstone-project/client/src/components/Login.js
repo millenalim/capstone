@@ -54,10 +54,10 @@ function Login({ messages, setMessages, makeId, isPasswordComplex}) {
 
     return (
         <div className="row">
-            <div className="col-lg-4 col-md-6 text-white">
-                <h3>Login</h3>
+            <div className="col-12 col-sm-8 col-md-6 col-lg-4 offset-sm-4 offset-sd-3 offset-lg-4 text-white">
+                <h1 class="mb-3 text-center">Login</h1>
                 <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <label className="form-label mt-3" htmlFor="user-email">Email</label>
+                <label className="form-label mt-3" htmlFor="user-email">Email:</label>
                     <input
                         className="form-control"
                         type="email"
@@ -73,7 +73,7 @@ function Login({ messages, setMessages, makeId, isPasswordComplex}) {
                     />
                     <p className="form-error-message">{errors.username?.message}</p>
 
-                    <label className="form-label mt-3" htmlFor="user-password">Password</label>
+                    <label className="form-label mt-3" htmlFor="user-password">Password:</label>
                     <input 
                         className="form-control" 
                         type="password" 

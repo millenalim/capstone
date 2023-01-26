@@ -9,11 +9,12 @@ function UsersSingleCard({ user, editUser }) {
                         <p className="h3">{user.firstName + " " + user.lastName}</p>
                     </div>
                 <div className="card-body">
-                    <p>Language: {user.languageId}</p>
-                    <p>Proficiency: {user.proficiencyLevel}</p>
-                    <p>Availability: {user.schedule}</p>
+                    <p><span className="fw-bold">Language:</span> {user.languageId}</p>
+                    <p><span className="fw-bold">Proficiency:</span> {user.proficiencyLevel}</p>
+                    <p><span className="fw-bold">Availability:</span> {user.schedule}</p>
+                    <p><span className="fw-bold">Bio:</span> {user.bio}</p>
                 </div>
-                <div>
+                <div className="mb-3 col text-center">
                  <button type="button" className="btn btn-primary" onClick={() => editUser(user)}>Edit</button>
                 </div>
                 {/* <div className="btn-toolbar position-relative py-4" role="toolbar">

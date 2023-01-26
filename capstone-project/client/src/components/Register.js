@@ -77,8 +77,8 @@ function Register({ messages, setMessages, makeId, isPasswordComplex}) {
 
   return (
     <div className="row">
-      <div className="col-lg-4 col-md-6 text-white">
-        <h3>Sign Up</h3>
+      <div className="col-12 col-sm-8 col-md-6 col-lg-4 offset-sm-4 offset-sd-3 offset-lg-4 text-white">
+        <h1 className="mb-3 text-center">Sign Up</h1>
         <form id="login-form" onSubmit={handleSubmit(onSubmit)}>
           <label className="form-label mt-3" htmlFor="user-email">
             Email
