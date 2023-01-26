@@ -1,10 +1,11 @@
 package learn.data;
 
 import learn.data.mappers.LanguageMapper;
-import learn.data.mappers.ScheduleMapper;
 import learn.models.Language;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class LanguageJdbcTemplateRepository implements LanguageRepository{
@@ -12,6 +13,14 @@ public class LanguageJdbcTemplateRepository implements LanguageRepository{
 
     public LanguageJdbcTemplateRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+
+    @Override
+    public List<Language> findAll(){
+        final String sql = "select language_id, `language` "
+                + "from `language`;";
+        return jdbcTemplate.query(sql,new LanguageMapper());
     }
 
     @Override

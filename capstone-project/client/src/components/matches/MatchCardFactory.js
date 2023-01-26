@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useNavigate } from 'react-router'
 import AuthContext from '../../context/AuthContext';
 import MatchCard from './MatchCard';
@@ -7,6 +7,10 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
 
     const navigate = useNavigate();
 
+    const [schedules, setSchedules] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    const [updatedMatches, setUpdatedMatches] = useState([]);
+    const [updatedLanguageMatches, setLanguageMatches] = useState([]);
 
     const auth = useContext(AuthContext);
 
@@ -14,23 +18,49 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
         getMatches();
     }, []);
 
-    async function getLanguage(languageId)  {
-        let language = await fetch("http://localhost:8080/language/" + languageId)
+    useEffect(() => {
+        getSchedules();
+        getLanguages();
+    }, []);
+    
 
-            .then(response => response.json())
-            .then(data => {
-                return data;
-            });
-        return language;
+    useEffect(() => {
+        let updatedUsers = users.map(user => {
+            let updatedUser = {...user};
+            let schedule = {};
+            if (schedules.length > 0) {
+                schedule = schedules.filter(schedule => schedule.scheduleId === user.schedule[0])[0];
+            }
+            updatedUser["scheduleName"] = schedule;
+            return updatedUser;
+        });
+        setUpdatedMatches(updatedUsers);
+    }, [schedules]);
+
+    useEffect(() => {
+        let updatedUsers = users.map(user => {
+            let updatedUser = {...user};
+            let language = {};
+            if (languages.length > 0) {
+                language = languages.filter(language => language.languageId === user.languageId)[0];
+            }
+            updatedUser["language"] = language;
+            return updatedUser;
+        });
+        setLanguageMatches(updatedUsers);
+    }, [languages]);
+
+
+    function getSchedules() {
+        fetch("http://localhost:8080/schedule/")
+        .then(response => response.json())
+        .then(data => setSchedules(data));
     }
-    async function getSchedule(scheduleId) {
-        let schedule = await fetch("http://localhost:8080/schedule/" + scheduleId)
 
-            .then(response => response.json())
-            .then(data => {
-                return data;
-            });
-        return schedule;
+    function getLanguages() {
+        fetch("http://localhost:8080/language/")
+        .then(response => response.json())
+        .then(data => setLanguages(data))
     }
 
     const getMatches = () => {
@@ -39,24 +69,9 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
                 Authorization: "Bearer " + auth.currentUser.token
             }
         })
-            // .then(error => console.error(error))
-            // .then(response => console.log(response))
-            // .then(response => parseResponseMessage(response))
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    let nextUser = { ...data };
-                    let language = getLanguage(data.languageId);
-                    let schedule = getSchedule(data.scheduleId);
-                    nextUser["language"] = language;
-                    nextUser["scheduleName"] = schedule;
-                    setAllUsers(nextUser);
-                }
-
-                else { return null; }
-            })
-            // .then(data => console.log(data))
-            .catch(error => setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
+        .then(response => response.json())
+        .then(data => data ? setAllUsers(data) : null)
+        .catch(error => setMessages([...messages, { id: makeId(), type: "failure", text: error.message }]));
     }
 
     const messageMatch = (users) => {
@@ -65,17 +80,18 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
     }
 
     const createCardFactory = () => {
-        if (users.length > 0) {
-            let matchCardArray = users.map(matchObj => {
+        if (updatedMatches.length > 0) {
+            let matchCardArray = updatedMatches.map(matchObj => {
                 return (<MatchCard key={matchObj.appUserId + "-" + matchObj.username}
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     messageMatch={messageMatch}
                     matchedUser={matchObj}
+                    programmingLanguage={updatedLanguageMatches[0]}
 
                 />)
             });
-            console.log(matchCardArray)
+            
             return matchCardArray;
         }
     }

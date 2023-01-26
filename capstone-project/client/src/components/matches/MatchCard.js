@@ -1,4 +1,4 @@
-function MatchCard({ matchedUser, messageMatch }) {
+function MatchCard({ matchedUser, messageMatch,programmingLanguage }) {
   return (
     <>
       <div className="col-4">
@@ -8,15 +8,11 @@ function MatchCard({ matchedUser, messageMatch }) {
               {matchedUser.firstName + " " + matchedUser.lastName}
             </p>
           </div>
-<<<<<<< HEAD
+
           <div className="card-body">
-            <p>Language: {matchedUser.language.language}</p>
-=======
-          <div className="card-body card text-center">
-            <p>Language: {matchedUser.languageId}</p>
->>>>>>> 2e5d9a50f11a9516ec41812491058963bdad9313
+            <p>Language: {programmingLanguage.language.language}</p>
             <p>Proficiency: {matchedUser.proficiencyLevel}</p>
-            <p>Availability: {matchedUser.scheduleName.availbility + matchedUser.scheduleName.dayOfWeek}</p>
+            <p>Availability: {matchedUser.scheduleName.dayOfWeek +"-"+ matchedUser.scheduleName.availability}</p>
             <p>Bio: {matchedUser.bio}</p>
           </div>
           <div className="col text-center">

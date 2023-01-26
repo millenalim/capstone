@@ -94,6 +94,10 @@ Content-Type: application/json
 }
 ###
 GET {{url}}/discover/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibWlsbGVuYUBsaW0uY29tIiwiYXBwX3VzZXJfaWQiOjMsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3NDc0OTE4MH0.9flhTX4BN_fRXJuLk-gQsyHwLCnE-9Hvaz0jTqbar6Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctc2FmYXJpIiwic3ViIjoibWlsbGVuYUBsaW0uY29tIiwiYXBwX3VzZXJfaWQiOjMsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3NDc2OTg0OX0.hkTsugnOTRqZAKAUy9YNMBpqYa9aQ7Wu4ULzC5x-1kA
 
 ###
+GET {{url}}/language/3
+
+###
+GET {{url}}/schedule/3
