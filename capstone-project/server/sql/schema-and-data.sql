@@ -86,7 +86,7 @@ insert into app_user (username, password_hash, first_name, last_name, bio, enabl
     ('sarah@ryder.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Sarah', 'Ryder', 'I have no idea what I am doing.', 1),
     ('gia@tanner.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Gia','Tanner','Solving code and taking names one day at a time.',1),
     ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson','I thought this was ChristianMingle',1),
-    ('janie@summers.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Janie', 'Summers', 'Wanna master Java by the end of the year', 1),
+    ('janie@summers.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Janie', 'Summers', 'Sleep is for the weak', 1),
     ('diane@blanchet.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Diane', 'Blanchet', 'Thought coding would be easy. I was wrong', 1),
     ('alba@zevallos.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Alba', 'Zevallos', 'Help. My rubber duckie is now talking back to me', 1),
     ('ida@kou.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Ida', 'Kou', 'Hi! So excited to start building projects with you!', 1),
@@ -149,7 +149,6 @@ insert into `language` (`language`) values
     ('PHP'),
     ('SQL');
     
-    describe app_user_language;
     insert into app_user_language (proficiency_level, app_user_id, language_id)  values
     ("Beginner", 1, 1),
 	("Intermediate",2,2),
@@ -158,19 +157,16 @@ insert into `language` (`language`) values
     ("Expert",5,3),
     ("Expert",6,3),
     ("Beginner",7,5),
-    ("Beginner",8,5),
+    ("Expert",8,3),
     ("Beginner",9,5),
-    ("Beginner",10,5),
+    ("Expert",10,3),
     ("Expert", 11,3),
     ("Expert",12,3),
     ("Beginner", 13,5),
     ("Beginner", 14, 5),
-    ("Expert",15,3);
+    ("Beginner",15,3);
     
     
-    
-describe app_user_schedule;
-
 insert into app_user_schedule (app_user_id, schedule_id ) values 
    (1,1),
     (1,2),
