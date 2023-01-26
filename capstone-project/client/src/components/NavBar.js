@@ -51,11 +51,11 @@ function NavBar({ currentUser }) {
                         Profile
                       </NavLink>
                     </li>
-                    <li className="nav-item me-5">
+                    {/* <li className="nav-item me-5">
                       <NavLink to="/profile_form" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         Test Form
                       </NavLink>
-                    </li>
+                    </li> */}
                   </>
                 ) : null}
               {!auth.currentUser ? 

@@ -183,8 +183,8 @@ return (
     >
       <option value="1">Java</option>
       <option value="2">C</option>
-      <option value="3">C#</option>
-      <option value="4">C++</option>
+      <option value="3">C++</option>
+      <option value="4">C#</option>
       <option value="5">Javascript</option>
       <option value="6">Python</option>
       <option value="7">PHP</option>
