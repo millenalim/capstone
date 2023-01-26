@@ -24,6 +24,8 @@ function App() {
   const [users, setAllUsers] = useState([]);
   const [appUser, setAppUser] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [schedules, setSchedules] = useState([]);
+  const [languages, setLanguages] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
@@ -33,39 +35,44 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    getSchedules();
+    getLanguages();
+  }, []);
 
-    const login = (token) => {
 
-      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY,token)
+  const login = (token) => {
 
-      const { sub: username, authorities: authoritiesString,app_user_id: appUserId } = jwtDecode(token);
+    localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, token)
 
-      const roles = authoritiesString.split(',');
+    const { sub: username, authorities: authoritiesString, app_user_id: appUserId } = jwtDecode(token);
 
-      const user = {
-        username,
-        roles,
-        token,
-        appUserId,
-        hasRole(role) {
-          return this.roles.includes(role);
-        }
-      };
+    const roles = authoritiesString.split(',');
 
-      console.log(user);
+    const user = {
+      username,
+      roles,
+      token,
+      appUserId,
+      hasRole(role) {
+        return this.roles.includes(role);
+      }
+    };
 
-      setCurrentUser(user);
+    console.log(user);
 
-      return user;
-    }
+    setCurrentUser(user);
 
-    const logout = () => {
-      setCurrentUser(null);
-      localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
-    }
+    return user;
+  }
+
+  const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+  }
 
   const auth = {
-    currentUser: currentUser ? {...currentUser} : null,
+    currentUser: currentUser ? { ...currentUser } : null,
     login,
     logout
   }
@@ -76,7 +83,7 @@ function App() {
     let others = 0;
 
     const characters = [...password];
-  
+
     for (let c of characters) {
       const charCode = c.charCodeAt(0);
 
@@ -95,7 +102,7 @@ function App() {
   const makeId = () => {
     let id = "";
     let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    for ( var i = 0; i < 12; i++ ) {
+    for (var i = 0; i < 12; i++) {
       id += characters.charAt(Math.floor(Math.random() * 36));
     }
     return id;
@@ -103,28 +110,40 @@ function App() {
 
   const parseResponseMessage = (response, userData = "", method = "changed") => {
     switch (response.status) {
-      case 200: 
+      case 200:
         return response.json();
 
-      case 201: 
+      case 201:
         return response.json();
 
       case 204:
-        setMessages([...messages, { id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} was successfully ${method}.`}]);
+        setMessages([...messages, { id: makeId(), type: "success", text: `User ${userData.firstName} ${userData.lastName} was successfully ${method}.` }]);
         return null;
-      
+
       case 404:
-        setMessages([...messages, { id: makeId(), type: "failure", text: "Users could not be found."}]);
+        setMessages([...messages, { id: makeId(), type: "failure", text: "Users could not be found." }]);
         return null;
-      
+
       case 409:
-        setMessages([...messages, { id: makeId(), type: "failure", text: "User data does not match. Request could not be completed."}]);
+        setMessages([...messages, { id: makeId(), type: "failure", text: "User data does not match. Request could not be completed." }]);
         return null;
 
       default:
-        setMessages([...messages, { id: makeId(), type: "failure", text: "Something went wrong. Please try again later."}]);
+        setMessages([...messages, { id: makeId(), type: "failure", text: "Something went wrong. Please try again later." }]);
         return null;
     }
+  }
+
+  function getSchedules() {
+    fetch("http://localhost:8080/schedule/")
+      .then(response => response.json())
+      .then(data => setSchedules(data));
+  }
+
+  function getLanguages() {
+    fetch("http://localhost:8080/language/")
+      .then(response => response.json())
+      .then(data => setLanguages(data))
   }
 
   return (
@@ -133,80 +152,82 @@ function App() {
         <NavBar />
         <div className="container pt-5 mt-5">
           <MessageFactory messages={messages} setMessages={setMessages} />
-            <Routes>
-              <Route path="/" element={<Home />} />
+          <Routes>
+            <Route path="/" element={<Home />} />
             {/* If logged in as user, go to home page, if not, go to login page */}
             <Route path="/login" element={
-              currentUser ? <Navigate to={"/"} /> : 
-              <Login 
-                // setCurrentUser={setCurrentUser}
-                messages={messages}
-                setMessages={setMessages}
-                makeId={makeId}
-                isPasswordComplex={isPasswordComplex}
+              currentUser ? <Navigate to={"/"} /> :
+                <Login
+                  // setCurrentUser={setCurrentUser}
+                  messages={messages}
+                  setMessages={setMessages}
+                  makeId={makeId}
+                  isPasswordComplex={isPasswordComplex}
                 />
-            }/>
+            } />
 
             <Route path="/signup" element={
-              currentUser ? <Navigate to="/" /> : 
-              <Register
-                messages={messages}
-                setMessages={setMessages}
-                makeId={makeId}
-                isPasswordComplex={isPasswordComplex}
-              />
-            }/>
+              currentUser ? <Navigate to="/" /> :
+                <Register
+                  messages={messages}
+                  setMessages={setMessages}
+                  makeId={makeId}
+                  isPasswordComplex={isPasswordComplex}
+                />
+            } />
 
             <Route path="/profile_form" element={
-              <ProfileForm 
-              messages={messages}
-              setMessages={setMessages}
-              currentUser={currentUser}
-              makeId={makeId}
-              parseResponseMessage={parseResponseMessage}
+              <ProfileForm
+                messages={messages}
+                setMessages={setMessages}
+                currentUser={currentUser}
+                makeId={makeId}
+                parseResponseMessage={parseResponseMessage}
               />
-            }/>
+            } />
 
             <Route path="/discover" element={
               <MatchCardFactory
-              currentUser={currentUser}
-              setCurrentUser={setCurrentUser}
-              users={users}
-              setAllUsers={setAllUsers}
-              messages={messages} 
-              setMessages={setMessages}
-              makeId={makeId}
-              parseResponseMessage={parseResponseMessage}
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                users={users}
+                setAllUsers={setAllUsers}
+                messages={messages}
+                setMessages={setMessages}
+                makeId={makeId}
+                parseResponseMessage={parseResponseMessage}
+                schedules={schedules}
+                languages={languages}
               />
-            }/>
+            } />
 
             <Route path="/messages" element={
-              <MyChatComponent/>
+              <MyChatComponent />
             } />
 
             <Route path="/profile" element={
-              <CardFactory 
-              currentUser={currentUser} 
-              setCurrentUser={setCurrentUser}
-              appUser={appUser}
-              setAppUser={setAppUser}
-              messages={messages}
-              setMessages={setMessages} />
-            }/>
+              <CardFactory
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                appUser={appUser}
+                setAppUser={setAppUser}
+                messages={messages}
+                setMessages={setMessages} />
+            } />
 
 
             {/* <Route path="/profile_form" element={
               currentUser ? <ProfileForm  currentUser={currentUser} setCurrentUser={setCurrentUser} messages={messages} setMessages={setMessages} /> : <NotFound />
             }/> */}
 
-            
+
             {/* If logged in as admin, go to the table of users, if not, go to login page */}
             <Route path="/users" element={
-              currentUser ? <TableOfUsers users={users} setAppUser={setAllUsers} /> : <Login /> 
-            }/>
+              currentUser ? <TableOfUsers users={users} setAppUser={setAllUsers} /> : <Login />
+            } />
 
             <Route path="*" element={<NotFound />} />
-            </Routes>
+          </Routes>
         </div>
       </Router>
     </AuthContext.Provider>

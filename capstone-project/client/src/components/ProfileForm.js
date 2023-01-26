@@ -7,6 +7,7 @@ import AuthContext from "../context/AuthContext";
 function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId,parseResponseMessage }) {
 
   const auth = useContext(AuthContext);
+  console.log("profile auth",auth);
   const appUserId = auth.currentUser.appUserId
   const {
     register,

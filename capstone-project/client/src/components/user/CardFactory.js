@@ -19,7 +19,7 @@ function CardFactory({ currentUser, setCurrentUser, appUser, setAppUser, message
             }
         })
         .then(response => response.json())
-        .then(data => data ? setAppUser(data) : null)
+        .then(data => data ? setAppUser({  ...data,...auth.currentUser }) : null)
         // .then(data => console.log(data))
         .catch(error => setMessages([...messages, { type: "failure", text: error.message}]));
     }

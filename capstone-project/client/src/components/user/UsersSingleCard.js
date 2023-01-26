@@ -1,4 +1,5 @@
 function UsersSingleCard({ user, editUser }) {
+    console.log("usc",user);
   return (
     <>
         <div className="row mt-5">

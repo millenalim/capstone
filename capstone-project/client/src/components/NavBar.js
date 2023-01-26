@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 function NavBar({ currentUser }) {
   const { appUserId } = useParams();
   const auth = useContext(AuthContext);
-
+  
   const logoString = "<Hooked />";
 
   return (

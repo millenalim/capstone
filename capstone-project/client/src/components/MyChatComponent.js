@@ -28,7 +28,7 @@ function MyChatComponent() {
       });
 
       const session = new Talk.Session({
-        appId: 'tbFXs0DD',
+        appId: 'tDb6Ljie',
         me: currentUser,
       });
 

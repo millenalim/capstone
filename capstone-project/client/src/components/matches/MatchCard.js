@@ -10,7 +10,7 @@ function MatchCard({ matchedUser, messageMatch,programmingLanguage }) {
           </div>
 
           <div className="card-body">
-            <p>Language: {programmingLanguage.language.language}</p>
+            <p>Language: {matchedUser.language.language}</p>
             <p>Proficiency: {matchedUser.proficiencyLevel}</p>
             <p>Availability: {matchedUser.scheduleName.dayOfWeek +"-"+ matchedUser.scheduleName.availability}</p>
             <p>Bio: {matchedUser.bio}</p>
