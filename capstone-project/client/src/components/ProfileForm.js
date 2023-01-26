@@ -62,18 +62,7 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
     }
 }, []);
 
-  // useEffect(() => {
-  //   console.log("asdf"+currentUser)
-  //   if (currentUser.appUserId > 0) {
-  //         setValue("appUserId", currentUser.appUserId);
-  //         setValue("firstName", currentUser.firstName);
-  //         setValue("lastName", currentUser.lastName);
-  //         setValue("language", currentUser.language);
-  //         setValue("proficiency", currentUser.proficiencyLevel);
-  //         setValue("schedule", currentUser.schedule.length > 1 ? currentUser[1] : "");
-  //         setValue("bio", currentUser.bio);
-  //   }
-  // }, []);
+  
 
   const onSubmit = (newUserObj) => {
     
@@ -81,16 +70,7 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
     let retypedUser = {...newUserObj};
     
 
-      // firstName: newUserObj.firstName,
-      // lastName: newUserObj.lastName,
-      // language: newUserObj.languageId,
-      // proficiencyLevel: newUserObj.proficiencyLevel,
-      // bio: newUserObj.bio,
-      // schedule:newUserObj.schedule,
     
-    
-
-    // newUserObj.schedule && retypedUser.schedule.push(newUserObj.schedule);
 
     if (appUserId) {
       retypedUser["appUserId"] = appUserId;

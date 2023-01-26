@@ -212,7 +212,11 @@ function App() {
                 appUser={appUser}
                 setAppUser={setAppUser}
                 messages={messages}
-                setMessages={setMessages} />
+                setMessages={setMessages}
+                schedules={schedules}
+                languages={languages} 
+                
+                />
             } />
 
 
