@@ -1,8 +1,8 @@
 function MatchCard({ matchedUser, messageMatch,programmingLanguage }) {
   return (
     <>
-      <div className="col-4">
-        <div className="card h-100">
+      <div className="col-4 mb-5">
+        <div className="card h-100 ">
           <div className="card-header card text-center">
             <p className="h3">
               {matchedUser.firstName + " " + matchedUser.lastName}

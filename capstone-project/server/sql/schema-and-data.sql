@@ -85,7 +85,15 @@ insert into app_user (username, password_hash, first_name, last_name, bio, enabl
     ('john@williams.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'John', 'Williams', 'C++ is love. C++ is life.', 1),
     ('sarah@ryder.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Sarah', 'Ryder', 'I have no idea what I am doing.', 1),
     ('gia@tanner.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Gia','Tanner','Solving code and taking names one day at a time.',1),
-    ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson','I thought this was ChristianMingle',1);
+    ('kit@thompson.com','$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa','Kit', 'Thompson','I thought this was ChristianMingle',1),
+    ('janie@summers.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Janie', 'Summers', 'Sleep is for the weak', 1),
+    ('diane@blanchet.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Diane', 'Blanchet', 'Thought coding would be easy. I was wrong', 1),
+    ('alba@zevallos.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Alba', 'Zevallos', 'Help. My rubber duckie is now talking back to me', 1),
+    ('ida@kou.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Ida', 'Kou', 'Hi! So excited to start building projects with you!', 1),
+    ('shafira@orji.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Shafira', 'Orji', 'Hey', 1),
+    ('nino@fontana.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Nino', 'Fontana', 'New to coding', 1),
+    ('benjamin@kemp.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Benjamin', 'Kemp', 'console.log is reason I still have a job', 1),
+    ('troy@chasey.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Troy', 'Chasey', 'My first love is JavaScript. My second is my wife', 1);
     
     
 insert into app_user_role
@@ -96,7 +104,15 @@ insert into app_user_role
     (4,1),
     (5,1),
     (6,1),
-    (7,1);
+    (7,1),
+    (8,1),
+    (9,1),
+    (10,1),
+    (11,1),
+    (12,1),
+    (13,1),
+    (14,1),
+    (15,1);
     
 insert into `schedule` (schedule_id, day_of_week, availability) 
 	values
@@ -133,7 +149,6 @@ insert into `language` (`language`) values
     ('PHP'),
     ('SQL');
     
-    describe app_user_language;
     insert into app_user_language (proficiency_level, app_user_id, language_id)  values
     ("Beginner", 1, 1),
 	("Intermediate",2,2),
@@ -141,12 +156,17 @@ insert into `language` (`language`) values
     ("Expert",4,3),
     ("Expert",5,3),
     ("Expert",6,3),
-    ("Expert",7,5);
+    ("Beginner",7,5),
+    ("Expert",8,3),
+    ("Beginner",9,5),
+    ("Expert",10,3),
+    ("Expert", 11,3),
+    ("Expert",12,3),
+    ("Beginner", 13,5),
+    ("Beginner", 14, 5),
+    ("Beginner",15,3);
     
     
-    
-describe app_user_schedule;
-
 insert into app_user_schedule (app_user_id, schedule_id ) values 
    (1,1),
     (1,2),
@@ -156,7 +176,14 @@ insert into app_user_schedule (app_user_id, schedule_id ) values
     (4,10),
     (5,10),
     (6,10),
-    (7,10);
+    (7,10),
+    (8,10),
+    (9,10),
+    (10,10),
+    (11,10),
+    (13,10),
+    (14,10),
+    (15,10);
     
     
 
