@@ -7,8 +7,7 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
 
     const navigate = useNavigate();
 
-    // const [updatedMatches, setUpdatedMatches] = useState([]);
-    // const [updatedLanguageMatches, setLanguageMatches] = useState([]);
+    
 
     const auth = useContext(AuthContext);
 
@@ -16,31 +15,7 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
         getMatches();
     }, []);
 
-    // useEffect(() => {
-    //     let updatedUsers = users.map(user => {
-    //         let updatedUser = { ...user };
-    //         let schedule = {};
-    //         if (schedules.length > 0) {
-    //             schedule = schedules.filter(schedule => schedule.scheduleId === user.schedule[0])[0];
-    //         }
-    //         updatedUser["scheduleName"] = schedule;
-    //         return updatedUser;
-    //     });
-    //     setUpdatedMatches(updatedUsers);
-    // }, [schedules]);
-
-    // useEffect(() => {
-    //     let updatedUsers = users.map(user => {
-    //         let updatedUser = { ...user };
-    //         let language = {};
-    //         if (languages.length > 0) {
-    //             language = languages.filter(language => language.languageId === user.languageId)[0];
-    //         }
-    //         updatedUser["language"] = language;
-    //         return updatedUser;
-    //     });
-    //     setLanguageMatches(updatedUsers);
-    // }, [languages]);
+    
 
     const getMatches = () => {
         fetch("http://localhost:8080/discover/" + auth.currentUser.appUserId, {
@@ -95,8 +70,7 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
                     setCurrentUser={setCurrentUser}
                     messageMatch={messageMatch}
                     matchedUser={matchObj}
-                    // programmingLanguage={updatedLanguageMatches[0]}
-
+                    
                 />)
             });
 
