@@ -91,7 +91,7 @@ insert into app_user (username, password_hash, first_name, last_name, bio, enabl
     ('alba@zevallos.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Alba', 'Zevallos', 'Help. My rubber duckie is now talking back to me', 1),
     ('ida@kou.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Ida', 'Kou', 'Hi! So excited to start building projects with you!', 1),
     ('shafira@orji.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Shafira', 'Orji', 'Hey', 1),
-    ('nino@fontana.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Nino', 'Fontana', 'New to coding', 1),
+    ('nino@fontana.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Nino', 'Fontana', 'I am proud to say that coding does not make me cry anymore', 1),
     ('benjamin@kemp.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Benjamin', 'Kemp', 'console.log is reason I still have a job', 1),
     ('troy@chasey.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa', 'Troy', 'Chasey', 'My first love is JavaScript. My second is my wife', 1);
     
@@ -156,15 +156,15 @@ insert into `language` (`language`) values
     ("Expert",4,3),
     ("Expert",5,3),
     ("Expert",6,3),
-    ("Beginner",7,5),
+    ("Expert",7,5),
     ("Expert",8,3),
-    ("Beginner",9,5),
+    ("Expert",9,5),
     ("Expert",10,3),
     ("Expert", 11,3),
     ("Expert",12,3),
-    ("Beginner", 13,5),
-    ("Beginner", 14, 5),
-    ("Beginner",15,3);
+    ("Expert", 13,5),
+    ("Expert", 14, 5),
+    ("Expert",15,3);
     
     
 insert into app_user_schedule (app_user_id, schedule_id ) values 
