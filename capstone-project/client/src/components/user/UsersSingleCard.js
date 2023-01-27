@@ -9,9 +9,10 @@ function UsersSingleCard({ user, editUser }) {
                         <p className="h3">{user.firstName + " " + user.lastName}</p>
                     </div>
                 <div className="card-body">
-                    <p><span className="fw-bold">Language:</span> {user.language.language}</p>
+                    <p><span className="fw-bold">Language:</span> {user.languageId}</p>
                     <p><span className="fw-bold">Proficiency:</span> {user.proficiencyLevel}</p>
-                    <p><span className="fw-bold">Availability:</span> {user.scheduleName.dayOfWeek+"-"+user.scheduleName.availability}</p>
+                    <p><span className="fw-bold">Availability:</span> {user.scheduleN
+                    }</p>
                     <p><span className="fw-bold">Bio:</span> {user.bio}</p>
                 </div>
                 <div className="mb-3 col text-center">

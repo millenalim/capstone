@@ -2,6 +2,7 @@ import { useEffect, useContext, useState } from 'react'
 import { useNavigate } from 'react-router'
 import AuthContext from '../../context/AuthContext';
 import MatchCard from './MatchCard';
+import Talk from 'talkjs';
 
 function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, messages, setMessages, makeId, schedules, languages }) {
 
@@ -58,8 +59,35 @@ function MatchCardFactory({ currentUser, setCurrentUser, users, setAllUsers, mes
     }
 
     const messageMatch = (users) => {
-        setCurrentUser(users);
-        navigate("/messages");
+        const me = new Talk.User({
+            id: '1',
+            name: 'Millena Lim',
+            email: 'millena@lim.com',
+            welcomeMessage: 'Hello!',
+            role: 'default',
+          });
+    
+          const other = new Talk.User({
+            id: '4',
+            name: 'John Williams',
+            email: 'john@williams.com',
+            welcomeMessage: 'Hello!',
+            role: 'default',
+          });
+    
+          const session = new Talk.Session({
+            appId: 'tDb6Ljie',
+            me: me,
+          });
+
+        const conversation = session.getOrCreateConversation(
+        Talk.oneOnOneId(me, other)
+        );
+        conversation.setParticipant(me);
+        conversation.setParticipant(other);
+        const popup = session.createPopup();
+        popup.select(conversation);
+        popup.mount({ show: false });
     }
 
     const createCardFactory = () => {

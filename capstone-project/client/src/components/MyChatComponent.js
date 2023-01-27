@@ -1,5 +1,6 @@
-import Talk from 'talkjs';
 import { useEffect, useState, useRef } from 'react';
+import Talk from 'talkjs';
+import ParticlesBg from 'particles-bg';
 
 function MyChatComponent() {
   const chatboxEl = useRef();
@@ -45,7 +46,17 @@ function MyChatComponent() {
     }
   }, [talkLoaded]);
 
-  return <div style={{height: '500px'}} className="inbox-container" ref={chatboxEl} />;
+  return (
+    <>
+    <div className="row banner">
+      <ParticlesBg
+        type="cobweb"
+        bg={true}
+      />
+      <div style={{height: '500px'}} className="inbox-container" ref={chatboxEl} />
+    </div>
+    </>
+  );
 }
 
 export default MyChatComponent;

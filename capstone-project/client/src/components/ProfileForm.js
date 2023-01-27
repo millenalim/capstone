@@ -87,7 +87,7 @@ function ProfileForm({ currentUser, setCurrentUser, messages, setMessages,makeId
           if (response.status === 204) {
             let message = {
               type: "success",
-              text: "User profile has been successfully added"
+              text: "User profile has been successfully created."
             }
 
             setMessages([...messages, message]);
